@@ -10,6 +10,8 @@ dependencies:
   flutter:
     sdk: flutter
   cupertino_icons: ^1.0.8
+  iconsax: ^0.0.8
+  get: ^4.7.2
 
 dev_dependencies:
   flutter_test:
@@ -23,8 +25,11 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+
   assets:
-    - assets/logos/manolingonombre.png
+    - assets/logos/
+    - assets/icons/brands/
+    - assets/images/
 
 flutter_native_splash:
   color: "#FFFFFF"
@@ -34,10 +39,10 @@ flutter_native_splash:
   fonts:
     - family: Bunny
       fonts:
-        - asset: fonts/Chonky Bunny.ttf
+        - asset: assets/fonts/Chonky Bunny.ttf
     - family: Comic
       fonts:
-        - asset: fonts/Hey Comic.otf
+        - asset: assets/fonts/Hey Comic.otf
     - family: Janda
       fonts:
-        - asset: fonts/JandaManateeSolid.ttf
+        - asset: assets/fonts/JandaManateeSolid.ttf

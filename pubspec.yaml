@@ -46,3 +46,6 @@ flutter_native_splash:
     - family: Janda
       fonts:
         - asset: assets/fonts/JandaManateeSolid.ttf
+    - family: Kinder
+      fonts:
+        - asset: assets/fonts/Letters for Learners.ttf

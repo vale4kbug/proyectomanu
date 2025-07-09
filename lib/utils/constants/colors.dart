@@ -27,4 +27,11 @@ class TColors {
 
   static const Color intermedioAzul = Color(0xffd9e4ff);
   static const Color intermediofuerteAzul = Color(0xff8babf1);
+
+  //gradiente
+  static const Gradient linearGradient = LinearGradient(
+    begin: Alignment(0, 0),
+    end: Alignment(0.70, -0.70),
+    colors: [Color(0Xff8babf1), Color(0Xffb3c7f7), Color(0Xffd9e4ff)],
+  );
 }

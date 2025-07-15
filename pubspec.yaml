@@ -51,3 +51,15 @@ flutter_icons:
   android: true
   ios: true
   image_path: "assets/logos/applogo.png"
+
+flutter_native_splash:
+  color: "#77baff" # color claro
+  color_dark: "#0d4cd8" # elige aquí tu color para modo oscuro
+  image: assets/images/iconosplash.png
+
+  android_12:
+    image: assets/images/iconosplash.png
+    color: "#77baff"
+    color_dark: "#0d4cd8"
+
+  web: false

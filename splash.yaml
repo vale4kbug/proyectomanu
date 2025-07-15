@@ -1,8 +1,11 @@
 flutter_native_splash:
-  color: "#FFFFFF"
-  image: assets/images/splashscreen-light.png
-  image_dark: assets/images/splashscreen-dark.png
+  color: "#77baff" # color claro
+  color_dark: "#0d4cd8" # elige aquí tu color para modo oscuro
+  image: assets/images/iconosplash.png
+
   android_12:
-    image: assets/images/splashscreen-light.png
-    image_dark: assets/images/splashscreen-dark.png
+    image: assets/images/iconosplash.png
+    color: "#77baff"
+    color_dark: "#0d4cd8"
+
   web: false

@@ -11,7 +11,7 @@ class OnBoardingController extends GetxController {
   //Saltar a un punto dependiendo la pagina seleccionada
   void dotNavigationClick(index) {
     currentPageIndex.value = index;
-    pageController.jumpTo(index);
+    pageController.jumpToPage(index); // CORREGIDO
   }
 
   //Actualizar index y saltar a la siguiente pagina
@@ -27,6 +27,6 @@ class OnBoardingController extends GetxController {
   //Actualizar index y saltar a la ultima
   void skipPage() {
     currentPageIndex.value = 2;
-    pageController.jumpTo(2);
+    pageController.jumpToPage(2);
   }
 }

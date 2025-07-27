@@ -5,8 +5,11 @@ class TImages {
   //social logos
   static const String google = "path";
   static const String facebook = "path";
-  //onboarding agregar
-  static const String onBoardingImage1 = "path";
-  static const String onBoardingImage2 = "path";
-  static const String onBoardingImage3 = "path";
+  //onboarding
+  static const String onBoardingImage1 =
+      "assets/images/on_boarding/OnBoarding1_0000.gif";
+  static const String onBoardingImage2 =
+      "assets/images/on_boarding/OnBoarding2_0000.gif";
+  static const String onBoardingImage3 =
+      "assets/images/on_boarding/OnBoarding3_0000.gif";
 }

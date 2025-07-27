@@ -1,62 +1,77 @@
 import 'package:flutter/material.dart';
+import 'package:proyectomanu/utils/constants/colors.dart';
 
 class TTextTheme {
   TTextTheme._();
+  static const String _fontFamily =
+      'Bunny'; // ← Nombre definido en pubspec.yaml
+
   static TextTheme lightTextTheme = TextTheme(
     headlineLarge: const TextStyle().copyWith(
+      fontFamily: _fontFamily,
       fontSize: 32.0,
       fontWeight: FontWeight.bold,
-      color: Colors.black,
+      color: const Color(0Xff0d4cd8),
     ),
     headlineMedium: const TextStyle().copyWith(
+      fontFamily: _fontFamily,
       fontSize: 24.0,
       fontWeight: FontWeight.w600,
-      color: Colors.black,
+      color: const Color(0Xff0d4cd8),
     ),
     headlineSmall: const TextStyle().copyWith(
+      fontFamily: _fontFamily,
       fontSize: 18.0,
       fontWeight: FontWeight.w600,
-      color: Colors.black,
+      color: const Color(0Xff0d4cd8),
     ),
     titleLarge: const TextStyle().copyWith(
       fontSize: 16.0,
+      fontFamily: _fontFamily,
       fontWeight: FontWeight.w600,
-      color: Colors.black,
+      color: const Color(0Xff0d4cd8),
     ),
     titleMedium: const TextStyle().copyWith(
       fontSize: 16.0,
+      fontFamily: _fontFamily,
       fontWeight: FontWeight.w500,
-      color: Colors.black,
+      color: const Color(0Xff0d4cd8),
     ),
     titleSmall: const TextStyle().copyWith(
       fontSize: 16.0,
+      fontFamily: _fontFamily,
       fontWeight: FontWeight.w400,
-      color: Colors.black,
+      color: const Color(0Xff0d4cd8),
     ),
     bodyLarge: const TextStyle().copyWith(
       fontSize: 14.0,
+
       fontWeight: FontWeight.w500,
-      color: Colors.black,
+      color: const Color(0Xff0d4cd8),
     ),
     bodyMedium: const TextStyle().copyWith(
       fontSize: 14.0,
+
       fontWeight: FontWeight.normal,
-      color: Colors.black,
+      color: const Color(0Xff0d4cd8),
     ),
     bodySmall: const TextStyle().copyWith(
       fontSize: 14.0,
+
       fontWeight: FontWeight.w500,
-      color: Colors.black.withOpacity(0.5),
+      color: const Color.fromARGB(172, 13, 77, 216),
     ),
     labelLarge: const TextStyle().copyWith(
       fontSize: 12.0,
+
       fontWeight: FontWeight.normal,
-      color: Colors.black,
+      color: const Color(0Xff0d4cd8),
     ),
     labelSmall: const TextStyle().copyWith(
       fontSize: 12.0,
+
       fontWeight: FontWeight.normal,
-      color: Colors.black.withOpacity(0.5),
+      color: const Color.fromARGB(172, 13, 77, 216),
     ),
   );
 
@@ -64,31 +79,43 @@ class TTextTheme {
     headlineLarge: const TextStyle().copyWith(
       fontSize: 32.0,
       fontWeight: FontWeight.bold,
+      fontFamily: _fontFamily,
+
       color: Colors.white,
     ),
     headlineMedium: const TextStyle().copyWith(
       fontSize: 24.0,
       fontWeight: FontWeight.w600,
+      fontFamily: _fontFamily,
+
       color: Colors.white,
     ),
     headlineSmall: const TextStyle().copyWith(
       fontSize: 18.0,
       fontWeight: FontWeight.w600,
+      fontFamily: _fontFamily,
+
       color: Colors.white,
     ),
     titleLarge: const TextStyle().copyWith(
       fontSize: 16.0,
       fontWeight: FontWeight.w600,
+      fontFamily: _fontFamily,
+
       color: Colors.white,
     ),
     titleMedium: const TextStyle().copyWith(
       fontSize: 16.0,
       fontWeight: FontWeight.w500,
+      fontFamily: _fontFamily,
+
       color: Colors.white,
     ),
     titleSmall: const TextStyle().copyWith(
       fontSize: 16.0,
       fontWeight: FontWeight.w400,
+      fontFamily: _fontFamily,
+
       color: Colors.white,
     ),
     bodyLarge: const TextStyle().copyWith(

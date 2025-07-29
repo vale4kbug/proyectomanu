@@ -31,7 +31,7 @@ class TFormDivider extends StatelessWidget {
           child: Divider(
             color: dark ? TColors.intermedioAzul : TColors.primaryColor,
             thickness: 0.5,
-            indent: 60,
+            indent: 5,
             endIndent: 5,
           ),
         ),

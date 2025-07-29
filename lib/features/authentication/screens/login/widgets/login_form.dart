@@ -56,14 +56,14 @@ class TLoginForm extends StatelessWidget {
                 child: Text(TTexts.signIn),
               ),
             ),
-            const SizedBox(height: TSizes.spaceBtwSections),
+            const SizedBox(height: TSizes.spaceBtwImages),
 
             //Crear cuenta boton
             SizedBox(
               width: double.infinity,
               child: OutlinedButton(
                 onPressed: () {},
-                child: Text(TTexts.signIn),
+                child: Text(TTexts.createAccount),
               ),
             ),
           ],

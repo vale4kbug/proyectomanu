@@ -16,6 +16,7 @@ class TLoginHeader extends StatelessWidget {
       children: [
         Image(
           height: 150,
+          fit: BoxFit.contain,
           image: AssetImage(dark ? TImages.darkAppLogo : TImages.lightAppLogo),
         ),
         Text(

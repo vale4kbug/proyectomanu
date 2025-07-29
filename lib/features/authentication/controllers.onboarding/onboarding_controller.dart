@@ -17,12 +17,14 @@ class OnBoardingController extends GetxController {
 
   //Actualizar index y saltar a la siguiente pagina
   void nextPage() {
-    if (currentPageIndex.value == 2) {
-      Get.offAll(const LoginScreen());
-    } else {
-      int page = currentPageIndex.value + 1;
-      pageController.jumpToPage(page);
-    }
+    Get.offAll(const LoginScreen());
+
+    //if (currentPageIndex.value == 2) {
+    // Get.offAll(const LoginScreen());
+    //} else {
+    //  int page = currentPageIndex.value + 1;
+    //  pageController.jumpToPage(page);
+    //}
   }
 
   //Actualizar index y saltar a la ultima

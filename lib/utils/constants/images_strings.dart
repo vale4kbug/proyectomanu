@@ -1,10 +1,13 @@
 class TImages {
   //logo manolingo
-  static const String darkAppLogo = "path";
-  static const String lightAppLogo = "path";
+  static const String darkAppLogo = "assets/logos/manolingo-logo-blanco.png";
+  static const String lightAppLogo = "assets/logos/manolingo-logo-azul.png";
+  static const String lightAppLogoconManu =
+      "assets/logos/manolingo-logo-azul con manu-flat.png";
+
   //social logos
-  static const String google = "path";
-  static const String facebook = "path";
+  static const String google = "assets/images/Google.png";
+  static const String facebook = "assets/images/Facebook.png";
   //onboarding
   static const String onBoardingImage1 =
       "assets/images/on_boarding/OnBoarding1_0000.gif";

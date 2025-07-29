@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
+import 'package:proyectomanu/features/authentication/screens/login/login.dart';
 
 class OnBoardingController extends GetxController {
   static OnBoardingController get instance => Get.find();
@@ -11,13 +12,13 @@ class OnBoardingController extends GetxController {
   //Saltar a un punto dependiendo la pagina seleccionada
   void dotNavigationClick(index) {
     currentPageIndex.value = index;
-    pageController.jumpToPage(index); // CORREGIDO
+    pageController.jumpToPage(index);
   }
 
   //Actualizar index y saltar a la siguiente pagina
   void nextPage() {
     if (currentPageIndex.value == 2) {
-      // Get.to(LoginScreen());
+      Get.offAll(const LoginScreen());
     } else {
       int page = currentPageIndex.value + 1;
       pageController.jumpToPage(page);

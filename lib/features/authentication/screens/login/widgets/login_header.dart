@@ -3,14 +3,15 @@ import 'package:flutter/widgets.dart';
 import 'package:proyectomanu/utils/constants/images_strings.dart';
 import 'package:proyectomanu/utils/constants/sizes.dart';
 import 'package:proyectomanu/utils/constants/text_strings.dart';
+import 'package:proyectomanu/utils/helpers/helper_functions.dart';
 
 class TLoginHeader extends StatelessWidget {
-  const TLoginHeader({super.key, required this.dark});
-
-  final bool dark;
+  const TLoginHeader({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final dark = THelperFunctions.isDarkMode(context);
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [

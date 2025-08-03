@@ -17,7 +17,6 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final dark = THelperFunctions.isDarkMode(context);
     return Scaffold(
       body: SingleChildScrollView(
         child: Padding(
@@ -25,13 +24,10 @@ class LoginScreen extends StatelessWidget {
           child: Column(
             children: [
               //LOGO TITULO SUBTITULO
-              TLoginHeader(dark: dark),
+              TLoginHeader(),
               TLoginForm(),
               //Divisor
-              TFormDivider(
-                dark: dark,
-                dividerText: TTexts.orSignIn.capitalize!,
-              ),
+              TFormDivider(dividerText: TTexts.orSignIn.capitalize!),
               const SizedBox(height: TSizes.spaceBtwSections),
               //footer
               TSocialButtons(),

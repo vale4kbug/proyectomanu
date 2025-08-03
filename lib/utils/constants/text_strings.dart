@@ -29,6 +29,8 @@ class TTexts {
   static const orSignIn = "o ingresar con";
   static const orSignUp = "o crear cuenta con";
   static const iAgreeTo = "Estoy de acuerdo a";
+  static const and = "y";
+
   static const privacyPolicy = "Política de privacidad";
   static const termsofUse = "Terminos y condiciones";
   static const resendEmail = "Reenviar correo";

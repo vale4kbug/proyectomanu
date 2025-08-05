@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:proyectomanu/features/authentication/screens/signup/widgets/termsandconditions_checkbox.dart';
-import 'package:proyectomanu/utils/constants/colors.dart';
 import 'package:proyectomanu/utils/constants/sizes.dart';
 import 'package:proyectomanu/utils/constants/text_strings.dart';
-import 'package:proyectomanu/utils/helpers/helper_functions.dart';
 
 class TSignupForm extends StatelessWidget {
   const TSignupForm({super.key});

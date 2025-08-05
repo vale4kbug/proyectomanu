@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:get/get_utils/src/extensions/export.dart';
+import 'package:get/get.dart';
 import 'package:proyectomanu/common/widgets/widgets.login_signup/form_divider.dart';
 import 'package:proyectomanu/common/widgets/widgets.login_signup/social_buttons.dart';
+import 'package:proyectomanu/features/authentication/screens/signup/verify_email.dart';
 import 'package:proyectomanu/features/authentication/screens/signup/widgets/signup_form.dart';
 import 'package:proyectomanu/utils/constants/sizes.dart';
 import 'package:proyectomanu/utils/constants/text_strings.dart';
@@ -28,12 +29,21 @@ class SignupScreen extends StatelessWidget {
               //Forma
               const TSignupForm(),
               const SizedBox(height: TSizes.spaceBtwInputFields),
+              SizedBox(
+                width: double.infinity,
+                child: ElevatedButton(
+                  onPressed: () => Get.to(() => const VerifyEmailScreen()),
+                  child: Text(TTexts.createAccount),
+                ),
+              ),
+              const SizedBox(height: TSizes.spaceBtwInputFields),
 
               //Divider
               TFormDivider(dividerText: TTexts.orSignUp.capitalize!),
               const SizedBox(height: TSizes.spaceBtwInputFields),
 
               const TSocialButtons(),
+              const SizedBox(height: TSizes.spaceBtwInputFields),
             ],
           ),
         ),

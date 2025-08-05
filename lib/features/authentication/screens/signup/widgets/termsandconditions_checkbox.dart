@@ -55,16 +55,6 @@ class TTermsandConditionsForm extends StatelessWidget {
             ),
           ],
         ),
-
-        const SizedBox(height: TSizes.spaceBtwInputFields),
-
-        SizedBox(
-          width: double.infinity,
-          child: ElevatedButton(
-            onPressed: () {},
-            child: Text(TTexts.createAccount),
-          ),
-        ),
       ],
     );
   }

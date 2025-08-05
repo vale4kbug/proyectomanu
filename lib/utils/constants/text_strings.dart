@@ -33,6 +33,8 @@ class TTexts {
 
   static const privacyPolicy = "Política de privacidad";
   static const termsofUse = "Terminos y condiciones";
+  static const tcontinue = "Continuar";
+
   static const resendEmail = "Reenviar correo";
   static const resendEmailIn = "Reenviar correo en";
 
@@ -45,7 +47,7 @@ class TTexts {
       "Correo para resetear tu contraseña enviado.";
   static const changeYourPasswordSubTitle =
       "Se te ha enviado un link para cambiar tu contraseña y mantenner tu cuenta protegida.";
-  static const confirmEmail = "Verifica tu dirección de correo.";
+  static const confirmEmail = "Verifica la bandeja de tu correo.";
   static const confirmEmailSubtitle =
       "¡Felicidades! Tu cuenta te espera. Verifica tu correo para empezar a aprender. @(o◝‿◜o)@";
   static const emailNotReceivedMessage =

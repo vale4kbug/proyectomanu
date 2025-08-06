@@ -14,6 +14,9 @@ class OnBoardingScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    precacheImage(const AssetImage(TImages.onBoardingImage1), context);
+    precacheImage(const AssetImage(TImages.onBoardingImage2), context);
+    precacheImage(const AssetImage(TImages.onBoardingImage3), context);
     final controller = Get.put(OnBoardingController());
     return Scaffold(
       body: Stack(

@@ -37,6 +37,8 @@ class TTexts {
 
   static const resendEmail = "Reenviar correo";
   static const resendEmailIn = "Reenviar correo en";
+  static const submit = "Enviar";
+  static const done = "Listo";
 
   //Forma de autetificacion headers
   static const signupTitle = "Vamos a crearte una cuenta @( o･ω･)@";

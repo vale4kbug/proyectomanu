@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:proyectomanu/utils/constants/colors.dart';
 
 class TTextTheme {
   TTextTheme._();

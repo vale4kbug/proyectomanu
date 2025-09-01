@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:proyectomanu/features/home/home.dart';
+import 'package:proyectomanu/features/perfil/screens/perfil.dart';
 import 'package:proyectomanu/utils/constants/colors.dart';
 import 'package:proyectomanu/utils/helpers/helper_functions.dart';
 
@@ -60,7 +61,7 @@ class NavigationController extends GetxController {
     const HomeScreen(),
     Container(color: Colors.purple),
     Container(color: Colors.orange),
-    Container(color: Colors.blue),
+    const PerfilScreen(),
     Container(color: Colors.yellow),
   ];
 }

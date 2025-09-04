@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:proyectomanu/features/diccionario/screens/diccionario.dart';
 import 'package:proyectomanu/features/home/home.dart';
 import 'package:proyectomanu/features/perfil/screens/perfil.dart';
 import 'package:proyectomanu/utils/constants/colors.dart';
@@ -60,7 +61,7 @@ class NavigationController extends GetxController {
   final screens = [
     const HomeScreen(),
     Container(color: Colors.purple),
-    Container(color: Colors.orange),
+    const DiccionarioScreen(),
     const PerfilScreen(),
     Container(color: Colors.yellow),
   ];

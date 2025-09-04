@@ -4,7 +4,8 @@ class TImages {
   static const String lightAppLogo = "assets/logos/manolingo-logo-azul.png";
   static const String lightAppLogoconManu =
       "assets/logos/manolingo-logo-azul con manu-flat.png";
-
+  //perfil
+  static const String imagenperfil = "assets/icons/categories/chikawa.png";
   //social logos
   static const String google = "assets/images/Google.png";
   static const String facebook = "assets/images/Facebook.png";
@@ -20,4 +21,7 @@ class TImages {
       "assets/images/verificaemail.png";
   static const String verifyIllustration = "assets/images/verificaemail.png";
   static const String staticSuccesIllutration = "assets/images/exito.png";
+
+  //Iconos Categoria
+  static const String dactidologiaIcon = "assets/images/exito.png";
 }

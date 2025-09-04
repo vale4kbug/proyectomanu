@@ -1,30 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:proyectomanu/common/widgets/appbar/appbar.dart';
-import 'package:proyectomanu/utils/constants/text_strings.dart';
 
 class TPerfilAppBar extends StatelessWidget {
-  const TPerfilAppBar({super.key});
+  const TPerfilAppBar({super.key, required this.text});
+
+  final String text;
 
   @override
   Widget build(BuildContext context) {
     return TAppBar(
       title: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(
-            TTexts.perfilAppBarTitle,
+            text,
             style: Theme.of(
               context,
-            ).textTheme.labelMedium!.apply(color: Colors.blueGrey),
-          ),
-          Text(
-            TTexts.perfilAppBarSubTitle,
-            style: Theme.of(
-              context,
-            ).textTheme.headlineSmall!.apply(color: Colors.white),
+            ).textTheme.headlineMedium!.apply(color: Colors.white),
           ),
         ],
       ),
+      actions: const [], // 👈 ya vacío
     );
   }
 }

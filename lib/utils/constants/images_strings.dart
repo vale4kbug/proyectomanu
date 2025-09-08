@@ -24,4 +24,7 @@ class TImages {
 
   //Iconos Categoria
   static const String dactidologiaIcon = "assets/images/exito.png";
+
+  //Imagenes Diccionario Thumbnail
+  static const String thumbnaildactidologiaA = "assets/images/exito.png";
 }

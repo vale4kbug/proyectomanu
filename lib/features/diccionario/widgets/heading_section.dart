@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class TSectionHeading extends StatelessWidget {
   const TSectionHeading({
     super.key,
-    this.textColor = const Color.fromARGB(255, 15, 114, 88),
+    this.textColor,
     this.showActionButton = false,
     required this.title,
     this.buttonTitle = 'Ver todo',

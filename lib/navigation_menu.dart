@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:proyectomanu/features/configuracion/screens/configuracion.dart';
 import 'package:proyectomanu/features/diccionario/screens/diccionario.dart';
 import 'package:proyectomanu/features/home/home.dart';
 import 'package:proyectomanu/features/perfil/screens/perfil.dart';
@@ -44,10 +45,10 @@ class NavigationMenu extends StatelessWidget {
               icon: Icon(Iconsax.happyemoji, color: TColors.primaryColor),
               label: 'Perfil',
             ),
-            NavigationDestination(
-              icon: Icon(Iconsax.setting, color: TColors.primaryColor),
-              label: 'Configuración',
-            ),
+            //  NavigationDestination(
+            //   icon: Icon(Iconsax.setting, color: TColors.primaryColor),
+            // label: 'Configuración',
+            //),
           ],
         ),
       ),
@@ -63,6 +64,6 @@ class NavigationController extends GetxController {
     Container(color: Colors.purple),
     const DiccionarioScreen(),
     const PerfilScreen(),
-    Container(color: Colors.yellow),
+    //const ConfiguracionScreen(),
   ];
 }

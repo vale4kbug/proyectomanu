@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:proyectomanu/common/widgets/card_diccionario/card_diccionario_vertical.dart';
 import 'package:proyectomanu/utils/constants/sizes.dart';
 
 class TGridLayout extends StatelessWidget {

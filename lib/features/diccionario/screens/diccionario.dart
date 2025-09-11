@@ -28,7 +28,10 @@ class DiccionarioScreen extends StatelessWidget {
                       children: const [
                         //catagorias slide horizontal
                         SizedBox(height: TSizes.inputFieldRadius),
-                        TSectionHeading(title: 'Categorías'),
+                        TSectionHeading(
+                          title: 'Categorías',
+                          textColor: Color.fromARGB(255, 15, 114, 88),
+                        ),
                         SizedBox(height: TSizes.inputFieldRadius),
                         TDiccionarioCategories(),
                       ],

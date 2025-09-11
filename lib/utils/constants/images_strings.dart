@@ -5,10 +5,10 @@ class TImages {
   static const String lightAppLogoconManu =
       "assets/logos/manolingo-logo-azul con manu-flat.png";
   //perfil
-  static const String imagenperfil = "assets/icons/categories/chikawa.png";
+  static const String imagenperfil = "assets/logos/applogo.png";
   //social logos
-  static const String google = "assets/images/Google.png";
-  static const String facebook = "assets/images/Facebook.png";
+  static const String google = "assets/icons/brands/Google.png";
+  static const String facebook = "assets/icons/brands/Facebook.png";
   //onboarding
   static const String onBoardingImage1 =
       "assets/images/on_boarding/OnBoarding1_0000.gif";
@@ -19,12 +19,15 @@ class TImages {
   //animations
   static const String deliveredEmailIllustration =
       "assets/images/verificaemail.png";
-  static const String verifyIllustration = "assets/images/verificaemail.png";
-  static const String staticSuccesIllutration = "assets/images/exito.png";
+  static const String verifyIllustration =
+      "assets/images/correo/verificaemail.png";
+  static const String staticSuccesIllutration =
+      "assets/images/correo/exito.png";
 
   //Iconos Categoria
-  static const String dactidologiaIcon = "assets/images/exito.png";
+  static const String dactidologiaIcon = "assets/logos/applogo.png"; //cambiar
 
   //Imagenes Diccionario Thumbnail
-  static const String thumbnaildactidologiaA = "assets/images/exito.png";
+  static const String thumbnaildactidologiaA =
+      "assets/logos/applogo.png"; //cambiar
 }

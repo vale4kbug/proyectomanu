@@ -35,6 +35,8 @@ flutter:
     - assets/images/on_boarding/
     - assets/images/animations/
     - assets/icons/categories/
+    - assets/images/correo/
+    - assets/images/usuario/
 
   fonts:
     - family: Bunny

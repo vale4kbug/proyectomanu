@@ -15,7 +15,7 @@ class TPerfilFoto extends StatelessWidget {
           CircleAvatar(
             radius: 50,
             backgroundColor: Colors.grey.shade300,
-            backgroundImage: imageUrl != null ? NetworkImage(imageUrl!) : null,
+            backgroundImage: imageUrl != null ? AssetImage(imageUrl!) : null,
             child: imageUrl == null
                 ? const Icon(Iconsax.user, size: 50, color: Colors.white)
                 : null,

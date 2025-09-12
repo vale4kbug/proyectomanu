@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:proyectomanu/common/widgets/appbar/appbar.dart';
 import 'package:proyectomanu/common/widgets/list_tiles/config_menu_tile.dart';
+import 'package:proyectomanu/features/configuracion/screens/configuracion_datos.dart';
 import 'package:proyectomanu/features/diccionario/widgets/heading_section.dart';
 import 'package:proyectomanu/utils/constants/colors.dart';
 import 'package:proyectomanu/utils/constants/sizes.dart';
@@ -28,7 +29,7 @@ class ConfiguracionScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'Configuración',
+                'Configuración ○Ｏo。.@(-ェ-)@ノ',
                 style: Theme.of(
                   context,
                 ).textTheme.headlineMedium!.apply(color: TColors.primaryColor),
@@ -36,9 +37,9 @@ class ConfiguracionScreen extends StatelessWidget {
               const SizedBox(height: TSizes.sm),
               Text(
                 "Ajusta tu experiencia a tu medida",
-                style: Theme.of(context).textTheme.bodyMedium!.apply(
-                  color: TColors.intermediofuerteAzul,
-                ),
+                style: Theme.of(
+                  context,
+                ).textTheme.bodyMedium!.apply(color: TColors.primarioBoton),
               ),
               const SizedBox(height: TSizes.spaceBtwSections),
 
@@ -49,6 +50,12 @@ class ConfiguracionScreen extends StatelessWidget {
               ),
 
               const SizedBox(height: TSizes.spaceBtwItems),
+              TConfigMenuTile(
+                icon: Iconsax.personalcard,
+                title: 'Mis Datos',
+                subTitle: 'Modifica tu información personal.',
+                onTap: () => Get.to(() => const ConfiguracionDatosScreen()),
+              ),
               TConfigMenuTile(
                 icon: Iconsax.setting_4,
                 title: 'Preferencias',
@@ -61,8 +68,11 @@ class ConfiguracionScreen extends StatelessWidget {
                 subTitle: 'Elige qué notificaciones quieres ver.',
                 onTap: () {},
               ),
+              const SizedBox(height: TSizes.spaceBtwItems),
 
               const SizedBox(height: TSizes.spaceBtwSections),
+              const Divider(),
+              const SizedBox(height: TSizes.spaceBtwItems / 2),
 
               TSectionHeading(
                 title: 'Soporte',
@@ -82,14 +92,21 @@ class ConfiguracionScreen extends StatelessWidget {
                 subTitle: 'Dinos qué crees que podría ser mejor.',
                 onTap: () {},
               ),
+              const SizedBox(height: TSizes.spaceBtwItems),
 
               const SizedBox(height: TSizes.spaceBtwSections),
+              const Divider(),
+              const SizedBox(height: TSizes.spaceBtwItems),
+              const SizedBox(height: TSizes.spaceBtwItems),
 
               SizedBox(
                 width: double.infinity,
                 child: OutlinedButton(
                   onPressed: () {},
-                  child: const Text('Cerrar sesión'),
+                  child: const Text(
+                    'Cerrar sesión',
+                    style: TextStyle(color: Colors.red),
+                  ),
                 ),
               ),
               const SizedBox(height: TSizes.spaceBtwSections * 2.5),

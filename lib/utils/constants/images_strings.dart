@@ -30,4 +30,12 @@ class TImages {
   //Imagenes Diccionario Thumbnail
   static const String thumbnaildactidologiaA =
       "assets/logos/applogo.png"; //cambiar
+
+  //Imagenes Logros
+  static const String logro1 = "assets/logos/applogo.png"; //cambiar
+  static const String logro2 = "assets/logos/applogo.png"; //cambiar
+  static const String logro3 = "assets/logos/applogo.png"; //cambiar
+  static const String logro4 = "assets/logos/applogo.png"; //cambiar
+  static const String logro5 = "assets/logos/applogo.png"; //cambiar
+  static const String logro6 = "assets/logos/applogo.png"; //cambiar
 }

@@ -34,4 +34,6 @@ class TColors {
     end: Alignment(0.70, -0.70),
     colors: [Color(0Xff8babf1), Color(0Xffb3c7f7), Color(0Xffd9e4ff)],
   );
+
+  static var lightGrey;
 }

@@ -58,6 +58,15 @@ class TTexts {
       "Tu cuenta ha sido creada de manera exitosa. @(* ᗢ *)@";
   static const yourAccountCreatedSubTitle =
       "Bienvenido a Manolingo. La aplicación para aprender LSM de manera divertida.";
-  //AppBar Perfil Usuario
+  // Perfil Usuario
   static const perfilAppBarTitle = "Usuario";
+  static const perfilEstadisticaTitle = "Estadísticas";
+  static const perfilLogrosTitle = "Logros";
+  static const perfilEstrellas = "Estrellas Obtenidas";
+  static const perfilNiveles = "Niveles Completados";
+  static const perfilLogros = "Logros Desbloqueados";
+  //
+  static const perfilUsuarioResultado = "0";
+
+  //Logros desbloqueables
 }

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:iconsax/iconsax.dart';
 import 'package:proyectomanu/common/widgets/appbar/appbar.dart';
 import 'package:proyectomanu/features/configuracion/widgets/configuracion_datos_menu.dart';
 import 'package:proyectomanu/features/diccionario/widgets/heading_section.dart';

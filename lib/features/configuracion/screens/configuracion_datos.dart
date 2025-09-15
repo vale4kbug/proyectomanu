@@ -3,6 +3,7 @@ import 'package:proyectomanu/common/widgets/appbar/appbar.dart';
 import 'package:proyectomanu/features/configuracion/widgets/configuracion_datos_menu.dart';
 import 'package:proyectomanu/features/diccionario/widgets/heading_section.dart';
 import 'package:proyectomanu/utils/constants/sizes.dart';
+import 'package:proyectomanu/utils/constants/text_strings.dart';
 
 class ConfiguracionDatosScreen extends StatelessWidget {
   const ConfiguracionDatosScreen({super.key});
@@ -16,61 +17,73 @@ class ConfiguracionDatosScreen extends StatelessWidget {
           padding: const EdgeInsets.all(TSizes.defaultSpace),
           child: Column(
             children: [
-              TSectionHeading(title: 'Información del Perfil'),
+              TSectionHeading(title: TTexts.configDatosTitle),
               const SizedBox(height: TSizes.spaceBtwItems / 2),
 
               const Divider(),
               const SizedBox(height: TSizes.spaceBtwItems),
 
               TConfigDatosMenu(
-                title: 'Nombre',
+                title: TTexts.name,
                 subTitle: 'Manu el mono',
                 onPressed: () {},
               ),
               TConfigDatosMenu(
-                title: 'Usuario',
+                title: TTexts.username,
                 subTitle: 'xXManuMonitoXx',
                 onPressed: () {},
               ),
-              SizedBox(
-                width: double.infinity,
-                child: OutlinedButton(
-                  onPressed: () {},
-                  child: const Text('Cambiar foto de perfil'),
-                ),
-              ),
 
+              TConfigDatosMenu(
+                title: TTexts.configDatosFoto,
+                subTitle: '',
+                onPressed: () {},
+              ),
               const SizedBox(height: TSizes.spaceBtwItems),
-              TSectionHeading(title: 'Información Personal'),
+              TSectionHeading(title: TTexts.configDatosTitle2),
               const SizedBox(height: TSizes.spaceBtwItems / 2),
 
               const Divider(),
               const SizedBox(height: TSizes.spaceBtwItems),
               TConfigDatosMenu(
-                title: 'ID de Usuario',
+                title: TTexts.configDatosID,
                 subTitle: '1234',
                 onPressed: () {},
               ),
               TConfigDatosMenu(
-                title: 'Correo',
+                title: TTexts.email,
                 subTitle: 'manu@gmail.com',
                 onPressed: () {},
               ),
               TConfigDatosMenu(
-                title: 'Teléfono',
+                title: TTexts.configDatosphone,
                 subTitle: '+52-631-1234567',
                 onPressed: () {},
               ),
               TConfigDatosMenu(
-                title: 'Género',
+                title: TTexts.configDatosgenero,
                 subTitle: 'Punk',
                 onPressed: () {},
               ),
               TConfigDatosMenu(
-                title: 'Nacimiento',
+                title: TTexts.configDatosnacimiento,
                 subTitle: '10 de abril de 2025',
                 onPressed: () {},
               ),
+
+              const SizedBox(height: TSizes.spaceBtwItems * 4),
+
+              SizedBox(
+                width: double.infinity,
+                child: OutlinedButton(
+                  onPressed: () {},
+                  child: const Text(
+                    TTexts.eliminarCuentaBoton,
+                    style: TextStyle(color: Colors.red),
+                  ),
+                ),
+              ),
+              const SizedBox(height: TSizes.spaceBtwSections * 2.5),
             ],
           ),
         ),

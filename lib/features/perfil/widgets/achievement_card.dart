@@ -33,8 +33,8 @@ class TAchievementCard extends StatelessWidget {
                   borderRadius: BorderRadius.circular(12),
                   child: Image.asset(
                     image,
-                    height: 80,
-                    width: 80,
+                    height: 100,
+                    width: 100,
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -43,8 +43,8 @@ class TAchievementCard extends StatelessWidget {
               // Overlay oscuro si está bloqueado
               if (locked)
                 Container(
-                  height: 80,
-                  width: 80,
+                  height: 100,
+                  width: 100,
                   decoration: BoxDecoration(
                     color: const Color.fromARGB(65, 0, 0, 0),
                     borderRadius: BorderRadius.circular(12),

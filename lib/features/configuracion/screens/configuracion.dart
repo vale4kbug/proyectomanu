@@ -4,9 +4,13 @@ import 'package:iconsax/iconsax.dart';
 import 'package:proyectomanu/common/widgets/appbar/appbar.dart';
 import 'package:proyectomanu/common/widgets/list_tiles/config_menu_tile.dart';
 import 'package:proyectomanu/features/configuracion/screens/configuracion_datos.dart';
+import 'package:proyectomanu/features/configuracion/screens/configuracion_notificaciones.dart';
+import 'package:proyectomanu/features/configuracion/screens/configuracion_retroalimentacion.dart';
+import 'package:proyectomanu/features/configuracion/screens/configuracion_soporte.dart';
 import 'package:proyectomanu/features/diccionario/widgets/heading_section.dart';
 import 'package:proyectomanu/utils/constants/colors.dart';
 import 'package:proyectomanu/utils/constants/sizes.dart';
+import 'package:proyectomanu/utils/constants/text_strings.dart';
 
 class ConfiguracionScreen extends StatelessWidget {
   const ConfiguracionScreen({super.key});
@@ -29,14 +33,14 @@ class ConfiguracionScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'Configuración ○Ｏo。.@(-ェ-)@ノ',
+                TTexts.configTitle,
                 style: Theme.of(
                   context,
                 ).textTheme.headlineMedium!.apply(color: TColors.primaryColor),
               ),
               const SizedBox(height: TSizes.sm),
               Text(
-                "Ajusta tu experiencia a tu medida",
+                TTexts.configSubTitle,
                 style: Theme.of(
                   context,
                 ).textTheme.bodyMedium!.apply(color: TColors.primarioBoton),
@@ -44,7 +48,7 @@ class ConfiguracionScreen extends StatelessWidget {
               const SizedBox(height: TSizes.spaceBtwSections),
 
               TSectionHeading(
-                title: 'Mi cuenta',
+                title: TTexts.configCuenta,
                 showActionButton: false,
                 textColor: TColors.primaryColor,
               ),
@@ -52,49 +56,42 @@ class ConfiguracionScreen extends StatelessWidget {
               const SizedBox(height: TSizes.spaceBtwItems),
               TConfigMenuTile(
                 icon: Iconsax.personalcard,
-                title: 'Mis Datos',
-                subTitle: 'Modifica tu información personal.',
+                title: TTexts.configDatos,
+                subTitle: TTexts.configDatosSub,
                 onTap: () => Get.to(() => const ConfiguracionDatosScreen()),
               ),
-              TConfigMenuTile(
-                icon: Iconsax.setting_4,
-                title: 'Preferencias',
-                subTitle: 'Ajusta a tu experiencia deseada.',
-                onTap: () {},
-              ),
+
               TConfigMenuTile(
                 icon: Iconsax.notification,
-                title: 'Notificaciones',
-                subTitle: 'Elige qué notificaciones quieres ver.',
-                onTap: () {},
+                title: TTexts.configNotificaciones,
+                subTitle: TTexts.configNotificacionesSub,
+                onTap: () =>
+                    Get.to(() => const ConfiguracionNotificacionesScreen()),
               ),
-              const SizedBox(height: TSizes.spaceBtwItems),
-
-              const SizedBox(height: TSizes.spaceBtwSections),
               const Divider(),
               const SizedBox(height: TSizes.spaceBtwItems / 2),
 
               TSectionHeading(
-                title: 'Soporte',
+                title: TTexts.configSoporteTitle,
                 showActionButton: false,
                 textColor: TColors.primaryColor,
               ),
               const SizedBox(height: TSizes.spaceBtwItems),
               TConfigMenuTile(
                 icon: Iconsax.info_circle,
-                title: 'Ayuda',
-                subTitle: '¿Necesitas apoyo?',
-                onTap: () {},
+                title: TTexts.configAyuda,
+                subTitle: TTexts.configAyudaSub,
+                onTap: () => Get.to(() => const ConfiguracionAyudaScreen()),
               ),
               TConfigMenuTile(
                 icon: Iconsax.refresh,
-                title: 'Retroalimentación',
-                subTitle: 'Dinos qué crees que podría ser mejor.',
-                onTap: () {},
+                title: TTexts.configRetro,
+                subTitle: TTexts.configRetroSub,
+                onTap: () =>
+                    Get.to(() => const ConfiguracionRetroalimentacionScreen()),
               ),
               const SizedBox(height: TSizes.spaceBtwItems),
 
-              const SizedBox(height: TSizes.spaceBtwSections),
               const Divider(),
               const SizedBox(height: TSizes.spaceBtwItems),
               const SizedBox(height: TSizes.spaceBtwItems),
@@ -104,7 +101,7 @@ class ConfiguracionScreen extends StatelessWidget {
                 child: OutlinedButton(
                   onPressed: () {},
                   child: const Text(
-                    'Cerrar sesión',
+                    TTexts.cerrarSesionBoton,
                     style: TextStyle(color: Colors.red),
                   ),
                 ),

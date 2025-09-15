@@ -65,8 +65,81 @@ class TTexts {
   static const perfilEstrellas = "Estrellas Obtenidas";
   static const perfilNiveles = "Niveles Completados";
   static const perfilLogros = "Logros Desbloqueados";
+  static const perfilCompartir = "Comparte tu progreso ৻@(  •̀ ᗜ •́  ৻)@";
+
   //
   static const perfilUsuarioResultado = "0";
 
   //Logros desbloqueables
+  static const logroTitulo1 = "Manitas que hablan";
+  static const logroSubTitulo1 = "Completa un nivel.";
+  static const logroTitulo2 = "Perfeccionista";
+  static const logroSubTitulo2 = "Completa 3 niveles con 3 estrellas.";
+  static const logroTitulo3 = "Creador de Tendencias";
+  static const logroSubTitulo3 = "Comparte tu progreso.";
+  static const logroTitulo4 = "Amarillo Amarillo el Plátano";
+
+  static const logroSubTitulo4 = "Consulta el diccionario";
+
+  //Config
+  static const configTitle = "Configuración ○Ｏo。.@(-ェ-)@ノ";
+  static const configSubTitle = "Ajusta tu experiencia a tu medida";
+  static const configCuenta = "Mi cuenta";
+  static const configDatos = "Mis Datos";
+  static const configDatosSub = "Modifica tu información personal.";
+  static const configRetro = "Retroalimentación";
+  static const configRetroSub = "Dinos qué crees que podría ser mejor.";
+  static const configAyuda = "Ayuda";
+  static const configAyudaSub = "¿Necesitas apoyo?";
+  static const configSoporteTitle = "Soporte";
+  static const configPreferencias = "Preferencias";
+  static const configPreferenciasSub = "Ajusta a tu experiencia deseada.";
+  static const configNotificaciones = "Notificaciones";
+  static const configNotificacionesSub =
+      "Elige qué notificaciones quieres ver.";
+
+  static const cerrarSesionBoton = "Cerrar sesión";
+
+  //Config Usuario Datos
+  static const configDatosTitle = "Información del Perfil";
+  static const configDatosFoto = "Foto de Perfil";
+  static const configDatosTitle2 = "Información Personal";
+  static const configDatosID = "ID de Usuario";
+  static const configDatosphone = "Teléfono";
+  static const configDatosgenero = "Género";
+  static const configDatosnacimiento = "Fecha de Nacimiento";
+
+  static const eliminarCuentaBoton = "Eliminar Cuenta :C";
+
+  //Config Notificaciones
+  static const configNotificacionesTitle = "Notificaciones";
+  static const configNotificacionesSubTitle = "Configuración de Notificaciones";
+  static const configNotificacionesGen = "Notificaciones Generales";
+  static const configNotificacionesAlertas =
+      "Recibe alertas importantes de la app";
+  static const configNotificacionesReminder = "Recordatorios";
+  static const configNotificacionesReminderSub =
+      "Te avisamos si te ausentas demasiado tiempo.";
+  static const configNotificacionesLogro = "Logros";
+  static const configNotificacionesLogroSub =
+      "Notificación cuando desbloquees un logro";
+  static const configNotificacionesNov = "Novedades";
+  static const configNotificacionesNovSub =
+      "Noticias y actualizaciones de la app.";
+
+  //Config RetroAlimentacion
+  static const configRetroTitle = "Retroalimentación";
+  static const configRetroSubTitle = "Tu opinión es importante";
+  static const configRetroSubTitle2 = "Dinos qué crees que podríamos mejorar:";
+  static const configRetroDecoracion = "Escribe tus comentarios aquí...";
+  static const configRetroGracias =
+      "¡Gracias por tu retroalimentación! Seguiremos trabajando para traerte la mejor experiencia. @(*^ｪ^)@";
+  static const configRetroEnviar = "Enviar";
+
+  //Config Soporte
+  static const configAyudaTitle = "Retroalimentación";
+  static const configFAQ = "Preguntas Frecuentes";
+  static const configFAQ1 = "¿Quiénes somos?";
+  static const configFAQ2 = "¿Quiénes somos?";
+  static const configFAQ3 = "¿Cómo contacto al soporte?";
 }

@@ -3,8 +3,8 @@ import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:proyectomanu/common/widgets/custom_shapes/containers/primary_header_container.dart';
 import 'package:proyectomanu/features/configuracion/screens/configuracion.dart';
-import 'package:proyectomanu/features/perfil/widgets/achievement_card.dart';
 import 'package:proyectomanu/features/perfil/widgets/circular_image.dart';
+import 'package:proyectomanu/features/perfil/widgets/logros_display.dart';
 import 'package:proyectomanu/features/perfil/widgets/stat_usuario_container.dart';
 import 'package:proyectomanu/utils/constants/colors.dart';
 import 'package:proyectomanu/utils/constants/images_strings.dart';
@@ -27,18 +27,19 @@ class PerfilScreen extends StatelessWidget {
                 children: [
                   Column(
                     children: [
-                      const SizedBox(height: 40),
+                      const SizedBox(height: 30),
                       TCircularImage(
                         image: TImages.imagenperfil,
-                        width: 110,
-                        height: 110,
+                        width: 135,
+                        height: 135,
                       ),
-                      const SizedBox(height: TSizes.spaceBtwSections / 2),
+                      const SizedBox(height: TSizes.spaceBtwSections / 3),
                       Center(
                         child: Text(
                           TTexts.perfilAppBarTitle,
-                          style: Theme.of(context).textTheme.headlineMedium!
-                              .apply(color: Colors.white),
+                          style: Theme.of(
+                            context,
+                          ).textTheme.headlineLarge!.apply(color: Colors.white),
                         ),
                       ),
                     ],
@@ -65,6 +66,7 @@ class PerfilScreen extends StatelessWidget {
                 ).textTheme.headlineMedium!.apply(color: TColors.primarioBoton),
               ),
             ),
+            const SizedBox(height: TSizes.spaceBtwSections),
 
             TStatUsuarioContainer(
               dark: dark,
@@ -100,39 +102,19 @@ class PerfilScreen extends StatelessWidget {
               ),
             ),
 
-            //CUADRICULA CON LOGROS QUE SERIA UNA IMAGEN, DESCRIPCION Y UNA FORMA DE SABER QUE SI LO HA OBTENIDO
-            GridView.count(
-              shrinkWrap: true,
-              physics: const NeverScrollableScrollPhysics(),
-              crossAxisCount: 2,
-              mainAxisSpacing: 12,
-              crossAxisSpacing: 12,
-              children: const [
-                TAchievementCard(
-                  image: 'assets/images/logro1.png',
-                  title: 'Buen comienzo',
-                  subtitle: 'Completa un nivel.',
-                  locked: false,
+            TLogrosDisplayPerfil(),
+            const SizedBox(height: TSizes.spaceBtwSections),
+
+            Padding(
+              padding: const EdgeInsets.all(15.0),
+              child: SizedBox(
+                width: double.infinity,
+                child: OutlinedButton.icon(
+                  onPressed: () {},
+                  label: const Text(TTexts.perfilCompartir),
+                  icon: const Icon(Iconsax.send_2),
                 ),
-                TAchievementCard(
-                  image: 'assets/images/logro2.png',
-                  title: 'Perfeccionista',
-                  subtitle: 'Completa un nivel con 3 estrellas.',
-                  locked: true,
-                ),
-                TAchievementCard(
-                  image: 'assets/images/logro3.png',
-                  subtitle: 'Comparte tu progreso.',
-                  title: 'Creador de Tendencias',
-                  locked: false,
-                ),
-                TAchievementCard(
-                  image: 'assets/images/logro4.png',
-                  subtitle: 'Completa tu primer sesión de ejercicios.',
-                  title: 'Amarillo Amarillo el Plátano',
-                  locked: false,
-                ),
-              ],
+              ),
             ),
           ],
         ),

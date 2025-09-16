@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:proyectomanu/features/perfil/widgets/circular_image.dart';
 import 'package:proyectomanu/utils/constants/colors.dart';
 import 'package:proyectomanu/utils/constants/sizes.dart';
-import 'package:proyectomanu/utils/helpers/helper_functions.dart';
 
 class TVerticalImageText extends StatelessWidget {
   const TVerticalImageText({
@@ -9,20 +9,17 @@ class TVerticalImageText extends StatelessWidget {
     required this.image,
     required this.title,
     this.textColor = TColors.light,
-    this.backgroundColor = TColors.light,
     this.onTap,
     this.isNetworkImage = false,
   });
 
   final String image, title;
   final Color textColor;
-  final Color? backgroundColor;
   final void Function()? onTap;
   final bool isNetworkImage;
 
   @override
   Widget build(BuildContext context) {
-    final dark = THelperFunctions.isDarkMode(context);
     return GestureDetector(
       onTap: onTap,
       child: Padding(
@@ -30,24 +27,7 @@ class TVerticalImageText extends StatelessWidget {
         child: Column(
           children: [
             //Icono Circular
-            Container(
-              width: 56,
-              height: 56,
-              padding: EdgeInsets.all(TSizes.sm),
-              decoration: BoxDecoration(
-                color: backgroundColor ?? (dark ? TColors.dark : TColors.light),
-                borderRadius: BorderRadius.circular(100),
-              ),
-              child: Center(
-                child: Image(
-                  image: isNetworkImage
-                      ? NetworkImage(image)
-                      : AssetImage(image) as ImageProvider,
-                  fit: BoxFit.cover,
-                  color: dark ? TColors.light : TColors.dark,
-                ),
-              ),
-            ),
+            TCircularImage(image: image),
             const SizedBox(height: TSizes.spaceBtwItems / 2),
             SizedBox(
               width: 55,

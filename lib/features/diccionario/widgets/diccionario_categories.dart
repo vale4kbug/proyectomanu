@@ -15,7 +15,7 @@ class TDiccionarioCategories extends StatelessWidget {
         scrollDirection: Axis.horizontal,
         itemBuilder: (_, index) {
           return TVerticalImageText(
-            image: TImages.imagenperfil, // de mientras
+            image: TImages.imagenperfil,
             title: 'ABCdario',
             textColor: const Color.fromARGB(255, 15, 114, 88),
             onTap: () {},

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:proyectomanu/common/styles/shadows.dart';
+import 'package:proyectomanu/utils/constants/images_strings.dart';
 import 'package:proyectomanu/utils/constants/sizes.dart';
 
 class TDiccionarioCardVertical extends StatelessWidget {
@@ -14,7 +14,6 @@ class TDiccionarioCardVertical extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.all(TSizes.sm),
         decoration: BoxDecoration(
-          boxShadow: [TShadowSyle.verticalCardShadow],
           borderRadius: BorderRadius.circular(
             12,
           ), // esquinas redondeadas suaves
@@ -32,7 +31,7 @@ class TDiccionarioCardVertical extends StatelessWidget {
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(8),
                 child: Image.asset(
-                  'assets/images/thumbnaildactidologiaA.png',
+                  TImages.imagenperfil,
                   height: 100,
                   width: double.infinity,
                   fit: BoxFit.cover, // ajusta la imagen al recuadro

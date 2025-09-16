@@ -142,4 +142,9 @@ class TTexts {
   static const configFAQ1 = "¿Quiénes somos?";
   static const configFAQ2 = "¿Quiénes somos?";
   static const configFAQ3 = "¿Cómo contacto al soporte?";
+
+  //Ejercicios
+  static const ejerciciosBanner1 = "Rigidez Motora";
+  static const ejerciciosBanner2 = "Fluidez y Claridad";
+  static const ejerciciosBanner3 = "Expresiones Faciales";
 }

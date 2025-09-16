@@ -40,7 +40,7 @@ class TAchievementCard extends StatelessWidget {
                 ),
               ),
 
-              // Overlay oscuro si está bloqueado
+              // Overlay oscuro si establoqueado
               if (locked)
                 Container(
                   height: 100,

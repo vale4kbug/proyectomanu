@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
-import 'package:proyectomanu/features/configuracion/screens/configuracion.dart';
 import 'package:proyectomanu/features/diccionario/screens/diccionario.dart';
+import 'package:proyectomanu/features/ejercicios/screens/ejercicios_menu.dart';
 import 'package:proyectomanu/features/home/home.dart';
 import 'package:proyectomanu/features/perfil/screens/perfil.dart';
 import 'package:proyectomanu/utils/constants/colors.dart';
@@ -61,7 +61,7 @@ class NavigationController extends GetxController {
   final Rx<int> selectedIndex = 0.obs;
   final screens = [
     const HomeScreen(),
-    Container(color: Colors.purple),
+    const EjerciciosScreen(),
     const DiccionarioScreen(),
     const PerfilScreen(),
     //const ConfiguracionScreen(),

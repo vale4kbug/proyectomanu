@@ -4,28 +4,33 @@ publish_to: "none"
 version: 1.0.0+1
 
 environment:
-  sdk: ^3.8.1
+  sdk: ">=3.0.0 <4.0.0" # Se recomienda especificar un rango
 
 dependencies:
   flutter:
     sdk: flutter
+
   cupertino_icons: ^1.0.8
   iconsax: ^0.0.8
   get: ^4.7.2
   get_storage: ^2.1.1
+  http: ^1.5.0
+  intl: ^0.20.2
+  logger: ^2.6.1
+  url_launcher: ^6.3.2
+  smooth_page_indicator: ^1.1.0
+  chiclet: ^1.2.0
+  pretty_animated_text: ^2.0.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  http: ^1.4.0
-  intl: ^0.20.2
-  logger: ^2.6.0
-  url_launcher: ^6.3.1
-  flutter_native_splash: ^2.4.6
-  flutter_lints: ^5.0.0
+
+  # PAQUETES DE DESARROLLO (SOLO HERRAMIENTAS)
+  flutter_lints: ^6.0.0
+  flutter_native_splash: ^2.4.0
   flutter_launcher_icons: ^0.14.4
-  smooth_page_indicator: ^1.2.1
-  chiclet: ^1.2.0
+
 flutter:
   uses-material-design: true
 

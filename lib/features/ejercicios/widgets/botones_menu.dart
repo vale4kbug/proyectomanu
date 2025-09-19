@@ -23,15 +23,14 @@ class BotonBanner extends StatelessWidget {
         onTap: onTap,
         child: Row(
           children: [
-            // Imagen degradada hacia la derecha
+            // Imagen con degradado
             ShaderMask(
               shaderCallback: (bounds) => const LinearGradient(
                 begin: Alignment.centerLeft,
                 end: Alignment.centerRight,
                 colors: [TColors.primarioBoton, Colors.transparent],
               ).createShader(bounds),
-              blendMode:
-                  BlendMode.dstIn, // <- recorta la imagen con transparencia
+              blendMode: BlendMode.dstIn,
               child: Image.asset(
                 imagen,
                 height: 150,
@@ -42,16 +41,16 @@ class BotonBanner extends StatelessWidget {
 
             const SizedBox(width: 16),
 
-            // Texto a un lado de la imagen degradada
-            Center(
-              child: Expanded(
-                child: Text(
-                  titulo,
-                  style: Theme.of(context).textTheme.headlineLarge?.copyWith(
-                    fontWeight: FontWeight.bold,
-                  ),
-                  maxLines: 2,
+            // Texto expandible
+            Expanded(
+              child: Text(
+                titulo,
+                style: Theme.of(context).textTheme.headlineLarge?.copyWith(
+                  fontWeight: FontWeight.bold,
                 ),
+                maxLines: 3, // <- Permite varias líneas
+                overflow: TextOverflow
+                    .ellipsis, // <- Opcional: puntos suspensivos si se pasa
               ),
             ),
           ],

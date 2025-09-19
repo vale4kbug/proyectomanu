@@ -46,7 +46,7 @@ class DialogoBurbujaPersonaje extends StatelessWidget {
               color: colorburbuja,
               tailPosition: tailPosition,
               child: AnimatedSwitcher(
-                duration: const Duration(milliseconds: 200),
+                duration: const Duration(milliseconds: 100),
                 transitionBuilder: (child, anim) =>
                     FadeTransition(opacity: anim, child: child),
                 child: ScaleText(

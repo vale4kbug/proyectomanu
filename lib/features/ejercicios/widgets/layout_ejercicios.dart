@@ -6,6 +6,7 @@ import 'package:proyectomanu/features/ejercicios/widgets/burbujacolita.dart';
 import 'package:proyectomanu/features/ejercicios/widgets/dialogo_burbuja.dart';
 
 import 'package:proyectomanu/utils/constants/sizes.dart';
+import 'package:proyectomanu/utils/constants/text_strings.dart';
 
 class TContenidoLayout extends StatefulWidget {
   const TContenidoLayout({
@@ -63,7 +64,7 @@ class _TContenidoLayoutState extends State<TContenidoLayout> {
               child: ElevatedButton.icon(
                 onPressed: _siguiente,
                 icon: const Icon(Iconsax.play),
-                label: const Text("Siguiente"),
+                label: Text(TTexts.botonSiguiente),
               ),
             ),
           ],

@@ -11,7 +11,8 @@ class ConfiguracionDatosScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const TAppBar(showBackArrow: true, title: Text('Mis Datos')),
+      appBar: const TAppBar(
+          showBackArrow: true, title: Text(TTexts.configDatosTitle1)),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(TSizes.defaultSpace),
@@ -19,10 +20,8 @@ class ConfiguracionDatosScreen extends StatelessWidget {
             children: [
               TSectionHeading(title: TTexts.configDatosTitle),
               const SizedBox(height: TSizes.spaceBtwItems / 2),
-
               const Divider(),
               const SizedBox(height: TSizes.spaceBtwItems),
-
               TConfigDatosMenu(
                 title: TTexts.name,
                 subTitle: 'Manu el mono',
@@ -33,7 +32,6 @@ class ConfiguracionDatosScreen extends StatelessWidget {
                 subTitle: 'xXManuMonitoXx',
                 onPressed: () {},
               ),
-
               TConfigDatosMenu(
                 title: TTexts.configDatosFoto,
                 subTitle: '',
@@ -42,7 +40,6 @@ class ConfiguracionDatosScreen extends StatelessWidget {
               const SizedBox(height: TSizes.spaceBtwItems),
               TSectionHeading(title: TTexts.configDatosTitle2),
               const SizedBox(height: TSizes.spaceBtwItems / 2),
-
               const Divider(),
               const SizedBox(height: TSizes.spaceBtwItems),
               TConfigDatosMenu(
@@ -70,9 +67,7 @@ class ConfiguracionDatosScreen extends StatelessWidget {
                 subTitle: '10 de abril de 2025',
                 onPressed: () {},
               ),
-
               const SizedBox(height: TSizes.spaceBtwItems * 4),
-
               SizedBox(
                 width: double.infinity,
                 child: OutlinedButton(

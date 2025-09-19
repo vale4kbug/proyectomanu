@@ -11,7 +11,7 @@ class TDiccionarioHeaderContainer extends StatelessWidget {
       child: Container(
         width: double.infinity,
         height: 240,
-        color: const Color.fromARGB(188, 133, 255, 144),
+        color: const Color.fromARGB(255, 114, 237, 134),
         child: Stack(children: [child]),
       ),
     );

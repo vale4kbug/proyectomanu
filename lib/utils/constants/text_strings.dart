@@ -101,6 +101,8 @@ class TTexts {
   static const cerrarSesionBoton = "Cerrar sesión";
 
   //Config Usuario Datos
+  static const configDatosTitle1 = "Mis Datos";
+
   static const configDatosTitle = "Información del Perfil";
   static const configDatosFoto = "Foto de Perfil";
   static const configDatosTitle2 = "Información Personal";
@@ -147,4 +149,12 @@ class TTexts {
   static const ejerciciosBanner1 = "Rigidez Motora";
   static const ejerciciosBanner2 = "Fluidez y Claridad";
   static const ejerciciosBanner3 = "Expresiones Faciales";
+
+  static const botonSiguiente = "Siguiente";
+
+  //Diccionario Tarjeta Individual
+  static const diccionarioTarjetaTitle = "Nombre de la letra";
+  static const diccionarioTarjetaA = "Letra A";
+  static const diccionarioTarjetaADesc =
+      "Con la mano cerrada, se muestran las uñas y se estira el dedo pulgar hacia un lado. La palma mira al frente.";
 }

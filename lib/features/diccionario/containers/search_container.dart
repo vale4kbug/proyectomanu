@@ -33,24 +33,24 @@ class TSearchContainer extends StatelessWidget {
           decoration: BoxDecoration(
             color: showBackground
                 ? dark
-                      ? TColors.dark
-                      : TColors.light
+                    ? TColors.dark
+                    : TColors.light
                 : Colors.transparent,
             borderRadius: BorderRadius.circular(TSizes.cardRadiusLG),
             border: showBorder
-                ? Border.all(color: const Color.fromARGB(255, 65, 236, 199))
+                ? Border.all(color: const Color.fromARGB(255, 205, 184, 244))
                 : null,
           ),
           child: Row(
             children: [
-              Icon(icon, color: const Color.fromARGB(197, 55, 179, 96)),
+              Icon(icon, color: const Color.fromARGB(255, 214, 152, 133)),
               const SizedBox(width: TSizes.spaceBtwSections),
               Text(
                 text,
                 textAlign: TextAlign.left,
                 style: Theme.of(context).textTheme.bodySmall!.copyWith(
-                  color: Color.fromARGB(197, 20, 127, 56),
-                ),
+                      color: Color.fromARGB(197, 20, 127, 56),
+                    ),
               ),
             ],
           ),

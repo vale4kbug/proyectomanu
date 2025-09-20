@@ -152,9 +152,16 @@ class TTexts {
 
   static const botonSiguiente = "Siguiente";
 
+//Diccionario
+  static const diccionarioBuscador = "Buscar";
+  static const diccionarioCategorias = "Categorías";
+
   //Diccionario Tarjeta Individual
   static const diccionarioTarjetaTitle = "Nombre de la letra";
   static const diccionarioTarjetaA = "Letra A";
   static const diccionarioTarjetaADesc =
       "Con la mano cerrada, se muestran las uñas y se estira el dedo pulgar hacia un lado. La palma mira al frente.";
+
+  //Success
+  static const botonContinuar = "Continuar";
 }

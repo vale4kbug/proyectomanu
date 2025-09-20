@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:get/get_navigation/src/extension_navigation.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:proyectomanu/features/exito/screens/exito_nivel.dart';
 import 'package:proyectomanu/features/home/widgets/boton_camino.dart';
 import 'package:proyectomanu/features/home/widgets/etiqueta_camino.dart';
 import 'package:proyectomanu/utils/constants/colors.dart';
+import 'package:proyectomanu/utils/constants/images_strings.dart';
 
 class TCaminoScreen extends StatelessWidget {
   const TCaminoScreen({super.key});
@@ -63,7 +67,10 @@ class TCaminoScreen extends StatelessWidget {
                     colorarribaboton: level['special'] == true
                         ? TColors.superBoton
                         : TColors.primarioBoton,
-                    onPressed: () {},
+                    onPressed: () => Get.to(() => const ExitoNivelLayout(
+                          mensaje: 'Manu te manda todo su apoyo',
+                          imagenPath: TImages.imagenperfil,
+                        )),
                     child: level['special'] == true
                         ? const Icon(
                             Iconsax.star,

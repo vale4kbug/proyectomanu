@@ -6,6 +6,7 @@ import 'package:proyectomanu/features/diccionario/containers/search_container.da
 import 'package:proyectomanu/features/diccionario/widgets/diccionario_categories.dart';
 import 'package:proyectomanu/features/diccionario/widgets/heading_section.dart';
 import 'package:proyectomanu/utils/constants/sizes.dart';
+import 'package:proyectomanu/utils/constants/text_strings.dart';
 
 class DiccionarioScreen extends StatelessWidget {
   const DiccionarioScreen({super.key});
@@ -21,7 +22,7 @@ class DiccionarioScreen extends StatelessWidget {
                 children: [
                   const SizedBox(height: TSizes.spaceBtwSections),
                   //recuadro buscar
-                  const TSearchContainer(text: 'Buscar'),
+                  const TSearchContainer(text: TTexts.diccionarioBuscador),
                   Padding(
                     padding: EdgeInsets.only(left: TSizes.defaultSpace),
                     child: Column(
@@ -29,7 +30,7 @@ class DiccionarioScreen extends StatelessWidget {
                         //catagorias slide horizontal
                         SizedBox(height: TSizes.inputFieldRadius),
                         TSectionHeading(
-                          title: 'Categorías',
+                          title: TTexts.diccionarioCategorias,
                           textColor: Color.fromARGB(255, 15, 114, 88),
                         ),
                         SizedBox(height: TSizes.inputFieldRadius),

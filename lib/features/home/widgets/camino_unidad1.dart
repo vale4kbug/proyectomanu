@@ -5,6 +5,7 @@ import 'package:iconsax/iconsax.dart';
 import 'package:proyectomanu/features/exito/screens/exito_nivel.dart';
 import 'package:proyectomanu/features/home/widgets/boton_camino.dart';
 import 'package:proyectomanu/features/home/widgets/etiqueta_camino.dart';
+import 'package:proyectomanu/features/niveles/screens/cuestionario.dart';
 import 'package:proyectomanu/utils/constants/colors.dart';
 import 'package:proyectomanu/utils/constants/images_strings.dart';
 
@@ -22,6 +23,22 @@ class TCaminoScreen extends StatelessWidget {
         'y': 550.0,
         'stars': 2,
         'special': false,
+        'screen': NivelCuestionarioScreen(
+          pregunta: "¿Qué letra es esta en LSM?",
+          imagenPath: TImages.imagenperfil,
+          opciones: ["A", "B", "C"],
+          respuestaCorrecta: "A",
+          nextScreen: NivelCuestionarioScreen(
+            pregunta: "¿Cuál es la letra B?",
+            imagenPath: TImages.imagenperfil,
+            opciones: ["A", "B", "C"],
+            respuestaCorrecta: "B",
+            nextScreen: const ExitoNivelLayout(
+              mensaje: "¡Nivel completado!",
+              imagenPath: TImages.imagenperfil,
+            ),
+          ),
+        ),
       },
       {
         'level': 2,
@@ -29,6 +46,10 @@ class TCaminoScreen extends StatelessWidget {
         'y': 400.0,
         'stars': 1,
         'special': false,
+        'screen': const ExitoNivelLayout(
+          mensaje: '¡Muy bien!',
+          imagenPath: TImages.imagenperfil,
+        ),
       },
       {
         'level': 3,
@@ -67,10 +88,7 @@ class TCaminoScreen extends StatelessWidget {
                     colorarribaboton: level['special'] == true
                         ? TColors.superBoton
                         : TColors.primarioBoton,
-                    onPressed: () => Get.to(() => const ExitoNivelLayout(
-                          mensaje: 'Manu te manda todo su apoyo',
-                          imagenPath: TImages.imagenperfil,
-                        )),
+                    onPressed: () => Get.to(() => level['screen'] as Widget),
                     child: level['special'] == true
                         ? const Icon(
                             Iconsax.star,

@@ -14,8 +14,7 @@ class TLogrosDisplayPerfil extends StatelessWidget {
       crossAxisCount: 2,
       mainAxisSpacing: 12,
       crossAxisSpacing: 12,
-
-      childAspectRatio: .85,
+      childAspectRatio: .75,
       children: const [
         TAchievementCard(
           image: TImages.logro1,
@@ -33,14 +32,12 @@ class TLogrosDisplayPerfil extends StatelessWidget {
           image: TImages.logro3,
           title: TTexts.logroTitulo3,
           subtitle: TTexts.logroSubTitulo3,
-
           locked: false,
         ),
         TAchievementCard(
           image: TImages.logro4,
           title: TTexts.logroTitulo4,
           subtitle: TTexts.logroSubTitulo4,
-
           locked: false,
         ),
       ],

@@ -44,7 +44,6 @@ class PerfilScreen extends StatelessWidget {
                       ),
                     ],
                   ),
-
                   Positioned(
                     top: 40,
                     right: 20,
@@ -57,7 +56,7 @@ class PerfilScreen extends StatelessWidget {
                 ],
               ),
             ),
-
+            const SizedBox(height: TSizes.spaceBtwSections / 2),
             Center(
               child: Text(
                 TTexts.perfilEstadisticaTitle,
@@ -67,7 +66,6 @@ class PerfilScreen extends StatelessWidget {
               ),
             ),
             const SizedBox(height: TSizes.spaceBtwSections),
-
             TStatUsuarioContainer(
               dark: dark,
               title: TTexts.perfilEstrellas,
@@ -89,7 +87,6 @@ class PerfilScreen extends StatelessWidget {
               icon: Iconsax.medal_star5,
               iconColor: Color.fromARGB(255, 133, 58, 255),
             ),
-
             const SizedBox(height: TSizes.spaceBtwSections),
             const Divider(),
             const SizedBox(height: TSizes.spaceBtwItems / 2),
@@ -101,10 +98,8 @@ class PerfilScreen extends StatelessWidget {
                 ).textTheme.headlineMedium!.apply(color: TColors.primarioBoton),
               ),
             ),
-
             TLogrosDisplayPerfil(),
             const SizedBox(height: TSizes.spaceBtwSections),
-
             Padding(
               padding: const EdgeInsets.all(15.0),
               child: SizedBox(

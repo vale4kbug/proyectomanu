@@ -47,16 +47,10 @@ flutter:
   fonts:
     - family: Bunny
       fonts:
-        - asset: assets/fonts/Chonky Bunny.ttf
-    - family: Comic
+        - asset: assets/fonts/LeagueSpartan-Bold.otf
+    - family: Monse
       fonts:
-        - asset: assets/fonts/Hey Comic.otf
-    - family: Janda
-      fonts:
-        - asset: assets/fonts/JandaManateeSolid.ttf
-    - family: Kinder
-      fonts:
-        - asset: assets/fonts/Letters for Learners.ttf
+        - asset: assets/fonts/Montserrat-Regular.ttf
 
 flutter_icons:
   android: true

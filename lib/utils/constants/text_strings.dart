@@ -13,8 +13,7 @@ class TTexts {
 
   //login
   static const loginTitle = "¡Hola! @(* ᗢ *)@/";
-  static const loginSubtitle =
-      "Aprendamos lenguaje de señas de una forma divertida";
+  static const loginSubtitle = "Aprendamos LSM de una forma divertida";
 
   //login autentificacion form
   static const name = "Nombre";

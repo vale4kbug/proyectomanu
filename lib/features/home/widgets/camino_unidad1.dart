@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:get/get_navigation/src/extension_navigation.dart';
+import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:proyectomanu/features/exito/screens/exito_nivel.dart';
 import 'package:proyectomanu/features/home/widgets/boton_camino.dart';
 import 'package:proyectomanu/features/home/widgets/etiqueta_camino.dart';
-import 'package:proyectomanu/features/niveles/screens/cuestionario.dart';
+import 'package:proyectomanu/features/niveles/controllers/nivelscreen.dart';
+import 'package:proyectomanu/features/niveles/models/tipoejercicio.dart';
 import 'package:proyectomanu/utils/constants/colors.dart';
 import 'package:proyectomanu/utils/constants/images_strings.dart';
 
@@ -16,6 +16,28 @@ class TCaminoScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
 
+    /// 🔹 Nivel 1: 2 preguntas + finalización
+    final ejerciciosNivel1 = [
+      Ejercicio(
+        tipo: TipoEjercicio.cuestionario,
+        data: {
+          "pregunta": "¿Qué letra es esta en LSM?",
+          "imagenPath": TImages.facebook,
+          "opciones": ["A", "B", "C"],
+          "respuestaCorrecta": "A",
+        },
+      ),
+      Ejercicio(
+        tipo: TipoEjercicio.cuestionario,
+        data: {
+          "pregunta": "¿Cuál es la letra B?",
+          "imagenPath": TImages.google,
+          "opciones": ["A", "B", "C"],
+          "respuestaCorrecta": "B",
+        },
+      ),
+    ];
+
     final levels = [
       {
         'level': 1,
@@ -23,22 +45,7 @@ class TCaminoScreen extends StatelessWidget {
         'y': 550.0,
         'stars': 2,
         'special': false,
-        'screen': NivelCuestionarioScreen(
-          pregunta: "¿Qué letra es esta en LSM?",
-          imagenPath: TImages.imagenperfil,
-          opciones: ["A", "B", "C"],
-          respuestaCorrecta: "A",
-          nextScreen: NivelCuestionarioScreen(
-            pregunta: "¿Cuál es la letra B?",
-            imagenPath: TImages.imagenperfil,
-            opciones: ["A", "B", "C"],
-            respuestaCorrecta: "B",
-            nextScreen: const ExitoNivelLayout(
-              mensaje: "¡Nivel completado!",
-              imagenPath: TImages.imagenperfil,
-            ),
-          ),
-        ),
+        'screen': NivelScreen(ejercicios: ejerciciosNivel1),
       },
       {
         'level': 2,
@@ -46,9 +53,11 @@ class TCaminoScreen extends StatelessWidget {
         'y': 400.0,
         'stars': 1,
         'special': false,
-        'screen': const ExitoNivelLayout(
-          mensaje: '¡Muy bien!',
+        'screen': ExitoNivelLayout(
+          mensaje: '¡Este es un nivel de demostración!',
           imagenPath: TImages.imagenperfil,
+          estrellasGanadas: 1,
+          onPressed: () => Get.back(),
         ),
       },
       {
@@ -57,6 +66,7 @@ class TCaminoScreen extends StatelessWidget {
         'y': 300.0,
         'stars': 3,
         'special': false,
+        'screen': null,
       },
       {
         'level': 4,
@@ -64,6 +74,7 @@ class TCaminoScreen extends StatelessWidget {
         'y': 150.0,
         'stars': 3,
         'special': true,
+        'screen': null,
       },
     ];
 
@@ -75,7 +86,6 @@ class TCaminoScreen extends StatelessWidget {
           width: screenWidth,
           child: Stack(
             children: [
-              // 🔹 Niveles
               ...levels.map((level) {
                 return Positioned(
                   left: (level['x'] as double) - 40,
@@ -88,7 +98,11 @@ class TCaminoScreen extends StatelessWidget {
                     colorarribaboton: level['special'] == true
                         ? TColors.superBoton
                         : TColors.primarioBoton,
-                    onPressed: () => Get.to(() => level['screen'] as Widget),
+                    onPressed: level['screen'] != null
+                        ? () {
+                            Get.to(() => level['screen'] as Widget);
+                          }
+                        : null,
                     child: level['special'] == true
                         ? const Icon(
                             Iconsax.star,

@@ -12,7 +12,7 @@ class TBotonCamino extends StatelessWidget {
     this.colorborde = Colors.transparent,
   });
 
-  final VoidCallback onPressed;
+  final VoidCallback? onPressed;
   final Widget child;
   final int stars;
   final Color colorbajoboton;
@@ -35,7 +35,6 @@ class TBotonCamino extends StatelessWidget {
           child: child,
         ),
         const SizedBox(height: 8),
-
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: List.generate(3, (index) {

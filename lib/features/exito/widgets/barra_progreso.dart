@@ -2,48 +2,27 @@ import 'package:flutter/material.dart';
 import 'package:proyectomanu/utils/constants/colors.dart';
 import 'package:proyectomanu/utils/constants/sizes.dart';
 
-class BarraProgresoOvalada extends StatefulWidget {
-  const BarraProgresoOvalada({super.key});
+// 1. Convertido a StatelessWidget, ya que no maneja su propia animación
+class BarraProgresoOvalada extends StatelessWidget {
+  const BarraProgresoOvalada({
+    super.key,
+    required this.progreso, // 2. Recibe el progreso como parámetro
+  });
 
-  @override
-  State<BarraProgresoOvalada> createState() => _BarraProgresoOvaladaState();
-}
-
-class _BarraProgresoOvaladaState extends State<BarraProgresoOvalada>
-    with SingleTickerProviderStateMixin {
-  late AnimationController _barraController;
-
-  @override
-  void initState() {
-    super.initState();
-    _barraController = AnimationController(
-      vsync: this,
-      duration: const Duration(seconds: 2),
-    )..forward();
-  }
-
-  @override
-  void dispose() {
-    _barraController.dispose();
-    super.dispose();
-  }
+  final double progreso;
 
   @override
   Widget build(BuildContext context) {
-    return AnimatedBuilder(
-      animation: _barraController,
-      builder: (context, child) {
-        return ClipRRect(
-          borderRadius: BorderRadius.circular(30), // Ovalada
-          child: CustomPaint(
-            painter: _BarraProgresoPainter(_barraController.value),
-            child: const SizedBox(
-              height: TSizes.spaceBtwSections,
-              width: double.infinity,
-            ),
-          ),
-        );
-      },
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(30), // Ovalada
+      child: CustomPaint(
+        // 3. Pasa el valor de progreso al pintor
+        painter: _BarraProgresoPainter(progreso),
+        child: const SizedBox(
+          height: TSizes.spaceBtwSections,
+          width: double.infinity,
+        ),
+      ),
     );
   }
 }
@@ -64,7 +43,6 @@ class _BarraProgresoPainter extends CustomPainter {
           TColors.intermediofuerteAzul,
           TColors.primarioBoton,
           TColors.primaryColor,
-          // TColors.superBoton
         ],
       ).createShader(Rect.fromLTWH(0, 0, size.width, size.height))
       ..style = PaintingStyle.fill;

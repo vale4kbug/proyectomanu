@@ -1,3 +1,5 @@
+import 'dart:math';
+
 class TTexts {
   //onboarding
   static const onBoardingTitle1 = "¡Bienvenido a Manolingo!";
@@ -53,8 +55,7 @@ class TTexts {
       "¡Felicidades! Tu cuenta te espera. Verifica tu correo para empezar a aprender. @(o◝‿◜o)@";
   static const emailNotReceivedMessage =
       "¿No recibiste el correo? Verifica en tu carpeta de spam or reenvialo.";
-  static const yourAccountCreatedTitle =
-      "Tu cuenta ha sido creada de manera exitosa. @(* ᗢ *)@";
+  static const yourAccountCreatedTitle = "Tu cuenta ha sido creada. @(* ᗢ *)@";
   static const yourAccountCreatedSubTitle =
       "Bienvenido a Manolingo. La aplicación para aprender LSM de manera divertida.";
   // Perfil Usuario
@@ -163,4 +164,64 @@ class TTexts {
 
   //Success
   static const botonContinuar = "Continuar";
+
+  //Niveles Resultados
+  static const List<String> mensajes1Estrella = [
+    "¡Buen comienzo! ¡La práctica te hará un experto!",
+    "¡No te rindas! Cada paso es un avance.",
+    "¡Sigue adelante! Estás construyendo una base sólida."
+  ];
+
+  static const List<String> mensajes2Estrellas = [
+    "¡Excelente trabajo! Estás muy cerca de la perfección.",
+    "¡Muy bien hecho! Tu esfuerzo está dando frutos.",
+    "¡Casi lo tienes! Sigue así y dominarás el tema."
+  ];
+
+  static const List<String> mensajes3Estrellas = [
+    "¡Perfecto! ¡Eres un verdadero maestro de las señas!",
+    "¡Increíble! Has dominado este nivel por completo.",
+    "¡Felicidades! Tu desempeño ha sido impecable."
+  ];
+  static String obtenerMensajePorEstrellas(int estrellas) {
+    final random = Random();
+
+    final estrellasReales = estrellas > 0 ? estrellas : 1;
+
+    switch (estrellasReales) {
+      case 1:
+        return mensajes1Estrella[random.nextInt(mensajes1Estrella.length)];
+      case 2:
+        return mensajes2Estrellas[random.nextInt(mensajes2Estrellas.length)];
+      case 3:
+        return mensajes3Estrellas[random.nextInt(mensajes3Estrellas.length)];
+      default:
+        return mensajes3Estrellas[random.nextInt(mensajes3Estrellas.length)];
+    }
+  }
+
+  ///Mensajes Correcto o Incorrecto
+  static const List<String> mensajesCorrectos = [
+    "✅ ¡Correcto!",
+    "✅ ¡Muy bien!",
+    "✅ ¡Genial!",
+    "✅ ¡Sigue así!",
+    "✅ ¡Excelente!"
+  ];
+
+  static const List<String> mensajesIncorrectos = [
+    "❌ Incorrecto",
+    "❌ Inténtalo de nuevo",
+    "❌ Casi lo tienes",
+    "❌ No te preocupes, ¡la práctica ayuda!"
+  ];
+  static String obtenerMensajeCorrecto() {
+    final random = Random();
+    return mensajesCorrectos[random.nextInt(mensajesCorrectos.length)];
+  }
+
+  static String obtenerMensajeIncorrecto() {
+    final random = Random();
+    return mensajesIncorrectos[random.nextInt(mensajesIncorrectos.length)];
+  }
 }

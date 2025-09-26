@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:proyectomanu/utils/constants/colors.dart';
 import 'package:proyectomanu/utils/constants/sizes.dart';
 import 'package:proyectomanu/utils/constants/text_strings.dart';
 
@@ -62,7 +63,7 @@ class _NivelCuestionarioScreenState extends State<NivelCuestionarioScreen> {
             ...widget.opciones.map((opcion) {
               final seleccionada = opcion == respuestaSeleccionada;
               final color = !respondido
-                  ? Colors.blue
+                  ? TColors.primarioBoton
                   : (opcion == widget.respuestaCorrecta
                       ? Colors.green
                       : (seleccionada ? Colors.red : Colors.grey));

@@ -165,7 +165,14 @@ class TTexts {
   //Success
   static const botonContinuar = "Continuar";
 
+  //Relacionar Nivel
+
+  static const nivelRelacionarTitle =
+      "Relaciona las imágenes con las palabras correctas";
+
   //Niveles Resultados
+
+  static const nivelCompleto = "¡Nivel completado!";
   static const List<String> mensajes1Estrella = [
     "¡Buen comienzo! ¡La práctica te hará un experto!",
     "¡No te rindas! Cada paso es un avance.",

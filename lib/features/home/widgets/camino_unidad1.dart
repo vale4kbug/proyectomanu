@@ -28,6 +28,17 @@ class TCaminoScreen extends StatelessWidget {
         },
       ),
       Ejercicio(
+        tipo: TipoEjercicio.relacionar,
+        data: {
+          "imagenes": [TImages.facebook, TImages.google],
+          "palabras": ["Facebook", "Google"],
+          "respuestasCorrectas": {
+            TImages.facebook: "Facebook",
+            TImages.google: "Google",
+          },
+        },
+      ),
+      Ejercicio(
         tipo: TipoEjercicio.cuestionario,
         data: {
           "pregunta": "¿Cuál es la letra B?",
@@ -43,7 +54,7 @@ class TCaminoScreen extends StatelessWidget {
         'level': 1,
         'x': screenWidth * 0.25,
         'y': 550.0,
-        'stars': 2,
+        'stars': 0,
         'special': false,
         'screen': NivelScreen(ejercicios: ejerciciosNivel1),
       },
@@ -51,7 +62,7 @@ class TCaminoScreen extends StatelessWidget {
         'level': 2,
         'x': screenWidth * 0.7,
         'y': 400.0,
-        'stars': 1,
+        'stars': 0,
         'special': false,
         'screen': ExitoNivelLayout(
           mensaje: '¡Este es un nivel de demostración!',
@@ -64,7 +75,7 @@ class TCaminoScreen extends StatelessWidget {
         'level': 3,
         'x': screenWidth * 0.3,
         'y': 300.0,
-        'stars': 3,
+        'stars': 0,
         'special': false,
         'screen': null,
       },
@@ -72,7 +83,7 @@ class TCaminoScreen extends StatelessWidget {
         'level': 4,
         'x': screenWidth * 0.65,
         'y': 150.0,
-        'stars': 3,
+        'stars': 0,
         'special': true,
         'screen': null,
       },

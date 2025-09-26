@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:proyectomanu/features/exito/screens/exito_nivel.dart';
 import 'package:proyectomanu/features/niveles/models/tipoejercicio.dart';
 import 'package:proyectomanu/features/niveles/screens/cuestionario.dart';
+import 'package:proyectomanu/features/niveles/screens/relacionar_columnas.dart';
 import 'package:proyectomanu/utils/constants/text_strings.dart';
 
 class NivelScreen extends StatefulWidget {
@@ -50,10 +51,18 @@ class _NivelScreenState extends State<NivelScreen> {
           respuestaCorrecta: ejercicio.data["respuestaCorrecta"],
           onNext: (correcto) => _siguiente(correcto: correcto),
         );
-
+      case TipoEjercicio.relacionar:
+        return NivelRelacionScreen(
+          key: ValueKey(_indiceActual),
+          imagenes: List<String>.from(ejercicio.data["imagenes"]),
+          palabras: List<String>.from(ejercicio.data["palabras"]),
+          respuestasCorrectas:
+              Map<String, String>.from(ejercicio.data["respuestasCorrectas"]),
+          onNext: (correcto) => _siguiente(correcto: correcto),
+        );
       case TipoEjercicio.finalizacion:
         return ExitoNivelLayout(
-          mensaje: "¡Nivel completado!",
+          mensaje: TTexts.nivelCompleto,
           imagenPath: ejercicio.data["imagenPath"],
           estrellasGanadas: _puntaje,
           onPressed: () => Get.back(),
@@ -62,7 +71,7 @@ class _NivelScreenState extends State<NivelScreen> {
       default:
         return Scaffold(
           body: Center(
-            child: Text("Ejercicio ${ejercicio.tipo} aún no implementado"),
+            child: Text("Error 0-o"),
           ),
         );
     }

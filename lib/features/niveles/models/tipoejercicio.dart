@@ -1,10 +1,12 @@
 enum TipoEjercicio {
   presentacion,
-  cuestionario,
-  relacionar,
-  escribir,
-  camara,
-  finalizacion
+  cuestionario, //
+  relacionar, //
+  camara, //falta
+  escritura, //
+  lectura, //
+  historia,
+  finalizacion, //
 }
 
 class Ejercicio {

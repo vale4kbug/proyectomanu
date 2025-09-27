@@ -1,3 +1,5 @@
+import 'dart:math';
+
 class TImages {
   //logo manolingo
   static const String darkAppLogo = "assets/logos/manolingo-logo-blanco.png";
@@ -38,4 +40,39 @@ class TImages {
   static const String logro4 = "assets/logos/applogo.png"; //cambiar
   static const String logro5 = "assets/logos/applogo.png"; //cambiar
   static const String logro6 = "assets/logos/applogo.png"; //cambiar
+
+  //Imagenes Final Nivel
+  static const List<String> imagen1Estrella = [
+    "assets/logos/applogo.png",
+    "assets/logos/applogo.png",
+    "assets/logos/applogo.png"
+  ];
+
+  static const List<String> imagen2Estrellas = [
+    "assets/logos/applogo.png",
+    "assets/logos/applogo.png",
+    "assets/logos/applogo.png"
+  ];
+
+  static const List<String> imagen3Estrellas = [
+    "assets/logos/applogo.png",
+    "assets/logos/applogo.png",
+    "assets/logos/applogo.png"
+  ];
+  static String imagenPorEstrellas(int estrellas) {
+    final random = Random();
+
+    final estrellasReales = (estrellas > 0 && estrellas <= 3) ? estrellas : 1;
+
+    switch (estrellasReales) {
+      case 1:
+        return imagen1Estrella[random.nextInt(imagen1Estrella.length)];
+      case 2:
+        return imagen2Estrellas[random.nextInt(imagen2Estrellas.length)];
+      case 3:
+        return imagen3Estrellas[random.nextInt(imagen3Estrellas.length)];
+      default:
+        return imagen3Estrellas[random.nextInt(imagen3Estrellas.length)];
+    }
+  }
 }

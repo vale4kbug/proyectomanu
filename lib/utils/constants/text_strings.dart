@@ -82,7 +82,7 @@ class TTexts {
   static const logroSubTitulo4 = "Consulta el diccionario";
 
   //Config
-  static const configTitle = "Configuración ○Ｏo。.@(-ェ-)@ノ";
+  static const configTitle = "Configuración @(-ェ-)@ノ";
   static const configSubTitle = "Ajusta tu experiencia a tu medida";
   static const configCuenta = "Mi cuenta";
   static const configDatos = "Mis Datos";
@@ -165,10 +165,17 @@ class TTexts {
   //Success
   static const botonContinuar = "Continuar";
 
+//Unidades Nombres
+  static const unidad1 = "Unidad 1: Dactilología";
+
   //Relacionar Nivel
 
   static const nivelRelacionarTitle =
       "Relaciona las imágenes con las palabras correctas";
+
+//Escribir Nivel
+  static const nivelEscribirInstruccion = "Escribe tu respuesta";
+  static const nivelEscribirBoton = "Validar";
 
   //Niveles Resultados
 

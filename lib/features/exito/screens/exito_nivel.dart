@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:proyectomanu/features/exito/widgets/barra_progreso.dart';
 import 'package:proyectomanu/features/exito/widgets/boton_continuar.dart';
 import 'package:proyectomanu/features/exito/widgets/estrellas.dart';
@@ -7,6 +6,7 @@ import 'package:proyectomanu/features/exito/widgets/imagen_victoria.dart';
 import 'package:proyectomanu/features/exito/widgets/texto_motivacional.dart';
 
 import 'package:proyectomanu/utils/constants/sizes.dart';
+import 'package:proyectomanu/utils/constants/text_strings.dart';
 
 // 1. Convertido a StatefulWidget para manejar las animaciones
 class ExitoNivelLayout extends StatefulWidget {
@@ -68,11 +68,8 @@ class _ExitoNivelLayoutState extends State<ExitoNivelLayout>
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                "¡Nivel Completado!",
-                style: Theme.of(context)
-                    .textTheme
-                    .headlineLarge!
-                    .copyWith(color: Colors.blue.shade700),
+                TTexts.nivelCompleto,
+                style: Theme.of(context).textTheme.headlineLarge,
                 textAlign: TextAlign.center,
               ),
               const SizedBox(height: TSizes.spaceBtwSections),

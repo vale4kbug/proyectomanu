@@ -81,10 +81,10 @@ class _NivelRelacionScreenState extends State<NivelRelacionScreen> {
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(16),
                               color: seleccionada
-                                  ? const Color.fromARGB(255, 154, 158, 248)
-                                  : const Color.fromARGB(255, 220, 220, 255),
+                                  ? Color.fromARGB(255, 249, 209, 136)
+                                  : Color.fromARGB(255, 255, 230, 183),
                               border: Border.all(
-                                color: TColors.superBoton,
+                                color: Color.fromARGB(255, 255, 186, 58),
                                 width: 2,
                               ),
                             ),

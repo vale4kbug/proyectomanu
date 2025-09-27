@@ -3,7 +3,10 @@ import 'package:get/get.dart';
 import 'package:proyectomanu/features/exito/screens/exito_nivel.dart';
 import 'package:proyectomanu/features/niveles/models/tipoejercicio.dart';
 import 'package:proyectomanu/features/niveles/screens/cuestionario.dart';
+import 'package:proyectomanu/features/niveles/screens/escribe.dart';
+import 'package:proyectomanu/features/niveles/screens/lectura.dart';
 import 'package:proyectomanu/features/niveles/screens/relacionar_columnas.dart';
+import 'package:proyectomanu/utils/constants/images_strings.dart';
 import 'package:proyectomanu/utils/constants/text_strings.dart';
 
 class NivelScreen extends StatefulWidget {
@@ -25,11 +28,10 @@ class _NivelScreenState extends State<NivelScreen> {
     if (_indiceActual < widget.ejercicios.length - 1) {
       setState(() => _indiceActual++);
     } else {
-      final data = widget.ejercicios.first.data;
       Get.off(
         () => ExitoNivelLayout(
           mensaje: TTexts.obtenerMensajePorEstrellas(_puntaje),
-          imagenPath: data["imagenPath"],
+          imagenPath: TImages.imagenPorEstrellas(_puntaje),
           estrellasGanadas: _puntaje,
           onPressed: () => Get.back(),
         ),
@@ -59,6 +61,21 @@ class _NivelScreenState extends State<NivelScreen> {
           respuestasCorrectas:
               Map<String, String>.from(ejercicio.data["respuestasCorrectas"]),
           onNext: (correcto) => _siguiente(correcto: correcto),
+        );
+      case TipoEjercicio.escritura:
+        return NivelEscrituraScreen(
+          key: ValueKey(_indiceActual),
+          pregunta: ejercicio.data["pregunta"],
+          imagenPath: ejercicio.data["imagenPath"],
+          respuestaCorrecta: ejercicio.data["respuestaCorrecta"],
+          onNext: (correcto) => _siguiente(correcto: correcto),
+        );
+      case TipoEjercicio.lectura:
+        return NivelLecturaScreen(
+          key: ValueKey(_indiceActual),
+          titulo: ejercicio.data["titulo"],
+          texto: ejercicio.data["texto"],
+          onNext: () => _siguiente(),
         );
       case TipoEjercicio.finalizacion:
         return ExitoNivelLayout(

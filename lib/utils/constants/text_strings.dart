@@ -180,6 +180,8 @@ class TTexts {
   //Niveles Resultados
 
   static const nivelCompleto = "¡Nivel completado!";
+  static const finalizar = "Entiendo @( o･ω･)@";
+
   static const List<String> mensajes1Estrella = [
     "¡Buen comienzo! ¡La práctica te hará un experto!",
     "¡No te rindas! Cada paso es un avance.",

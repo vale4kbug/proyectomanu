@@ -5,6 +5,7 @@ import 'package:proyectomanu/features/niveles/models/tipoejercicio.dart';
 import 'package:proyectomanu/features/niveles/screens/cuestionario.dart';
 import 'package:proyectomanu/features/niveles/screens/escribe.dart';
 import 'package:proyectomanu/features/niveles/screens/lectura.dart';
+import 'package:proyectomanu/features/niveles/screens/presentacion_sena.dart';
 import 'package:proyectomanu/features/niveles/screens/relacionar_columnas.dart';
 import 'package:proyectomanu/utils/constants/images_strings.dart';
 import 'package:proyectomanu/utils/constants/text_strings.dart';
@@ -70,6 +71,15 @@ class _NivelScreenState extends State<NivelScreen> {
           respuestaCorrecta: ejercicio.data["respuestaCorrecta"],
           onNext: (correcto) => _siguiente(correcto: correcto),
         );
+      case TipoEjercicio.presentacion:
+        return NivelPresentacionScreen(
+          key: ValueKey(_indiceActual),
+          textos: List<String>.from(ejercicio.data["textos"]),
+          imagenesSmall: List<String>.from(ejercicio.data["imagenesSmall"]),
+          imagenesBig: List<String>.from(ejercicio.data["imagenesBig"]),
+          onNext: () => _siguiente(),
+        );
+
       case TipoEjercicio.lectura:
         return NivelLecturaScreen(
           key: ValueKey(_indiceActual),

@@ -13,7 +13,7 @@ class BotonContinuar extends StatelessWidget {
       child: ElevatedButton(
         onPressed: onPressed,
         child: const Text(
-          TTexts.botonContinuar,
+          TTexts.finalizar,
         ),
       ),
     );

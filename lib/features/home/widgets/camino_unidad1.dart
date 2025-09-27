@@ -16,11 +16,31 @@ class TCaminoScreen extends StatelessWidget {
 
     final ejerciciosNivel1 = [
       Ejercicio(
+        tipo: TipoEjercicio.presentacion,
+        data: {
+          "titulo": "Bienvenida",
+          "textos": [
+            "En este nivel aprenderas como hacer la sena A",
+            "Ensenando las unas ",
+            "Se veria algo asi"
+          ],
+          "imagenesSmall": [
+            TImages.google,
+            TImages.facebook,
+            TImages.imagenperfil,
+          ],
+          "imagenesBig": [
+            TImages.onBoardingImage1,
+            TImages.onBoardingImage2,
+            TImages.onBoardingImage3,
+          ],
+        },
+      ),
+      Ejercicio(
         tipo: TipoEjercicio.lectura,
         data: {
-          "titulo": "Bienvenido al nivel 1",
-          "texto":
-              "En este nivel aprenderás a reconocer la seña de la letra A.",
+          "titulo": "Historia sobre LSM",
+          "texto": "Info info info.",
         },
       ),
       Ejercicio(
@@ -69,9 +89,10 @@ class TCaminoScreen extends StatelessWidget {
         'stars': 0,
         'special': false,
         'screen': ExitoNivelLayout(
-          mensaje: '¡Este es un nivel de demostración!',
+          mensaje:
+              '¡Este es un nivel de demostracion de la pantalla final wow!',
           imagenPath: TImages.imagenperfil,
-          estrellasGanadas: 1,
+          estrellasGanadas: 2,
           onPressed: () => Get.back(),
         ),
       },

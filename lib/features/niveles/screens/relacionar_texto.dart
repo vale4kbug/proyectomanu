@@ -47,7 +47,7 @@ class _NivelOpcionMultipleScreenState extends State<NivelOpcionMultipleScreen> {
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
-            /// Instrucción
+            ///
             Text(
               widget.instruccion,
               style: Theme.of(context).textTheme.headlineSmall,
@@ -56,10 +56,9 @@ class _NivelOpcionMultipleScreenState extends State<NivelOpcionMultipleScreen> {
             const SizedBox(height: TSizes.spaceBtwItems),
 
             /// Imagen
-            Image.asset(widget.imagenSena, height: 200),
-            const SizedBox(height: TSizes.spaceBtwSections),
+            Image.asset(widget.imagenSena, height: 250),
+            const SizedBox(height: TSizes.spaceBtwSections * 2),
 
-            /// Opciones en grid 3x2
             Expanded(
               child: GridView.builder(
                 itemCount: widget.opciones.length,

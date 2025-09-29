@@ -49,15 +49,18 @@ class DialogoBurbujaPersonaje extends StatelessWidget {
                 duration: const Duration(milliseconds: 100),
                 transitionBuilder: (child, anim) =>
                     FadeTransition(opacity: anim, child: child),
-                child: TypewriterText(
-                  key: ValueKey(texto),
-                  text: texto,
-                  speed: const Duration(
-                      milliseconds: 40), // velocidad de escritura
-                  style: Theme.of(context)
-                      .textTheme
-                      .titleSmall
-                      ?.copyWith(color: Colors.white),
+                child: SizedBox(
+                  width: double.infinity,
+                  child: TypewriterText(
+                    key: ValueKey(texto),
+                    text: texto,
+                    speed: const Duration(
+                        milliseconds: 40), // velocidad de escritura
+                    style: Theme.of(context)
+                        .textTheme
+                        .titleSmall
+                        ?.copyWith(color: Colors.white),
+                  ),
                 ),
               ),
             ),

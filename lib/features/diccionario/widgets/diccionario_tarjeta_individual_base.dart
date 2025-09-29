@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:proyectomanu/common/widgets/appbar/appbar.dart';
+import 'package:proyectomanu/common/widgets/texts/efecto_typewriter.dart';
 import 'package:proyectomanu/features/ejercicios/widgets/burbujacolita.dart';
 import 'package:proyectomanu/utils/constants/sizes.dart';
 
@@ -35,13 +36,16 @@ class DiccionarioTarjetaIndividual extends StatelessWidget {
             ColitaPosicion(
               color: Colors.blue,
               tailPosition: BubbleTailPosition.bottom,
-              child: Text(
-                texto,
-                style: Theme.of(context)
-                    .textTheme
-                    .titleMedium
-                    ?.copyWith(color: Colors.white),
-                textAlign: TextAlign.center,
+              child: SizedBox(
+                width: double.infinity,
+                child: TypewriterText(
+                  text: texto,
+                  style: Theme.of(context)
+                      .textTheme
+                      .titleMedium
+                      ?.copyWith(color: Colors.white),
+                  speed: const Duration(milliseconds: 50),
+                ),
               ),
             ),
             const SizedBox(height: TSizes.spaceBtwSections),

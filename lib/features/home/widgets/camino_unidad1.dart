@@ -16,9 +16,34 @@ class TCaminoScreen extends StatelessWidget {
 
     final ejerciciosNivel1 = [
       Ejercicio(
+        tipo: TipoEjercicio.historia,
+        data: {
+          "dialogos": [
+            {
+              "fondo": TImages.onBoardingImage1,
+              "personaje": TImages.imagenperfil,
+              "nombre": "Manu",
+              "texto": "... :)"
+            },
+            {
+              "fondo": TImages.onBoardingImage2,
+              "personaje": TImages.google,
+              "nombre": "Amarillo",
+              "texto":
+                  "Manu esta muy emocionado de que quieras empezar a aprender LSM y la verdad yo tambien"
+            },
+            {
+              "fondo": TImages.onBoardingImage3,
+              "personaje": TImages.facebook,
+              "nombre": "Amarillo",
+              "texto": "Demoslo todos para aprender."
+            },
+          ]
+        },
+      ),
+      Ejercicio(
         tipo: TipoEjercicio.presentacion,
         data: {
-          "titulo": "Bienvenida",
           "textos": [
             "En este nivel aprenderas como hacer la sena A",
             "Ensenando las unas ",

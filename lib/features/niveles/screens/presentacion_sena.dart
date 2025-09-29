@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:iconsax/iconsax.dart';
-import 'package:proyectomanu/common/widgets/appbar/appbar.dart';
 import 'package:proyectomanu/common/widgets/custom_shapes/containers/imagen_container.dart';
 import 'package:proyectomanu/features/ejercicios/widgets/dialogo_burbuja.dart';
 import 'package:proyectomanu/features/ejercicios/widgets/burbujacolita.dart';

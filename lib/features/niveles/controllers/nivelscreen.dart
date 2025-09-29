@@ -4,6 +4,7 @@ import 'package:proyectomanu/features/exito/screens/exito_nivel.dart';
 import 'package:proyectomanu/features/niveles/models/tipoejercicio.dart';
 import 'package:proyectomanu/features/niveles/screens/cuestionario.dart';
 import 'package:proyectomanu/features/niveles/screens/escribe.dart';
+import 'package:proyectomanu/features/niveles/screens/historia.dart';
 import 'package:proyectomanu/features/niveles/screens/lectura.dart';
 import 'package:proyectomanu/features/niveles/screens/presentacion_sena.dart';
 import 'package:proyectomanu/features/niveles/screens/relacionar_columnas.dart';
@@ -87,6 +88,13 @@ class _NivelScreenState extends State<NivelScreen> {
           texto: ejercicio.data["texto"],
           onNext: () => _siguiente(),
         );
+      case TipoEjercicio.historia:
+        return NivelHistoriaScreen(
+          key: ValueKey(_indiceActual),
+          dialogos: List<Map<String, String>>.from(ejercicio.data["dialogos"]),
+          onNext: () => _siguiente(),
+        );
+
       case TipoEjercicio.finalizacion:
         return ExitoNivelLayout(
           mensaje: TTexts.nivelCompleto,

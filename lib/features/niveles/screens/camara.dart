@@ -39,7 +39,10 @@ class _NivelCamaraScreenState extends State<NivelCamaraScreen> {
 
   Future<void> _inicializarCamara() async {
     final cameras = await availableCameras();
-    final camera = cameras.first; // Usa la cámara trasera/frontal según quieras
+    final camera = cameras.firstWhere(
+      (cam) => cam.lensDirection == CameraLensDirection.front,
+      orElse: () => cameras.first,
+    );
     _controller = CameraController(camera, ResolutionPreset.medium);
 
     await _controller!.initialize();

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pretty_animated_text/pretty_animated_text.dart';
+import 'package:proyectomanu/common/widgets/texts/efecto_typewriter.dart';
 import 'package:proyectomanu/features/ejercicios/widgets/burbujacolita.dart';
 import 'package:proyectomanu/utils/constants/sizes.dart';
 
@@ -49,12 +49,12 @@ class DialogoBurbujaPersonaje extends StatelessWidget {
                 duration: const Duration(milliseconds: 100),
                 transitionBuilder: (child, anim) =>
                     FadeTransition(opacity: anim, child: child),
-                child: ScaleText(
+                child: TypewriterText(
                   key: ValueKey(texto),
                   text: texto,
-                  duration: const Duration(seconds: 1),
-                  type: AnimationType.word,
-                  textStyle: Theme.of(context)
+                  speed: const Duration(
+                      milliseconds: 40), // velocidad de escritura
+                  style: Theme.of(context)
                       .textTheme
                       .titleSmall
                       ?.copyWith(color: Colors.white),

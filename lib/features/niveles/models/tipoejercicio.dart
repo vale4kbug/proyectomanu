@@ -2,10 +2,11 @@ enum TipoEjercicio {
   presentacion,
   cuestionario, //
   relacionar, //
+  opcionmultiple,
   camara, //falta
   escritura, //
   lectura, //
-  historia,
+  historia, //
   finalizacion, //
 }
 

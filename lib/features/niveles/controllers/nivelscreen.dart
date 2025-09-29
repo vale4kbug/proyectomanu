@@ -8,6 +8,7 @@ import 'package:proyectomanu/features/niveles/screens/historia.dart';
 import 'package:proyectomanu/features/niveles/screens/lectura.dart';
 import 'package:proyectomanu/features/niveles/screens/presentacion_sena.dart';
 import 'package:proyectomanu/features/niveles/screens/relacionar_columnas.dart';
+import 'package:proyectomanu/features/niveles/screens/relacionar_texto.dart';
 import 'package:proyectomanu/utils/constants/images_strings.dart';
 import 'package:proyectomanu/utils/constants/text_strings.dart';
 
@@ -93,6 +94,15 @@ class _NivelScreenState extends State<NivelScreen> {
           key: ValueKey(_indiceActual),
           dialogos: List<Map<String, String>>.from(ejercicio.data["dialogos"]),
           onNext: () => _siguiente(),
+        );
+      case TipoEjercicio.opcionmultiple:
+        return NivelOpcionMultipleScreen(
+          key: ValueKey(_indiceActual),
+          instruccion: ejercicio.data["instruccion"],
+          imagenSena: ejercicio.data["imagenSena"],
+          opciones: List<String>.from(ejercicio.data["opciones"]),
+          respuestaCorrecta: ejercicio.data["respuestaCorrecta"],
+          onNext: (correcto) => _siguiente(correcto: correcto),
         );
 
       case TipoEjercicio.finalizacion:

@@ -42,6 +42,15 @@ class TCaminoScreen extends StatelessWidget {
         },
       ),
       Ejercicio(
+        tipo: TipoEjercicio.opcionmultiple,
+        data: {
+          "instruccion": "Selecciona el nombre correcto de esta seña:",
+          "imagenSena": TImages.facebook, // ruta en tus assets
+          "opciones": ["A", "E", "I", "O", "U", "Ninguna"],
+          "respuestaCorrecta": "E",
+        },
+      ),
+      Ejercicio(
         tipo: TipoEjercicio.presentacion,
         data: {
           "textos": [

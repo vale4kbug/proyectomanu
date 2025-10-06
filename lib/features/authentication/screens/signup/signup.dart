@@ -28,14 +28,7 @@ class SignupScreen extends StatelessWidget {
               const SizedBox(height: TSizes.spaceBtwSections),
               //Forma
               const TSignupForm(),
-              const SizedBox(height: TSizes.spaceBtwInputFields),
-              SizedBox(
-                width: double.infinity,
-                child: ElevatedButton(
-                  onPressed: () => Get.to(() => const VerifyEmailScreen()),
-                  child: Text(TTexts.createAccount),
-                ),
-              ),
+
               const SizedBox(height: TSizes.spaceBtwInputFields),
 
               //Divider

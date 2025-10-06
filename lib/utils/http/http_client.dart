@@ -61,3 +61,22 @@ class THttpHelper {
     }
   }
 }
+
+class ApiService {
+  static const String baseUrl = "https://10.0.2.2:7285/api";
+
+  static Future<Map<String, dynamic>> login(
+      String email, String password) async {
+    final response = await http.post(
+      Uri.parse("$baseUrl/usuarios/login"),
+      headers: {'Content-Type': 'application/json'},
+      body: jsonEncode({"email": email, "password": password}),
+    );
+
+    if (response.statusCode == 200) {
+      return jsonDecode(response.body);
+    } else {
+      throw Exception("Error al iniciar sesión: ${response.body}");
+    }
+  }
+}

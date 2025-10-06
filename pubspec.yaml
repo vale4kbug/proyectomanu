@@ -20,8 +20,8 @@ dependencies:
   url_launcher: ^6.3.2
   smooth_page_indicator: ^1.1.0
   chiclet: ^1.2.0
-  pretty_animated_text: ^2.0.0
   camera: ^0.11.2
+  shared_preferences: ^2.5.3
 
 dev_dependencies:
   flutter_test:

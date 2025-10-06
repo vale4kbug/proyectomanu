@@ -1,4 +1,30 @@
 class TValidator {
+//campos vacios
+  static String? validateEmptyText(String? fieldName, String? value) {
+    if (value == null || value.isEmpty) {
+      return '$fieldName es requerido.';
+    }
+    return null;
+  }
+
+  //nombredeUsuario
+  static String? validateUsername(String? value) {
+    if (value == null || value.isEmpty) {
+      return 'El nombre de usuario es requerido.';
+    }
+
+    if (value.length < 4) {
+      return 'El nombre de usuario debe tener al menos 4 caracteres.';
+    }
+
+    final usernameRegExp = RegExp(r'^[a-zA-Z0-9_]+$');
+    if (!usernameRegExp.hasMatch(value)) {
+      return 'El nombre de usuario solo puede contener letras, números y guiones bajos.';
+    }
+
+    return null;
+  }
+
   static String? validateEmail(String? value) {
     if (value == null || value.isEmpty) {
       return 'Se requiere un correo electrónico.';

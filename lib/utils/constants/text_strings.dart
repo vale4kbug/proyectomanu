@@ -43,7 +43,7 @@ class TTexts {
 
   //Forma de autetificacion headers
   static const signupTitle = "Vamos a crearte una cuenta @( o･ω･)@";
-  static const forgetPasswordTitle = "Olvidé mi contraseña @(´･ｪ･`)@";
+  static const forgetPasswordTitle = "Olvidé mi contraseña\n @(´･ｪ･`)@";
   static const forgetPasswordSubTitle =
       "No te preocupes, aveces pasa. Ingresa tu correo para mandarte un link para reiniciar tu contraseña.";
   static const changeYourPasswordTitle =

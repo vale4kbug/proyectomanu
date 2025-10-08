@@ -51,6 +51,13 @@ class TCaminoScreen extends StatelessWidget {
         },
       ),
       Ejercicio(
+        tipo: TipoEjercicio.camara,
+        data: {
+          "senaObjetivo":
+              "Letra A", // Esta es la seña que el usuario debe hacer
+        },
+      ),
+      Ejercicio(
         tipo: TipoEjercicio.presentacion,
         data: {
           "textos": [

@@ -173,6 +173,10 @@ class TTexts {
   static const nivelRelacionarTitle =
       "Relaciona las imágenes con las palabras correctas";
 
+  //Camara Nivel
+  static const nivelCamaraInstruccion = "Replica la siguiente seña:";
+  static const nivelCamaraRecomendacion = "📷 Recuerda centrar la cámara";
+
 //Escribir Nivel
   static const nivelEscribirInstruccion = "Escribe tu respuesta";
   static const nivelEscribirBoton = "Validar";

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:proyectomanu/features/exito/screens/exito_nivel.dart';
 import 'package:proyectomanu/features/niveles/models/tipoejercicio.dart';
+import 'package:proyectomanu/features/niveles/screens/camara.dart';
 import 'package:proyectomanu/features/niveles/screens/cuestionario.dart';
 import 'package:proyectomanu/features/niveles/screens/escribe.dart';
 import 'package:proyectomanu/features/niveles/screens/historia.dart';
@@ -81,7 +82,12 @@ class _NivelScreenState extends State<NivelScreen> {
           imagenesBig: List<String>.from(ejercicio.data["imagenesBig"]),
           onNext: () => _siguiente(),
         );
-
+      case TipoEjercicio.camara:
+        return NivelCamaraScreen(
+          key: ValueKey(_indiceActual),
+          senaObjetivo: ejercicio.data["senaObjetivo"],
+          onNext: (correcto) => _siguiente(correcto: correcto),
+        );
       case TipoEjercicio.lectura:
         return NivelLecturaScreen(
           key: ValueKey(_indiceActual),

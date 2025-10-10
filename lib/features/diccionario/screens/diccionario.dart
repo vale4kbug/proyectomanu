@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:proyectomanu/common/widgets/card_diccionario/card_diccionario_vertical.dart';
 import 'package:proyectomanu/common/widgets/custom_shapes/containers/diccionario_header_container.dart';
 import 'package:proyectomanu/common/widgets/layouts/gridlayout.dart';
 import 'package:proyectomanu/features/diccionario/containers/search_container.dart';
+import 'package:proyectomanu/features/diccionario/controllers/glosario_controller.dart';
 import 'package:proyectomanu/features/diccionario/widgets/diccionario_categories.dart';
 import 'package:proyectomanu/features/diccionario/widgets/heading_section.dart';
 import 'package:proyectomanu/utils/constants/sizes.dart';
@@ -13,6 +16,8 @@ class DiccionarioScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(GlosarioController());
+
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -22,7 +27,11 @@ class DiccionarioScreen extends StatelessWidget {
                 children: [
                   const SizedBox(height: TSizes.spaceBtwSections),
                   //recuadro buscar
-                  const TSearchContainer(text: TTexts.diccionarioBuscador),
+                  TSearchContainer(
+                    hintText: TTexts.diccionarioBuscador,
+                    controller: controller.searchController,
+                    onChanged: controller.onSearchQueryChanged,
+                  ),
                   Padding(
                     padding: EdgeInsets.only(left: TSizes.defaultSpace),
                     child: Column(
@@ -49,14 +58,21 @@ class DiccionarioScreen extends StatelessWidget {
                 TSizes.defaultSpace, // right
                 TSizes.defaultSpace, // bottom
               ),
-              child: Column(
-                children: [
-                  TGridLayout(
-                    itemCount: 16,
-                    itemBuilder: (_, index) => const TDiccionarioCardVertical(),
+              child: Obx(() {
+                if (controller.isLoadingItems.value) {
+                  return const Center(child: CircularProgressIndicator());
+                }
+                if (controller.glosarioList.isEmpty) {
+                  return const Center(
+                      child: Text("No se encontraron elementos."));
+                }
+                return TGridLayout(
+                  itemCount: controller.glosarioList.length,
+                  itemBuilder: (_, index) => TDiccionarioCardVertical(
+                    item: controller.glosarioList[index],
                   ),
-                ],
-              ),
+                );
+              }),
             ),
           ],
         ),

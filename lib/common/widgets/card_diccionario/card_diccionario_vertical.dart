@@ -1,24 +1,27 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/src/extension_navigation.dart';
+import 'package:proyectomanu/features/diccionario/models/glosario_model.dart';
 import 'package:proyectomanu/features/diccionario/widgets/diccionario_tarjeta_individual_base.dart';
 import 'package:proyectomanu/utils/constants/images_strings.dart';
 import 'package:proyectomanu/utils/constants/sizes.dart';
-import 'package:proyectomanu/utils/constants/text_strings.dart';
 
 class TDiccionarioCardVertical extends StatelessWidget {
-  const TDiccionarioCardVertical({super.key});
+  const TDiccionarioCardVertical({super.key, required this.item});
+  final GlosarioItem item;
 
   @override
   Widget build(BuildContext context) {
     final dark = Theme.of(context).brightness == Brightness.dark;
 
     return GestureDetector(
-      onTap: () => Get.to(() => const DiccionarioTarjetaIndividual(
-            titulo: TTexts.diccionarioTarjetaA,
-            gifArriba: TImages.imagenperfil,
-            texto: TTexts.diccionarioTarjetaADesc,
-            gifAbajo: TImages.onBoardingImage1,
+      onTap: () => Get.to(() => DiccionarioTarjetaIndividual(
+            titulo: item.nombre,
+            gifArriba:
+                item.img ?? TImages.imagenperfil, // Usa una imagen por defecto
+            texto: item.descripcion ?? "No hay descripción.",
+            gifAbajo: TImages.onBoardingImage1, // Puedes cambiar esto
           )),
 
       ///base
@@ -37,24 +40,25 @@ class TDiccionarioCardVertical extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            // Imagen recortada
             Expanded(
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(8),
-                child: Image.asset(
-                  TImages.imagenperfil,
-                  height: 100,
-                  width: double.infinity,
-                  fit: BoxFit.cover, // ajusta la imagen al recuadro
+                child: Image.network(
+                  item.img ?? TImages.imagenperfil,
+                  fit: BoxFit.cover,
+                  errorBuilder: (context, error, stackTrace) {
+                    return Image.asset(TImages.imagenperfil, fit: BoxFit.cover);
+                  },
                 ),
               ),
             ),
             const SizedBox(height: 8),
-            // Título
-            Text(
-              "A",
+            AutoSizeText(
+              item.nombre,
               style: Theme.of(context).textTheme.titleMedium,
               textAlign: TextAlign.center,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
             ),
           ],
         ),

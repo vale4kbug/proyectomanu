@@ -10,7 +10,7 @@ class TDiccionarioHeaderContainer extends StatelessWidget {
     return TCurvedEdgeWidget(
       child: Container(
         width: double.infinity,
-        height: 240,
+        height: 275,
         color: const Color.fromARGB(255, 114, 237, 134),
         child: Stack(children: [child]),
       ),

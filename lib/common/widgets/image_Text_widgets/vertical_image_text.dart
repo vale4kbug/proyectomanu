@@ -22,26 +22,22 @@ class TVerticalImageText extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: onTap,
-      child: Padding(
-        padding: const EdgeInsets.only(right: TSizes.spaceBtwItems),
-        child: Column(
-          children: [
-            //Icono Circular
-            TCircularImage(image: image),
-            const SizedBox(height: TSizes.spaceBtwItems / 2),
-            SizedBox(
-              width: 55,
-              child: Text(
-                title,
-                style: Theme.of(
-                  context,
-                ).textTheme.labelMedium!.apply(color: textColor),
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-              ),
-            ),
-          ],
-        ),
+      child: Column(
+        children: [
+          //Icono Circular
+          TCircularImage(image: image),
+          const SizedBox(height: TSizes.spaceBtwItems / 2),
+
+          Text(
+            title,
+            style: Theme.of(
+              context,
+            ).textTheme.labelMedium!.apply(color: textColor),
+            maxLines: 2,
+            textAlign: TextAlign.center,
+            overflow: TextOverflow.ellipsis,
+          ),
+        ],
       ),
     );
   }

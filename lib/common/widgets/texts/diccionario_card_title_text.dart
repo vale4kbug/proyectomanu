@@ -18,7 +18,7 @@ class TCardDiccionarioTitleText extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       title,
-      style: Theme.of(context).textTheme.labelLarge,
+      style: Theme.of(context).textTheme.labelSmall,
       overflow: TextOverflow.ellipsis,
       maxLines: 2,
       textAlign: TextAlign.left,

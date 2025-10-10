@@ -1,3 +1,4 @@
+import 'dart:math' as math;
 import 'dart:async'; // Necesario para el Timer
 import 'dart:convert';
 import 'package:camera/camera.dart';
@@ -35,7 +36,7 @@ class _NivelCamaraScreenState extends State<NivelCamaraScreen> {
     super.initState();
     _inicializarCamara();
 
-    // <-- MEJORA: El GIF de ayuda ahora se activa después de 1 minuto (60 segundos)
+    // <-- El GIF de ayuda ahora se activa después de 1 minuto
     _helpTimer = Timer(const Duration(seconds: 60), () {
       if (mounted && !_detectadoCorrecto) {
         setState(() => _mostrarGifAyuda = true);
@@ -185,11 +186,13 @@ class _NivelCamaraScreenState extends State<NivelCamaraScreen> {
                   // Capa 1: La Cámara (con corrección de rotación)
                   AspectRatio(
                     aspectRatio: _controller!.value.aspectRatio,
-                    // <-- MEJORA: Corrección de la rotación de la cámara
-                    child: RotatedBox(
-                      // El valor de quarterTurns puede necesitar ajuste (prueba 1, 2, o 3)
-                      // 3 suele funcionar para la cámara frontal en Android.
-                      quarterTurns: 3,
+                    child: Transform(
+                      alignment: Alignment.center,
+                      transform: _controller!.description.lensDirection ==
+                              CameraLensDirection.front
+                          ? Matrix4.rotationY(
+                              math.pi) // Corrige el espejo de la cámara frontal
+                          : Matrix4.identity(),
                       child: CameraPreview(_controller!),
                     ),
                   ),

@@ -22,7 +22,7 @@ class _NivelHistoriaScreenState extends State<NivelHistoriaScreen> {
   int _indice = 0;
   String _textoVisible = "";
   Timer? _timer;
-  bool _completo = false; // Si ya se terminó de mostrar el texto
+  bool _completo = false;
 
   @override
   void initState() {
@@ -79,6 +79,7 @@ class _NivelHistoriaScreenState extends State<NivelHistoriaScreen> {
     final actual = widget.dialogos[_indice];
 
     return Scaffold(
+      appBar: AppBar(),
       body: Stack(
         fit: StackFit.expand,
         children: [

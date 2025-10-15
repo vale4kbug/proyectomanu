@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:proyectomanu/common/widgets/card_diccionario/card_diccionario_vertical.dart';
 import 'package:proyectomanu/common/widgets/custom_shapes/containers/diccionario_header_container.dart';
 import 'package:proyectomanu/common/widgets/layouts/gridlayout.dart';

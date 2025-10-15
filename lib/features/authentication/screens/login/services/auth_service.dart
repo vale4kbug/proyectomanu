@@ -1,145 +1,139 @@
-import 'dart:convert';
-import 'package:http/http.dart' as http;
+import 'package:dio/dio.dart';
+// Asegúrate de que la ruta a tu ApiClient sea correcta
+import 'package:proyectomanu/utils/http/api_client.dart';
+// Usaremos SharedPreferences para guardar el ID del usuario
+import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthService {
-  static const String baseUrl = "http://10.0.2.2:5199/api";
+  // Obtenemos la instancia de Dio configurada desde nuestro ApiClient.
+  static final Dio _dio = ApiClient.instance;
 
-  /// --- Método de Login ---
+  /// Inicia sesión con email y contraseña.
+  /// Devuelve el objeto de usuario si es exitoso.
   static Future<Map<String, dynamic>> login(
       String email, String password) async {
-    final response = await http.post(
-      Uri.parse("$baseUrl/usuarios/login"),
-      headers: {'Content-Type': 'application/json'},
-      body: jsonEncode({
-        "email": email,
-        "password": password,
-      }),
-    );
+    try {
+      final response = await _dio.post(
+        "/usuarios/login",
+        data: {"email": email, "password": password},
+      );
 
-    if (response.statusCode == 200) {
-      return jsonDecode(response.body);
-    } else {
-      // Manejo de errores robusto
-      try {
-        final errorBody = jsonDecode(response.body);
-        throw Exception(
-            errorBody['message'] ?? "Error desconocido al iniciar sesión");
-      } catch (e) {
-        throw Exception(
-            "Error del servidor (código: ${response.statusCode}). Intenta de nuevo más tarde.");
+      // GUARDAMOS EL ID DEL USUARIO PARA SIMULAR UNA SESIÓN
+      if (response.data != null && response.data['usuario'] != null) {
+        final prefs = await SharedPreferences.getInstance();
+        await prefs.setInt('userId', response.data['usuario']['idUsuario']);
       }
+
+      return response.data;
+    } on DioException catch (e) {
+      final errorMessage =
+          e.response?.data['message'] ?? 'Error de red o del servidor.';
+      throw Exception(errorMessage);
     }
   }
 
-  /// --- Método de Registro ---
+  // ¡ATENCIÓN! Este método getProfile no funcionará porque tu API no tiene
+  // un sistema de sesión (cookie o JWT) para saber quién es el usuario.
+  // Lo dejaremos preparado para el futuro.
+  static Future<Map<String, dynamic>> getProfile() async {
+    // Por ahora, leeremos el ID guardado y pediremos ese usuario específico
+    final prefs = await SharedPreferences.getInstance();
+    final userId = prefs.getInt('userId');
+
+    if (userId == null) {
+      throw Exception('No hay sesión iniciada.');
+    }
+
+    try {
+      // Llamamos al endpoint que obtiene un usuario por ID
+      final response = await _dio.get("/usuarios/$userId");
+      return response.data;
+    } on DioException catch (e) {
+      throw Exception('Error al obtener el perfil: ${e.response?.statusCode}');
+    }
+  }
+
+  /// Cierra la sesión (en este caso, solo borra el ID guardado).
+  static Future<void> logout() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.remove('userId');
+  }
+
+  /// Registra un nuevo usuario.
   static Future<Map<String, dynamic>> register({
     required String nombre,
-    required String apellido,
+    String? apellido,
     required String nombreUsuario,
     required String email,
     required String password,
-    required String authProvider,
+    required String authProvider, // <-- PARÁMETRO AÑADIDO
   }) async {
-    final response = await http.post(
-      Uri.parse("$baseUrl/usuarios/register"),
-      headers: {'Content-Type': 'application/json'},
-      body: jsonEncode({
-        "nombre": nombre,
-        "apellido": apellido,
-        "nombreUsuario": nombreUsuario,
-        "email": email,
-        "password": password,
-        "authProvider": authProvider,
-      }),
-    );
-
-    if (response.statusCode == 200 || response.statusCode == 201) {
-      return jsonDecode(response.body);
-    } else {
-      // Manejo de errores robusto
-      try {
-        final errorBody = jsonDecode(response.body);
-        throw Exception(
-            errorBody['message'] ?? "Error desconocido al registrar usuario");
-      } catch (e) {
-        throw Exception(
-            "Error del servidor (código: ${response.statusCode}). Intenta de nuevo más tarde.");
-      }
+    try {
+      final response = await _dio.post(
+        "/usuarios/register",
+        data: {
+          "nombre": nombre,
+          "apellido": apellido,
+          "nombreUsuario": nombreUsuario,
+          "email": email,
+          "password": password,
+          "authProvider": authProvider, // <-- AÑADIDO AL CUERPO DE LA PETICIÓN
+        },
+      );
+      return response.data;
+    } on DioException catch (e) {
+      final errorMessage =
+          e.response?.data['message'] ?? 'Error al registrar usuario.';
+      throw Exception(errorMessage);
     }
   }
 
-  /// --- Método para solicitar reseteo de contraseña ---
+  /// Solicita un correo para restablecer la contraseña.
   static Future<Map<String, dynamic>> forgotPassword(String email) async {
-    final response = await http.post(
-      Uri.parse("$baseUrl/usuarios/forgot-password"),
-      headers: {'Content-Type': 'application/json'},
-      body: jsonEncode({"email": email}),
-    );
-
-    if (response.statusCode == 200) {
-      return jsonDecode(response.body);
-    } else {
-      // Manejo de errores robusto
-      try {
-        final errorBody = jsonDecode(response.body);
-        throw Exception(
-            errorBody['message'] ?? "Error al solicitar el reseteo");
-      } catch (e) {
-        throw Exception(
-            "Error del servidor (código: ${response.statusCode}). Intenta de nuevo más tarde.");
-      }
+    try {
+      final response = await _dio.post(
+        "/usuarios/forgot-password",
+        data: {"email": email},
+      );
+      return response.data;
+    } on DioException catch (e) {
+      final errorMessage =
+          e.response?.data['message'] ?? 'Error al solicitar reseteo.';
+      throw Exception(errorMessage);
     }
   }
 
-  /// --- Método para confirmar la nueva contraseña ---
+  /// Restablece la contraseña usando un token y la nueva contraseña.
   static Future<Map<String, dynamic>> resetPassword({
     required String token,
     required String newPassword,
   }) async {
-    final response = await http.post(
-      Uri.parse("$baseUrl/usuarios/reset-password"),
-      headers: {'Content-Type': 'application/json'},
-      body: jsonEncode({
-        "token": token,
-        "newPassword": newPassword,
-      }),
-    );
-
-    if (response.statusCode == 200) {
-      return jsonDecode(response.body);
-    } else {
-      // Manejo de errores robusto
-      try {
-        final errorBody = jsonDecode(response.body);
-        throw Exception(
-            errorBody['message'] ?? "Error al restablecer la contraseña");
-      } catch (e) {
-        throw Exception(
-            "Error del servidor (código: ${response.statusCode}). Intenta de nuevo más tarde.");
-      }
+    try {
+      final response = await _dio.post(
+        "/usuarios/reset-password",
+        data: {"token": token, "newPassword": newPassword},
+      );
+      return response.data;
+    } on DioException catch (e) {
+      final errorMessage =
+          e.response?.data['message'] ?? 'Error al restablecer contraseña.';
+      throw Exception(errorMessage);
     }
   }
 
-  /// --- Método para reenviar correo de verificación ---
+  /// Reenvía el correo de verificación a un email dado.
   static Future<Map<String, dynamic>> resendVerificationEmail(
       String email) async {
-    final response = await http.post(
-      Uri.parse("$baseUrl/usuarios/resend-verification"),
-      headers: {'Content-Type': 'application/json'},
-      body: jsonEncode({"email": email}),
-    );
-
-    if (response.statusCode == 200) {
-      return jsonDecode(response.body);
-    } else {
-      // Manejo de errores robusto
-      try {
-        final errorBody = jsonDecode(response.body);
-        throw Exception(errorBody['message'] ?? "Error al reenviar el correo");
-      } catch (e) {
-        throw Exception(
-            "Error del servidor (código: ${response.statusCode}). Intenta de nuevo más tarde.");
-      }
+    try {
+      final response = await _dio.post(
+        "/usuarios/resend-verification",
+        data: {"email": email},
+      );
+      return response.data;
+    } on DioException catch (e) {
+      final errorMessage =
+          e.response?.data['message'] ?? 'Error al reenviar el correo.';
+      throw Exception(errorMessage);
     }
   }
 }

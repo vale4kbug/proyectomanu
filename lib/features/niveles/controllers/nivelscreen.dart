@@ -10,7 +10,7 @@ import 'package:proyectomanu/features/niveles/screens/lectura.dart';
 import 'package:proyectomanu/features/niveles/screens/presentacion_sena.dart';
 import 'package:proyectomanu/features/niveles/screens/relacionar_columnas.dart';
 import 'package:proyectomanu/features/niveles/screens/relacionar_texto.dart';
-import 'package:proyectomanu/utils/http/nivel_service.dart'; // Ajusta la ruta a tu NivelService
+import 'package:proyectomanu/utils/http/nivel_service.dart';
 import 'package:proyectomanu/utils/constants/images_strings.dart';
 import 'package:proyectomanu/utils/constants/text_strings.dart';
 
@@ -35,7 +35,6 @@ class _NivelScreenState extends State<NivelScreen> {
 
   void _siguiente(List<Ejercicio> ejercicios, {bool? correcto}) {
     if (correcto == true) _puntaje++;
-
     if (_indiceActual < ejercicios.length - 1) {
       setState(() => _indiceActual++);
     } else {
@@ -74,12 +73,6 @@ class _NivelScreenState extends State<NivelScreen> {
 
         final ejercicios = snapshot.data!;
         final ejercicio = ejercicios[_indiceActual];
-
-        // --- LÍNEA DE DEPURACIÓN PARA ENCONTRAR EL ERROR ---
-        print(
-            "--- Depurando Ejercicio ${_indiceActual + 1} (Tipo: ${ejercicio.tipo}) ---");
-        print("Data recibida: ${ejercicio.data}");
-        // ---------------------------------------------------
 
         try {
           switch (ejercicio.tipo) {
@@ -126,14 +119,14 @@ class _NivelScreenState extends State<NivelScreen> {
                 imagenesSmall:
                     List<String>.from(ejercicio.data["imagenesSmall"]),
                 imagenesBig: List<String>.from(ejercicio.data["imagenesBig"]),
-                onNext: () => _siguiente(ejercicios), // Corregido
+                onNext: () => _siguiente(ejercicios),
               );
             case TipoEjercicio.lectura:
               return NivelLecturaScreen(
                 key: ValueKey(_indiceActual),
                 titulo: ejercicio.data["titulo"],
                 texto: ejercicio.data["texto"],
-                onNext: () => _siguiente(ejercicios), // Corregido
+                onNext: () => _siguiente(ejercicios),
               );
             case TipoEjercicio.historia:
               return NivelHistoriaScreen(
@@ -141,10 +134,9 @@ class _NivelScreenState extends State<NivelScreen> {
                 dialogos: (ejercicio.data["dialogos"] as List)
                     .map((item) => Map<String, String>.from(item))
                     .toList(),
-                onNext: () => _siguiente(ejercicios), // Corregido
+                onNext: () => _siguiente(ejercicios),
               );
             case TipoEjercicio.opcionmultiple:
-              // Asumo que tienes una pantalla para esto, si no, puedes borrar este case
               return NivelOpcionMultipleScreen(
                 key: ValueKey(_indiceActual),
                 instruccion: ejercicio.data["instruccion"],
@@ -166,8 +158,6 @@ class _NivelScreenState extends State<NivelScreen> {
                   body: Center(child: Text("Tipo de ejercicio no reconocido")));
           }
         } catch (e) {
-          // Si el switch falla, este bloque nos dirá por qué.
-          print("ERROR AL CONSTRUIR EL WIDGET: $e");
           return Scaffold(
               body:
                   Center(child: Text("Error en los datos del ejercicio: $e")));

@@ -1,49 +1,62 @@
 import 'package:flutter/material.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:get/get_navigation/get_navigation.dart';
-import 'package:proyectomanu/features/ejercicios/screens/expresiones_faciales.dart';
-import 'package:proyectomanu/features/ejercicios/screens/fluidez_claridad.dart';
+import 'package:get/get.dart';
+import 'package:proyectomanu/features/ejercicios/services/practica_service.dart';
 import 'package:proyectomanu/features/ejercicios/widgets/botones_menu.dart';
-import 'package:proyectomanu/utils/constants/images_strings.dart';
-import 'package:proyectomanu/utils/constants/sizes.dart';
-import 'package:proyectomanu/utils/constants/text_strings.dart';
+import 'package:proyectomanu/features/ejercicios/widgets/layout_ejercicios.dart';
 
-class EjerciciosScreen extends StatelessWidget {
+class EjerciciosScreen extends StatefulWidget {
   const EjerciciosScreen({super.key});
+
+  @override
+  State<EjerciciosScreen> createState() => _EjerciciosScreenState();
+}
+
+class _EjerciciosScreenState extends State<EjerciciosScreen> {
+  late Future<List<Map<String, dynamic>>> futurePracticas;
+
+  @override
+  void initState() {
+    super.initState();
+    futurePracticas = PracticaService.getMenuPracticas();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: BotonBanner(
-                imagen: TImages.imagenperfil,
-                titulo: TTexts.ejerciciosBanner1,
-                onTap: () {},
-              ),
-            ),
-            SizedBox(height: TSizes.spaceBtwItems),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: BotonBanner(
-                imagen: TImages.imagenperfil,
-                titulo: TTexts.ejerciciosBanner2,
-                onTap: () => Get.to(() => const FluidezClaridadScreen()),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: BotonBanner(
-                imagen: TImages.imagenperfil,
-                titulo: TTexts.ejerciciosBanner3, //expresiones faciales
-                onTap: () => Get.to(() => const ExpresionesFacialesScreen()),
-              ),
-            ),
-          ],
-        ),
+      body: FutureBuilder<List<Map<String, dynamic>>>(
+        future: futurePracticas,
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(child: CircularProgressIndicator());
+          }
+          if (snapshot.hasError || !snapshot.hasData) {
+            return const Center(
+                child: Text("Error al cargar los ejercicios de práctica."));
+          }
+
+          final practicas = snapshot.data!;
+
+          return ListView.builder(
+            padding: const EdgeInsets.all(8.0),
+            itemCount: practicas.length,
+            itemBuilder: (context, index) {
+              final practica = practicas[index];
+              return Padding(
+                padding: const EdgeInsets.symmetric(vertical: 8.0),
+                child: BotonBanner(
+                  imagen: practica['imagenBanner'],
+                  titulo: practica['nombre'],
+                  onTap: () {
+                    Get.to(() => TContenidoLayout(
+                          practicaId: practica['id'],
+                          titulo: practica['nombre'],
+                        ));
+                  },
+                ),
+              );
+            },
+          );
+        },
       ),
     );
   }

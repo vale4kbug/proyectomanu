@@ -2,43 +2,43 @@ import 'package:flutter/material.dart';
 import 'package:proyectomanu/utils/constants/colors.dart';
 
 class TUnidadEtiqueta extends StatelessWidget {
-  final String titulo;
-
   const TUnidadEtiqueta({super.key, required this.titulo});
+
+  final String titulo;
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        const SizedBox(height: 20),
-        Row(
-          children: [
-            const Expanded(
-              child: Divider(
-                color: TColors.intermediofuerteAzul,
-                thickness: 2,
-                endIndent: 8,
-              ),
-            ),
-            Text(
+    // Obtenemos el ancho de la pantalla para darle un tamaño al widget
+    final screenWidth = MediaQuery.of(context).size.width;
+
+    // Usamos un SizedBox para darle al Row un ancho definido y evitar errores de layout.
+    return SizedBox(
+      width: screenWidth, // Ocupará el 90% del ancho de la pantalla
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          // Línea izquierda
+          const Expanded(
+              child: Divider(color: TColors.primaryColor, thickness: 1)),
+
+          // Padding para separar el texto de las líneas
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            child: Text(
               titulo,
-              style: const TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
-                color: TColors.intermediofuerteAzul,
-              ),
+              style: Theme.of(context)
+                  .textTheme
+                  .headlineSmall
+                  ?.apply(color: TColors.primaryColor),
             ),
-            const Expanded(
-              child: Divider(
-                color: TColors.intermediofuerteAzul,
-                thickness: 2,
-                indent: 8,
-              ),
-            ),
-          ],
-        ),
-        const SizedBox(height: 20),
-      ],
+          ),
+
+          // Línea derecha
+          const Expanded(
+              child: Divider(color: TColors.primaryColor, thickness: 1)),
+        ],
+      ),
     );
   }
 }

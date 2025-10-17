@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:proyectomanu/utils/http/nivel_service.dart'; // Ajusta la ruta
+import 'package:proyectomanu/utils/http/nivel_service.dart';
 import 'package:proyectomanu/features/home/widgets/camino_botones_estilo.dart';
-import 'package:proyectomanu/features/niveles/controllers/nivelscreen.dart'; // Ajusta la ruta
-import 'package:proyectomanu/utils/constants/text_strings.dart';
+import 'package:proyectomanu/features/niveles/controllers/nivelscreen.dart';
+// Importa tus nuevos modelos
+import 'package:proyectomanu/features/home/models/unidad_model.dart';
 
 class TCaminoScreen extends StatefulWidget {
-  const TCaminoScreen({super.key});
+  const TCaminoScreen({super.key, required this.unidad});
+  final UnidadData unidad; // Ahora recibe los datos de la unidad
+
   @override
   State<TCaminoScreen> createState() => _TCaminoScreenState();
 }
@@ -25,18 +28,13 @@ class _TCaminoScreenState extends State<TCaminoScreen> {
       futureLevels = NivelService.getCamino().then((nivelesDesdeApi) {
         if (!mounted) return [];
         final screenWidth = MediaQuery.of(context).size.width;
-        // Estas coordenadas se asignarán a los niveles que vengan de la API
-        final coordenadas = [
-          {'x': screenWidth * 0.25, 'y': 550.0},
-          {'x': screenWidth * 0.7, 'y': 400.0},
-          {'x': screenWidth * 0.3, 'y': 300.0},
-          {'x': screenWidth * 0.65, 'y': 150.0},
-          // Puedes añadir más coordenadas aquí para futuros niveles
-        ];
+
+        // Combina los datos de la API con las posiciones de nuestra unidad
         for (int i = 0; i < nivelesDesdeApi.length; i++) {
-          if (i < coordenadas.length) {
-            nivelesDesdeApi[i]['x'] = coordenadas[i]['x'];
-            nivelesDesdeApi[i]['y'] = coordenadas[i]['y'];
+          if (i < widget.unidad.posicionesNiveles.length) {
+            final posicion = widget.unidad.posicionesNiveles[i];
+            nivelesDesdeApi[i]['x'] = posicion.xFactor * screenWidth;
+            nivelesDesdeApi[i]['y'] = posicion.y;
           }
         }
         return nivelesDesdeApi;
@@ -46,7 +44,6 @@ class _TCaminoScreenState extends State<TCaminoScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final screenWidth = MediaQuery.of(context).size.width;
     return FutureBuilder<List<Map<String, Object?>>>(
       future: futureLevels,
       builder: (context, snapshot) {
@@ -62,27 +59,36 @@ class _TCaminoScreenState extends State<TCaminoScreen> {
           return const Scaffold(
               body: Center(child: Text("No se encontraron niveles.")));
         }
+
         final levels = snapshot.data!;
+
         return CaminoBotones(
-          screenWidth: screenWidth,
           levels: levels.map((level) {
             final bool estaDesbloqueado =
                 level['desbloqueado'] as bool? ?? false;
-            print(
-                "Procesando Nivel ${level['level']}: Desbloqueado = $estaDesbloqueado");
+            final String? requisito = level['requisitoDesbloqueo'] as String?;
+
             return {
               'level': level['level'], 'x': level['x'], 'y': level['y'],
               'stars': level['stars'], 'special': level['special'],
-              'onPressed': (level['desbloqueado'] as bool? ?? false)
-                  ? () async {
-                      await Get.to(
-                          () => NivelScreen(nivelId: level['level'] as int));
-                      _cargarNiveles(); // Recarga los niveles cuando el usuario vuelve
-                    }
-                  : null, // El botón estará deshabilitado si no está desbloqueado
+              'isLocked': !estaDesbloqueado, // Pasamos el estado de bloqueo
+              'onPressed': () {
+                if (estaDesbloqueado) {
+                  Get.to(() => NivelScreen(nivelId: level['level'] as int))
+                      ?.then((_) => _cargarNiveles());
+                } else if (requisito != null) {
+                  Get.snackbar(
+                    "Nivel Bloqueado",
+                    requisito,
+                    snackPosition: SnackPosition.BOTTOM,
+                    backgroundColor: Colors.blueGrey[800],
+                    colorText: Colors.white,
+                  );
+                }
+              },
             };
           }).toList(),
-          tituloUnidad: TTexts.unidad1,
+          unidad: widget.unidad,
         );
       },
     );

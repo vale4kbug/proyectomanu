@@ -1,23 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:chiclet/chiclet.dart'; // <-- USAMOS EL PAQUETE CORRECTO
 import 'package:iconsax/iconsax.dart';
+import 'package:proyectomanu/features/home/models/unidad_model.dart';
 import 'package:proyectomanu/features/home/widgets/etiqueta_camino.dart';
 import 'package:proyectomanu/utils/constants/colors.dart';
 
 class CaminoBotones extends StatelessWidget {
   const CaminoBotones({
     super.key,
-    required this.screenWidth,
     required this.levels,
-    required this.tituloUnidad,
+    required this.unidad, // Recibe el objeto de la unidad
   });
 
-  final double screenWidth;
   final List<Map<String, Object?>> levels;
-  final String tituloUnidad;
-
+  final UnidadData unidad;
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
       body: SingleChildScrollView(
         reverse: true,
@@ -34,6 +33,7 @@ class CaminoBotones extends StatelessWidget {
                   top: (level['y'] as double? ?? 0) - 40,
                   child: TBotonCamino(
                     stars: level['stars'] as int? ?? 0,
+                    isLocked: level['isLocked'] as bool? ?? true,
                     totalStars: 3, // Asumimos 3 estrellas por nivel
                     onPressed: level['onPressed'] as void Function()?,
                     isSpecial: level['special'] as bool? ?? false,
@@ -51,10 +51,11 @@ class CaminoBotones extends StatelessWidget {
                 );
               }),
               Positioned(
-                top: 650,
-                left: 0,
+                top: unidad.etiquetaY + 25, // Usa la posición Y del modelo
                 right: 0,
-                child: Center(child: TUnidadEtiqueta(titulo: tituloUnidad)),
+                child: Center(
+                    child: TUnidadEtiqueta(
+                        titulo: unidad.titulo)), // Esta llamada ahora es segura
               ),
             ],
           ),
@@ -73,6 +74,7 @@ class TBotonCamino extends StatelessWidget {
     required this.isSpecial,
     required this.stars,
     this.totalStars = 3,
+    required this.isLocked,
   });
 
   final VoidCallback? onPressed;
@@ -80,11 +82,10 @@ class TBotonCamino extends StatelessWidget {
   final bool isSpecial;
   final int stars;
   final int totalStars;
+  final bool isLocked;
 
   @override
   Widget build(BuildContext context) {
-    final bool isLocked = onPressed == null;
-
     final Color colorBajo = isLocked
         ? Colors.grey[700]!
         : (isSpecial

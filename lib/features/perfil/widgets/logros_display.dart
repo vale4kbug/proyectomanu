@@ -1,46 +1,32 @@
 import 'package:flutter/material.dart';
+import 'package:proyectomanu/features/authentication/screens/login/models/usuario_model.dart'; // <-- IMPORTA TU MODELO
 import 'package:proyectomanu/features/perfil/widgets/achievement_card.dart';
-import 'package:proyectomanu/utils/constants/images_strings.dart';
-import 'package:proyectomanu/utils/constants/text_strings.dart';
 
 class TLogrosDisplayPerfil extends StatelessWidget {
-  const TLogrosDisplayPerfil({super.key});
+  const TLogrosDisplayPerfil({super.key, required this.logros});
+  final List<LogroModel> logros;
 
   @override
   Widget build(BuildContext context) {
-    return GridView.count(
+    return GridView.builder(
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
-      crossAxisCount: 2,
-      mainAxisSpacing: 12,
-      crossAxisSpacing: 12,
-      childAspectRatio: .75,
-      children: const [
-        TAchievementCard(
-          image: TImages.logro1,
-          title: TTexts.logroTitulo1,
-          subtitle: TTexts.logroSubTitulo1,
-          locked: false,
-        ),
-        TAchievementCard(
-          image: TImages.logro2,
-          title: TTexts.logroTitulo2,
-          subtitle: TTexts.logroSubTitulo2,
-          locked: true,
-        ),
-        TAchievementCard(
-          image: TImages.logro3,
-          title: TTexts.logroTitulo3,
-          subtitle: TTexts.logroSubTitulo3,
-          locked: false,
-        ),
-        TAchievementCard(
-          image: TImages.logro4,
-          title: TTexts.logroTitulo4,
-          subtitle: TTexts.logroSubTitulo4,
-          locked: false,
-        ),
-      ],
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 2,
+        mainAxisSpacing: 12,
+        crossAxisSpacing: 12,
+        childAspectRatio: .75,
+      ),
+      itemCount: logros.length,
+      itemBuilder: (context, index) {
+        final logro = logros[index];
+        return TAchievementCard(
+          image: logro.imagen ?? '',
+          title: logro.titulo,
+          subtitle: logro.descripcion ?? '',
+          locked: !logro.desbloqueado,
+        );
+      },
     );
   }
 }

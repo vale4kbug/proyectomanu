@@ -21,37 +21,45 @@ class UserController extends GetxController {
 
   Future<void> intentarAutoLogin() async {
     isLoading.value = true;
-    final prefs = await SharedPreferences.getInstance();
-    final userId = prefs.getInt('userId');
-
-    if (userId != null) {
-      try {
-        // Llama a la versión adaptada de getProfile
-        final usuarioData = await AuthService.getProfile();
-        usuario.value = UsuarioModel.fromJson(usuarioData);
-      } catch (e) {
-        print("Auto-login fallido: $e");
-        await logout(); // Limpia la sesión si hay un error
-      }
+    try {
+      // Ya no revisamos SharedPreferences.
+// Solo intentamos obtener el perfil.
+      final usuarioData = await AuthService.getProfile();
+      usuario.value = UsuarioModel.fromJson(usuarioData);
+    } catch (e) {
+      // Esto es normal si no hay una sesión guardada.
+      print("No hay sesión de auto-login: $e");
+      usuario.value = null;
     }
+    // Finalmente, quitamos la carga (incluso si falló)
     isLoading.value = false;
   }
 
   Future<void> login(String email, String password) async {
     try {
-      // AuthService.login ahora guarda el ID del usuario
+      print("1. [DEBUG] Iniciando login...");
       await AuthService.login(email, password);
-      // Después del login, carga el perfil
-      await intentarAutoLogin();
+      print("2. [DEBUG] Login (cookie) exitoso. Pidiendo perfil...");
 
-      // Solo navega si la carga del perfil fue exitosa
-      if (usuario.value != null) {
-        Get.offAll(() => const NavigationMenu());
-      } else {
-        throw Exception(
-            "No se pudo cargar el perfil del usuario después del login.");
+      final usuarioData = await AuthService.getProfile();
+
+      // --- ¡ESTA ES LA LÍNEA MÁS IMPORTANTE! ---
+      print("3. [DEBUG] Datos del perfil recibidos: $usuarioData");
+
+      if (usuarioData == null) {
+        print("ERROR: AuthService.getProfile() devolvió null.");
+        throw Exception("Los datos del perfil llegaron vacíos.");
       }
+
+      usuario.value = UsuarioModel.fromJson(usuarioData);
+      print(
+          "4. [DEBUG] Modelo de usuario creado: ${usuario.value?.nombreUsuario}");
+
+      Get.offAll(() => const NavigationMenu());
+      print("5. [DEBUG] Navegando a NavigationMenu...");
     } catch (e) {
+      // --- TAMBIÉN MUY IMPORTANTE ---
+      print("ERROR [DEBUG]: La ejecución falló. Causa: $e");
       Get.snackbar(
           'Error de Login', e.toString().replaceFirst("Exception: ", ""),
           snackPosition: SnackPosition.BOTTOM,

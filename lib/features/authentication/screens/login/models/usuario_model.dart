@@ -20,11 +20,7 @@ class UsuarioModel {
     this.logros = const [],
   });
 
-  /// Factory constructor para crear una instancia de UsuarioModel desde un mapa JSON.
-  /// Este es el método que usa tu UserController.
   factory UsuarioModel.fromJson(Map<String, dynamic> json) {
-    // Maneja el caso de que 'estadisticas' o 'logros' puedan ser nulos en la respuesta de la API.
-    var estadisticas = json['estadisticas'] as Map<String, dynamic>? ?? {};
     var logrosList = json['logros'] as List<dynamic>? ?? [];
 
     return UsuarioModel(
@@ -32,8 +28,9 @@ class UsuarioModel {
       nombre: json['nombre'] ?? '',
       nombreUsuario: json['nombreUsuario'] ?? '',
       email: json['email'] ?? '',
-      estrellas: estadisticas['estrellas'] ?? 0,
-      nivelesCompletados: estadisticas['nivelesCompletados'] ?? 0,
+      // Leemos directamente del JSON
+      estrellas: json['estrellas'] ?? 0,
+      nivelesCompletados: json['nivelesCompletados'] ?? 0,
       logros: logrosList
           .map((logroJson) => LogroModel.fromJson(logroJson))
           .toList(),
@@ -41,7 +38,6 @@ class UsuarioModel {
   }
 }
 
-// Este modelo representa un único logro, ya sea bloqueado o desbloqueado.
 class LogroModel {
   final int id;
   final String titulo;
@@ -57,7 +53,6 @@ class LogroModel {
     required this.desbloqueado,
   });
 
-  /// Factory constructor para crear una instancia de LogroModel desde un mapa JSON.
   factory LogroModel.fromJson(Map<String, dynamic> json) {
     return LogroModel(
       id: json['id'] ?? 0,

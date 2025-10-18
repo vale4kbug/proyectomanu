@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:proyectomanu/common/widgets/appbar/appbar.dart';
 import 'package:proyectomanu/common/widgets/list_tiles/config_menu_tile.dart';
+import 'package:proyectomanu/features/authentication/screens/login/controllers/user_controller.dart';
 import 'package:proyectomanu/features/configuracion/screens/configuracion_datos.dart';
 import 'package:proyectomanu/features/configuracion/screens/configuracion_notificaciones.dart';
 import 'package:proyectomanu/features/configuracion/screens/configuracion_retroalimentacion.dart';
@@ -17,6 +18,7 @@ class ConfiguracionScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final userController = Get.find<UserController>();
     return Scaffold(
       appBar: TAppBar(
         actions: [
@@ -46,13 +48,11 @@ class ConfiguracionScreen extends StatelessWidget {
                 ).textTheme.bodyMedium!.apply(color: TColors.primarioBoton),
               ),
               const SizedBox(height: TSizes.spaceBtwSections),
-
               TSectionHeading(
                 title: TTexts.configCuenta,
                 showActionButton: false,
                 textColor: TColors.primaryColor,
               ),
-
               const SizedBox(height: TSizes.spaceBtwItems),
               TConfigMenuTile(
                 icon: Iconsax.personalcard,
@@ -60,7 +60,6 @@ class ConfiguracionScreen extends StatelessWidget {
                 subTitle: TTexts.configDatosSub,
                 onTap: () => Get.to(() => const ConfiguracionDatosScreen()),
               ),
-
               TConfigMenuTile(
                 icon: Iconsax.notification,
                 title: TTexts.configNotificaciones,
@@ -70,7 +69,6 @@ class ConfiguracionScreen extends StatelessWidget {
               ),
               const Divider(),
               const SizedBox(height: TSizes.spaceBtwItems / 2),
-
               TSectionHeading(
                 title: TTexts.configSoporteTitle,
                 showActionButton: false,
@@ -91,15 +89,13 @@ class ConfiguracionScreen extends StatelessWidget {
                     Get.to(() => const ConfiguracionRetroalimentacionScreen()),
               ),
               const SizedBox(height: TSizes.spaceBtwItems),
-
               const Divider(),
               const SizedBox(height: TSizes.spaceBtwItems),
               const SizedBox(height: TSizes.spaceBtwItems),
-
               SizedBox(
                 width: double.infinity,
                 child: OutlinedButton(
-                  onPressed: () {},
+                  onPressed: () => userController.logout(),
                   child: const Text(
                     TTexts.cerrarSesionBoton,
                     style: TextStyle(color: Colors.red),

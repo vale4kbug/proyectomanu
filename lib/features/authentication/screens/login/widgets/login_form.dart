@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
-import 'package:proyectomanu/features/authentication/screens/login/services/auth_service.dart';
+import 'package:proyectomanu/features/authentication/screens/login/controllers/user_controller.dart';
 import 'package:proyectomanu/features/authentication/screens/password_configuration/forget_password.dart';
 import 'package:proyectomanu/features/authentication/screens/signup/signup.dart';
-import 'package:proyectomanu/navigation_menu.dart';
 import 'package:proyectomanu/utils/constants/sizes.dart';
 import 'package:proyectomanu/utils/constants/text_strings.dart';
 import 'package:proyectomanu/utils/validators/validator.dart';
@@ -19,11 +18,10 @@ class TLoginForm extends StatefulWidget {
 class _TLoginFormState extends State<TLoginForm> {
   // 1. Clave global para identificar y validar el formulario
   final _formKey = GlobalKey<FormState>();
-
+  final userController = Get.find<UserController>();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   bool _loading = false;
-  // 2. Variable para controlar la visibilidad de la contraseña
   bool _passwordVisible = false;
 
   Future<void> _login() async {
@@ -33,8 +31,19 @@ class _TLoginFormState extends State<TLoginForm> {
     }
 
     setState(() => _loading = true);
+    await userController.login(
+      _emailController.text.trim(),
+      _passwordController.text.trim(),
+    );
 
-    try {
+    // Si el login falla, el controlador mostrará un snackbar
+    // y la ejecución volverá aquí. Necesitamos detener el spinner.
+    // Si tiene éxito, el controlador navega y este widget se "desmonta",
+    // por lo que el `if (mounted)` previene un error.
+    if (mounted) {
+      setState(() => _loading = false);
+    }
+    /*   try {
       final response = await AuthService.login(
         _emailController.text.trim(),
         _passwordController.text.trim(),
@@ -55,12 +64,11 @@ class _TLoginFormState extends State<TLoginForm> {
       if (mounted) {
         setState(() => _loading = false);
       }
-    }
+    }*/
   }
 
   @override
   Widget build(BuildContext context) {
-    // 4. Usa la clave en el widget Form
     return Form(
       key: _formKey,
       child: Padding(

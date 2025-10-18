@@ -1,15 +1,13 @@
 import 'package:dio/dio.dart';
 // Asegúrate de que la ruta a tu ApiClient sea correcta
 import 'package:proyectomanu/utils/http/api_client.dart';
-// Usaremos SharedPreferences para guardar el ID del usuario
-import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthService {
-  // Obtenemos la instancia de Dio configurada desde nuestro ApiClient.
+  // ¡Correcto! Usamos la instancia de Dio que maneja las cookies.
   static final Dio _dio = ApiClient.instance;
 
   /// Inicia sesión con email y contraseña.
-  /// Devuelve el objeto de usuario si es exitoso.
+  /// (El CookieManager de Dio guardará la cookie automáticamente)
   static Future<Map<String, dynamic>> login(
       String email, String password) async {
     try {
@@ -18,13 +16,8 @@ class AuthService {
         data: {"email": email, "password": password},
       );
 
-      // GUARDAMOS EL ID DEL USUARIO PARA SIMULAR UNA SESIÓN
-      if (response.data != null && response.data['usuario'] != null) {
-        final prefs = await SharedPreferences.getInstance();
-        await prefs.setInt('userId', response.data['usuario']['idUsuario']);
-      }
-
-      return response.data;
+      // Ya no necesitamos SharedPreferences. La cookie es suficiente.
+      return response.data as Map<String, dynamic>;
     } on DioException catch (e) {
       final errorMessage =
           e.response?.data['message'] ?? 'Error de red o del servidor.';
@@ -32,41 +25,43 @@ class AuthService {
     }
   }
 
-  // ¡ATENCIÓN! Este método getProfile no funcionará porque tu API no tiene
-  // un sistema de sesión (cookie o JWT) para saber quién es el usuario.
-  // Lo dejaremos preparado para el futuro.
+  /// ¡CORREGIDO! Obtiene el perfil del usuario usando la cookie de sesión.
   static Future<Map<String, dynamic>> getProfile() async {
-    // Por ahora, leeremos el ID guardado y pediremos ese usuario específico
-    final prefs = await SharedPreferences.getInstance();
-    final userId = prefs.getInt('userId');
-
-    if (userId == null) {
-      throw Exception('No hay sesión iniciada.');
-    }
-
     try {
-      // Llamamos al endpoint que obtiene un usuario por ID
-      final response = await _dio.get("/usuarios/$userId");
-      return response.data;
+      // Llamamos al endpoint [Authorize] que usa la cookie.
+      final response = await _dio.get("/usuarios/perfil");
+      return response.data as Map<String, dynamic>;
     } on DioException catch (e) {
-      throw Exception('Error al obtener el perfil: ${e.response?.statusCode}');
+      if (e.response?.statusCode == 401) {
+        // Si la API devuelve 401 (no autorizado), lanzamos este error.
+        throw Exception("No hay sesión iniciada o la sesión expiró.");
+      }
+      final errorMessage =
+          e.response?.data['message'] ?? 'Error al cargar el perfil.';
+      throw Exception(errorMessage);
     }
   }
 
-  /// Cierra la sesión (en este caso, solo borra el ID guardado).
+  /// Cierra la sesión (borra la cookie en el backend y en la app).
   static Future<void> logout() async {
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.remove('userId');
+    try {
+      // Llama al endpoint de logout de tu API
+      await _dio.post("/usuarios/logout");
+    } catch (e) {
+      print("Error al hacer logout (backend): $e");
+    }
+
+    // Ya no necesitamos SharedPreferences. El CookieManager se encarga.
   }
 
-  /// Registra un nuevo usuario.
+  /// Registra un nuevo usuario. (Tu código estaba bien)
   static Future<Map<String, dynamic>> register({
     required String nombre,
     String? apellido,
     required String nombreUsuario,
     required String email,
     required String password,
-    required String authProvider, // <-- PARÁMETRO AÑADIDO
+    required String authProvider,
   }) async {
     try {
       final response = await _dio.post(
@@ -77,7 +72,7 @@ class AuthService {
           "nombreUsuario": nombreUsuario,
           "email": email,
           "password": password,
-          "authProvider": authProvider, // <-- AÑADIDO AL CUERPO DE LA PETICIÓN
+          "authProvider": authProvider,
         },
       );
       return response.data;

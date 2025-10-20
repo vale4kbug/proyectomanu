@@ -45,13 +45,15 @@ class NivelService {
     }
   }
 
+// En NivelService.dart, método finalizarNivel
+
   static Future<void> finalizarNivel(int nivelId, int puntaje) async {
     try {
       await _dio.post(
         "/niveles/finalizar",
         data: {
-          "nivelId": nivelId,
-          "puntaje": puntaje,
+          "nivelId": nivelId, // <-- 'n' minúscula
+          "puntaje": puntaje, // <-- 'p' minúscula
         },
       );
     } catch (e) {

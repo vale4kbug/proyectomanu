@@ -49,18 +49,16 @@ class NivelService {
   }
 
   /// (EXTRA) Método para guardar el progreso cuando un nivel se completa
-  static Future<void> finalizarNivel(int nivelId, int estrellasGanadas) async {
+  static Future<void> finalizarNivel(int nivelId, int puntaje) async {
     try {
-      await _dio.post(
-        "/niveles/finalizar",
-        data: {
-          "nivelId": nivelId,
-          "estrellas": estrellasGanadas,
-        },
-      );
-    } catch (e) {
-      // Normalmente no se muestra un error al usuario por esto, solo se registra.
-      print("No se pudo guardar el progreso del nivel: $e");
+      final data = {"nivelId": nivelId, "puntaje": puntaje};
+      print("DEBUG: Enviando POST /niveles/finalizar -> $data");
+      final response = await _dio.post("/niveles/finalizar", data: data);
+      print(
+          "DEBUG: Response finalizarNivel status=${response.statusCode} data=${response.data}");
+    } catch (e, st) {
+      print("ERROR: No se pudo guardar el progreso del nivel: $e\n$st");
+      rethrow; // para que no se oculte el error
     }
   }
 }

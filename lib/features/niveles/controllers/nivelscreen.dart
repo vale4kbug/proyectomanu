@@ -10,9 +10,11 @@ import 'package:proyectomanu/features/niveles/screens/lectura.dart';
 import 'package:proyectomanu/features/niveles/screens/presentacion_sena.dart';
 import 'package:proyectomanu/features/niveles/screens/relacionar_columnas.dart';
 import 'package:proyectomanu/features/niveles/screens/relacionar_texto.dart';
+// Asegúrate de que la ruta a tu NivelService sea correcta
 import 'package:proyectomanu/utils/http/nivel_service.dart';
 import 'package:proyectomanu/utils/constants/images_strings.dart';
 import 'package:proyectomanu/utils/constants/text_strings.dart';
+import 'package:proyectomanu/navigation_menu.dart'; // Importa tu NavigationMenu
 
 class NivelScreen extends StatefulWidget {
   const NivelScreen({super.key, required this.nivelId});
@@ -25,7 +27,7 @@ class NivelScreen extends StatefulWidget {
 class _NivelScreenState extends State<NivelScreen> {
   late Future<List<Ejercicio>> futureEjercicios;
   int _indiceActual = 0;
-  int _puntaje = 0;
+  int _puntaje = 0; // Esta es la variable de ACIERTOS
 
   @override
   void initState() {
@@ -33,17 +35,55 @@ class _NivelScreenState extends State<NivelScreen> {
     futureEjercicios = NivelService.getEjercicios(widget.nivelId);
   }
 
+  // --- ¡ESTA ES LA FUNCIÓN CORREGIDA! ---
   void _siguiente(List<Ejercicio> ejercicios, {bool? correcto}) {
-    if (correcto == true) _puntaje++;
+    // 1. Incrementar el puntaje (aciertos)
+    if (correcto == true) {
+      _puntaje++;
+      print(
+          "DEBUG: _siguiente -> Se aumentó _puntaje a $_puntaje (correcto == true)");
+    } else {
+      print(
+          "DEBUG: _siguiente -> correcto == $correcto, _puntaje sigue = $_puntaje");
+    }
+
     if (_indiceActual < ejercicios.length - 1) {
+      // 2. Avanzar al siguiente ejercicio
       setState(() => _indiceActual++);
     } else {
+      // 3. ¡LÓGICA DE FINALIZACIÓN CORREGIDA!
+
+      // Contamos cuántos ejercicios SÍ eran evaluables (ignora los de historia, etc.)
+      final int ejerciciosEvaluables = ejercicios.where((ej) {
+        return ej.tipo != TipoEjercicio.historia &&
+            ej.tipo != TipoEjercicio.presentacion &&
+            ej.tipo != TipoEjercicio.lectura;
+      }).length;
+      print(
+          "DEBUG: Finalizando nivel. ejerciciosEvaluables = $ejerciciosEvaluables, puntaje local = $_puntaje");
+
+      // Calculamos las estrellas aquí en Flutter (igual que en tu C#)
+      int estrellasCalculadas = 0;
+      if (ejerciciosEvaluables > 0) {
+        double porcentaje = _puntaje / ejerciciosEvaluables;
+        if (porcentaje >= 0.95) {
+          estrellasCalculadas = 3;
+        } else if (porcentaje >= 0.60) {
+          estrellasCalculadas = 2;
+        } else if (_puntaje > 0) {
+          estrellasCalculadas = 1;
+        }
+      }
+
+      // Llamamos a la API con el PUNTUAJE (ej. 4)
       NivelService.finalizarNivel(widget.nivelId, _puntaje).then((_) {
+        // Navegamos a la pantalla de éxito con las ESTRELLAS (ej. 3)
         Get.off(() => ExitoNivelLayout(
-              mensaje: TTexts.obtenerMensajePorEstrellas(_puntaje),
-              imagenPath: TImages.imagenPorEstrellas(_puntaje),
-              estrellasGanadas: _puntaje,
-              onPressed: () => Get.back(),
+              mensaje: TTexts.obtenerMensajePorEstrellas(estrellasCalculadas),
+              imagenPath: TImages.imagenPorEstrellas(estrellasCalculadas),
+              estrellasGanadas: estrellasCalculadas, // <-- ¡CORREGIDO!
+              // Al presionar "Continuar", volvemos al menú principal
+              onPressed: () => Get.offAll(() => const NavigationMenu()),
             ));
       });
     }
@@ -60,9 +100,25 @@ class _NivelScreenState extends State<NivelScreen> {
         }
         if (snapshot.hasError) {
           return Scaffold(
-              body: Center(
-                  child:
-                      Text("Error al cargar ejercicios: ${snapshot.error}")));
+            body: Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text("Error al cargar ejercicios: ${snapshot.error}"),
+                  const SizedBox(height: 16),
+                  ElevatedButton(
+                    onPressed: () {
+                      setState(() {
+                        futureEjercicios =
+                            NivelService.getEjercicios(widget.nivelId);
+                      });
+                    },
+                    child: const Text("Reintentar"),
+                  ),
+                ],
+              ),
+            ),
+          );
         }
         if (!snapshot.hasData || snapshot.data!.isEmpty) {
           return const Scaffold(
@@ -119,14 +175,14 @@ class _NivelScreenState extends State<NivelScreen> {
                 imagenesSmall:
                     List<String>.from(ejercicio.data["imagenesSmall"]),
                 imagenesBig: List<String>.from(ejercicio.data["imagenesBig"]),
-                onNext: () => _siguiente(ejercicios),
+                onNext: () => _siguiente(ejercicios), // No cuenta como puntaje
               );
             case TipoEjercicio.lectura:
               return NivelLecturaScreen(
                 key: ValueKey(_indiceActual),
                 titulo: ejercicio.data["titulo"],
                 texto: ejercicio.data["texto"],
-                onNext: () => _siguiente(ejercicios),
+                onNext: () => _siguiente(ejercicios), // No cuenta como puntaje
               );
             case TipoEjercicio.historia:
               return NivelHistoriaScreen(
@@ -134,7 +190,7 @@ class _NivelScreenState extends State<NivelScreen> {
                 dialogos: (ejercicio.data["dialogos"] as List)
                     .map((item) => Map<String, String>.from(item))
                     .toList(),
-                onNext: () => _siguiente(ejercicios),
+                onNext: () => _siguiente(ejercicios), // No cuenta como puntaje
               );
             case TipoEjercicio.opcionmultiple:
               return NivelOpcionMultipleScreen(
@@ -146,13 +202,7 @@ class _NivelScreenState extends State<NivelScreen> {
                 onNext: (correcto) =>
                     _siguiente(ejercicios, correcto: correcto),
               );
-            case TipoEjercicio.finalizacion:
-              return ExitoNivelLayout(
-                mensaje: TTexts.nivelCompleto,
-                imagenPath: ejercicio.data["imagenPath"],
-                estrellasGanadas: _puntaje,
-                onPressed: () => Get.back(),
-              );
+
             default:
               return const Scaffold(
                   body: Center(child: Text("Tipo de ejercicio no reconocido")));

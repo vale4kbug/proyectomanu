@@ -22,8 +22,6 @@ class UserController extends GetxController {
   Future<void> intentarAutoLogin() async {
     isLoading.value = true;
     try {
-      // Ya no revisamos SharedPreferences.
-// Solo intentamos obtener el perfil.
       final usuarioData = await AuthService.getProfile();
       usuario.value = UsuarioModel.fromJson(usuarioData);
     } catch (e) {
@@ -72,5 +70,26 @@ class UserController extends GetxController {
     await AuthService.logout();
     usuario.value = null;
     Get.offAll(() => const LoginScreen());
+  }
+
+  Future<void> recargarUsuario() async {
+    try {
+      isLoading.value = true;
+      print("DEBUG: Recargando perfil del usuario...");
+      final usuarioData = await AuthService.getProfile();
+      usuario.value = UsuarioModel.fromJson(usuarioData);
+      print("DEBUG: Perfil recargado correctamente.");
+    } catch (e) {
+      print("ERROR al recargar usuario: $e");
+      Get.snackbar(
+        'Error',
+        'No se pudo actualizar el perfil.',
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: Colors.redAccent,
+        colorText: Colors.white,
+      );
+    } finally {
+      isLoading.value = false;
+    }
   }
 }

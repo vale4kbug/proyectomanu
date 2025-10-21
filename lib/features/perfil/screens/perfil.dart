@@ -4,17 +4,46 @@ import 'package:iconsax/iconsax.dart';
 import 'package:proyectomanu/common/widgets/custom_shapes/containers/primary_header_container.dart';
 import 'package:proyectomanu/features/authentication/screens/login/controllers/user_controller.dart';
 import 'package:proyectomanu/features/configuracion/screens/configuracion.dart';
+import 'package:proyectomanu/features/perfil/services/logros_service.dart';
 import 'package:proyectomanu/features/perfil/widgets/circular_image.dart';
-import 'package:proyectomanu/features/perfil/widgets/logros_display.dart';
 import 'package:proyectomanu/features/perfil/widgets/stat_usuario_container.dart';
+import 'package:proyectomanu/features/perfil/widgets/achievement_card.dart';
 import 'package:proyectomanu/utils/constants/colors.dart';
 import 'package:proyectomanu/utils/constants/images_strings.dart';
 import 'package:proyectomanu/utils/constants/sizes.dart';
 import 'package:proyectomanu/utils/constants/text_strings.dart';
 import 'package:proyectomanu/utils/helpers/helper_functions.dart';
 
-class PerfilScreen extends StatelessWidget {
+class PerfilScreen extends StatefulWidget {
   const PerfilScreen({super.key});
+
+  @override
+  State<PerfilScreen> createState() => _PerfilScreenState();
+}
+
+class _PerfilScreenState extends State<PerfilScreen> {
+  List<dynamic> logros = [];
+  bool cargando = true;
+
+  @override
+  void initState() {
+    super.initState();
+    cargarLogros();
+  }
+
+  Future<void> cargarLogros() async {
+    try {
+      final data = await LogrosService.obtenerLogrosUsuario();
+      setState(() {
+        logros = data;
+        cargando = false;
+      });
+      print("✅ Logros cargados: $logros");
+    } catch (e) {
+      setState(() => cargando = false);
+      print("❌ Error al cargar logros: $e");
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -22,22 +51,27 @@ class PerfilScreen extends StatelessWidget {
     final controller = Get.find<UserController>();
 
     return Scaffold(
-      body: SingleChildScrollView(
-        child: Obx(() {
-          if (controller.isLoading.value && controller.usuario.value == null) {
-            return const Center(
-                heightFactor: 15, child: CircularProgressIndicator());
-          }
+      body: Obx(() {
+        if (controller.isLoading.value && controller.usuario.value == null) {
+          return const Center(
+            heightFactor: 15,
+            child: CircularProgressIndicator(),
+          );
+        }
 
-          if (controller.usuario.value == null) {
-            return const Center(
-                heightFactor: 15, child: Text("No se pudo cargar el perfil."));
-          }
+        if (controller.usuario.value == null) {
+          return const Center(
+            heightFactor: 15,
+            child: Text("No se pudo cargar el perfil."),
+          );
+        }
 
-          final usuario = controller.usuario.value!;
+        final usuario = controller.usuario.value!;
 
-          return Column(
+        return SingleChildScrollView(
+          child: Column(
             children: [
+              // === Encabezado con imagen y nombre ===
               TPrimaryHeaderContainer(
                 child: Stack(
                   children: [
@@ -45,13 +79,14 @@ class PerfilScreen extends StatelessWidget {
                       children: [
                         const SizedBox(height: 30),
                         const TCircularImage(
-                            image: TImages.imagenperfil,
-                            width: 135,
-                            height: 135),
+                          image: TImages.imagenperfil,
+                          width: 135,
+                          height: 135,
+                        ),
                         const SizedBox(height: TSizes.spaceBtwSections / 3),
                         Center(
                           child: Text(
-                            usuario.nombreUsuario, // <-- DATO REAL
+                            usuario.nombreUsuario,
                             style: Theme.of(context)
                                 .textTheme
                                 .headlineLarge!
@@ -73,6 +108,7 @@ class PerfilScreen extends StatelessWidget {
                   ],
                 ),
               ),
+
               const SizedBox(height: TSizes.spaceBtwSections / 2),
               Center(
                 child: Text(
@@ -83,7 +119,10 @@ class PerfilScreen extends StatelessWidget {
                       .apply(color: TColors.primarioBoton),
                 ),
               ),
+
               const SizedBox(height: TSizes.spaceBtwSections),
+
+              // === Estadísticas del usuario ===
               TStatUsuarioContainer(
                 dark: dark,
                 title: TTexts.perfilEstrellas,
@@ -102,13 +141,16 @@ class PerfilScreen extends StatelessWidget {
                 dark: dark,
                 title: TTexts.perfilLogros,
                 subtitle:
-                    '${usuario.logros.where((l) => l.desbloqueado).length} / ${usuario.logros.length}',
+                    '${logros.where((l) => l['desbloqueado'] == true).length} / ${logros.length}',
                 icon: Iconsax.medal_star5,
                 iconColor: const Color.fromARGB(255, 133, 58, 255),
               ),
+
               const SizedBox(height: TSizes.spaceBtwSections),
               const Divider(),
               const SizedBox(height: TSizes.spaceBtwItems / 2),
+
+              // === Sección de Logros ===
               Center(
                 child: Text(
                   TTexts.perfilLogrosTitle,
@@ -118,23 +160,51 @@ class PerfilScreen extends StatelessWidget {
                       .apply(color: TColors.primarioBoton),
                 ),
               ),
-              TLogrosDisplayPerfil(logros: usuario.logros),
+
+              const SizedBox(height: TSizes.spaceBtwItems),
+
+              if (cargando)
+                const Center(child: CircularProgressIndicator())
+              else if (logros.isEmpty)
+                const Center(child: Text("No tienes logros aún 😢"))
+              else
+                GridView.builder(
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  itemCount: logros.length,
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    crossAxisSpacing: 8,
+                    mainAxisSpacing: 8,
+                    childAspectRatio: 0.85,
+                  ),
+                  itemBuilder: (context, index) {
+                    final logro = logros[index];
+                    return TAchievementCard(
+                      image: logro['img'] ?? 'assets/images/logros/default.png',
+                      title: logro['nombre'] ?? 'Sin título',
+                      subtitle: logro['descripcion'] ?? '',
+                      locked: !(logro['desbloqueado'] ?? false),
+                    );
+                  },
+                ),
+
               const SizedBox(height: TSizes.spaceBtwSections),
               Padding(
                 padding: const EdgeInsets.all(15.0),
                 child: SizedBox(
                   width: double.infinity,
                   child: OutlinedButton.icon(
-                    onPressed: () {},
+                    onPressed: () {/* Lógica para compartir */},
                     label: const Text(TTexts.perfilCompartir),
                     icon: const Icon(Iconsax.send_2),
                   ),
                 ),
               ),
             ],
-          );
-        }),
-      ),
+          ),
+        );
+      }),
     );
   }
 }

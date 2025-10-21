@@ -25,7 +25,7 @@ class AuthService {
     }
   }
 
-  /// ¡CORREGIDO! Obtiene el perfil del usuario usando la cookie de sesión.
+  /// Obtiene el perfil del usuario usando la cookie de sesión.
   static Future<Map<String, dynamic>> getProfile() async {
     try {
       // Llamamos al endpoint [Authorize] que usa la cookie.
@@ -50,11 +50,9 @@ class AuthService {
     } catch (e) {
       print("Error al hacer logout (backend): $e");
     }
-
-    // Ya no necesitamos SharedPreferences. El CookieManager se encarga.
   }
 
-  /// Registra un nuevo usuario. (Tu código estaba bien)
+  /// Registra un nuevo usuario
   static Future<Map<String, dynamic>> register({
     required String nombre,
     String? apellido,

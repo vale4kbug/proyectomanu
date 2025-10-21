@@ -52,6 +52,8 @@ flutter:
     - assets/images/ejercicio/
     - assets/images/correo/
     - assets/icons/brands/
+    - assets/images/logros/
+
   fonts:
     - family: Bunny
       fonts:

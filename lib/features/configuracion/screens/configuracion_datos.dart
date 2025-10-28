@@ -48,23 +48,13 @@ class ConfiguracionDatosScreen extends StatelessWidget {
                 onPressed: () {},
               ),
               TConfigDatosMenu(
-                title: TTexts.email,
+                title: 'Correo',
                 subTitle: 'manu@gmail.com',
                 onPressed: () {},
               ),
               TConfigDatosMenu(
-                title: TTexts.configDatosphone,
-                subTitle: '+52-631-1234567',
-                onPressed: () {},
-              ),
-              TConfigDatosMenu(
-                title: TTexts.configDatosgenero,
-                subTitle: 'Punk',
-                onPressed: () {},
-              ),
-              TConfigDatosMenu(
-                title: TTexts.configDatosnacimiento,
-                subTitle: '10 de abril de 2025',
+                title: 'Contraseña',
+                subTitle: '********',
                 onPressed: () {},
               ),
               const SizedBox(height: TSizes.spaceBtwItems * 4),

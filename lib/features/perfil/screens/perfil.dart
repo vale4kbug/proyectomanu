@@ -28,6 +28,9 @@ class _PerfilScreenState extends State<PerfilScreen> {
   @override
   void initState() {
     super.initState();
+    final controller =
+        Get.find<UserController>(); //para recarga de nuevos stats
+    controller.recargarUsuario(); //
     cargarLogros();
   }
 
@@ -38,10 +41,8 @@ class _PerfilScreenState extends State<PerfilScreen> {
         logros = data;
         cargando = false;
       });
-      print("✅ Logros cargados: $logros");
     } catch (e) {
       setState(() => cargando = false);
-      print("❌ Error al cargar logros: $e");
     }
   }
 

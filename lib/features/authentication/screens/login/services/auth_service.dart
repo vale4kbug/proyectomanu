@@ -1,9 +1,9 @@
+import 'package:camera/camera.dart';
 import 'package:dio/dio.dart';
-// Asegúrate de que la ruta a tu ApiClient sea correcta
 import 'package:proyectomanu/utils/http/api_client.dart';
 
 class AuthService {
-  // ¡Correcto! Usamos la instancia de Dio que maneja las cookies.
+  // Dio que maneja las cookies
   static final Dio _dio = ApiClient.instance;
 
   /// Inicia sesión con email y contraseña.
@@ -16,7 +16,6 @@ class AuthService {
         data: {"email": email, "password": password},
       );
 
-      // Ya no necesitamos SharedPreferences. La cookie es suficiente.
       return response.data as Map<String, dynamic>;
     } on DioException catch (e) {
       final errorMessage =
@@ -127,6 +126,49 @@ class AuthService {
       final errorMessage =
           e.response?.data['message'] ?? 'Error al reenviar el correo.';
       throw Exception(errorMessage);
+    }
+  }
+
+  static Future<Map<String, dynamic>> actualizarPerfil({
+    required String contrasenaActual,
+    String? nuevoNombre,
+    String? nuevoNombreUsuario,
+    String? nuevoCorreo,
+    String? nuevaContrasena,
+  }) async {
+    try {
+      final response = await _dio.put(
+        "/usuarios/actualizar-perfil",
+        data: {
+          "contrasenaActual": contrasenaActual,
+          "nuevoNombre": nuevoNombre,
+          "nuevoNombreUsuario": nuevoNombreUsuario,
+          "nuevoCorreo": nuevoCorreo,
+          "nuevaContrasena": nuevaContrasena,
+        },
+      );
+      return response.data;
+    } on DioException catch (e) {
+      throw Exception(
+          e.response?.data['message'] ?? 'Error al actualizar el perfil.');
+    }
+  }
+
+  // En AuthService.dart
+  static Future<Map<String, dynamic>> subirImagenPerfil(XFile imagen) async {
+    try {
+      String fileName = imagen.path.split('/').last;
+      FormData formData = FormData.fromMap({
+        "file": await MultipartFile.fromFile(imagen.path, filename: fileName),
+      });
+
+      // DEBES CREAR ESTE ENDPOINT EN TU API
+      final response =
+          await _dio.post("/usuarios/subir-imagen", data: formData);
+      return response.data;
+    } on DioException catch (e) {
+      throw Exception(
+          e.response?.data['message'] ?? 'Error al subir la imagen.');
     }
   }
 }

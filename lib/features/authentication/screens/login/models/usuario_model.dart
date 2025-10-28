@@ -1,6 +1,3 @@
-// lib/features/authentication/screens/login/models/usuario_model.dart
-
-// Este modelo representa a un solo usuario con sus estadísticas y logros.
 class UsuarioModel {
   final int id;
   final String nombre;
@@ -28,7 +25,6 @@ class UsuarioModel {
       nombre: json['nombre'] ?? '',
       nombreUsuario: json['nombreUsuario'] ?? '',
       email: json['email'] ?? '',
-      // Leemos directamente del JSON
       estrellas: json['estrellas'] ?? 0,
       nivelesCompletados: json['nivelesCompletados'] ?? 0,
       logros: logrosList
@@ -36,6 +32,8 @@ class UsuarioModel {
           .toList(),
     );
   }
+
+  get fotoUrl => null;
 }
 
 class LogroModel {

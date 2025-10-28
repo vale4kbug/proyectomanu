@@ -64,6 +64,7 @@ class _TypewriterTextState extends State<TypewriterText> {
     return Text(
       _visibleText,
       style: widget.style,
+      textAlign: TextAlign.center,
     );
   }
 }

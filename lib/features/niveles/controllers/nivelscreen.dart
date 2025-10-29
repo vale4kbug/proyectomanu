@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:proyectomanu/features/authentication/screens/login/controllers/user_controller.dart';
 import 'package:proyectomanu/features/exito/screens/exito_nivel.dart';
 import 'package:proyectomanu/features/niveles/models/tipoejercicio.dart';
 import 'package:proyectomanu/features/niveles/screens/camara.dart';
@@ -10,7 +11,6 @@ import 'package:proyectomanu/features/niveles/screens/lectura.dart';
 import 'package:proyectomanu/features/niveles/screens/presentacion_sena.dart';
 import 'package:proyectomanu/features/niveles/screens/relacionar_columnas.dart';
 import 'package:proyectomanu/features/niveles/screens/relacionar_texto.dart';
-// Asegúrate de que la ruta a tu NivelService sea correcta
 import 'package:proyectomanu/utils/http/nivel_service.dart';
 import 'package:proyectomanu/utils/constants/images_strings.dart';
 import 'package:proyectomanu/utils/constants/text_strings.dart';
@@ -75,16 +75,28 @@ class _NivelScreenState extends State<NivelScreen> {
         }
       }
 
-      // Llamamos a la API con el PUNTUAJE (ej. 4)
-      NivelService.finalizarNivel(widget.nivelId, _puntaje).then((_) {
-        // Navegamos a la pantalla de éxito con las ESTRELLAS (ej. 3)
+// Llamamos a la API con el PUNTUAJE (ej. 4)
+      NivelService.finalizarNivel(widget.nivelId, _puntaje).then((_) async {
+        // ✅ 1. Actualizar los datos del usuario desde la base de datos
+        final userController = Get.find<UserController>();
+        await userController.recargarUsuario();
+
+        // ✅ 2. Luego navegar a la pantalla de éxito
         Get.off(() => ExitoNivelLayout(
               mensaje: TTexts.obtenerMensajePorEstrellas(estrellasCalculadas),
               imagenPath: TImages.imagenPorEstrellas(estrellasCalculadas),
-              estrellasGanadas: estrellasCalculadas, // <-- ¡CORREGIDO!
-              // Al presionar "Continuar", volvemos al menú principal
+              estrellasGanadas: estrellasCalculadas,
               onPressed: () => Get.offAll(() => const NavigationMenu()),
             ));
+      }).catchError((error) {
+        print("ERROR al finalizar nivel: $error");
+        Get.snackbar(
+          'Error',
+          'No se pudo finalizar el nivel. Intenta nuevamente.',
+          snackPosition: SnackPosition.BOTTOM,
+          backgroundColor: Colors.redAccent,
+          colorText: Colors.white,
+        );
       });
     }
   }

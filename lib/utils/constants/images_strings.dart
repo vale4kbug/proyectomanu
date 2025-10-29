@@ -26,20 +26,21 @@ class TImages {
   static const String staticSuccesIllutration =
       "assets/images/correo/exito.png";
 
-  //Iconos Categoria
+  //AvataresPerfil
+
+  static const String avatar1 = "assets/logos/applogo.png";
+  static const String avatar2 = "assets/correo/exito.png";
+  static const String avatar3 = "assets/logos/applogo.png";
+  static const String avatar4 = "assets/logos/applogo.png";
+  static const String avatar5 = "assets/logos/applogo.png";
+  static const String avatar6 = "assets/logos/applogo.png";
+
+  //Iconos Categoriar
   static const String dactidologiaIcon = "assets/logos/applogo.png"; //cambiar
 
   //Imagenes Diccionario Thumbnail
   static const String thumbnaildactidologiaA =
       "assets/logos/applogo.png"; //cambiar
-
-  //Imagenes Logros
-  static const String logro1 = "assets/logos/applogo.png"; //cambiar
-  static const String logro2 = "assets/logos/applogo.png"; //cambiar
-  static const String logro3 = "assets/logos/applogo.png"; //cambiar
-  static const String logro4 = "assets/logos/applogo.png"; //cambiar
-  static const String logro5 = "assets/logos/applogo.png"; //cambiar
-  static const String logro6 = "assets/logos/applogo.png"; //cambiar
 
   //Imagenes Final Nivel
   static const List<String> imagen1Estrella = [

@@ -79,8 +79,8 @@ class _PerfilScreenState extends State<PerfilScreen> {
                     Column(
                       children: [
                         const SizedBox(height: 30),
-                        const TCircularImage(
-                          image: TImages.imagenperfil,
+                        TCircularImage(
+                          image: usuario.fotoUrl ?? TImages.imagenperfil,
                           width: 135,
                           height: 135,
                         ),

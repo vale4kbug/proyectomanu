@@ -3,6 +3,7 @@ class UsuarioModel {
   final String nombre;
   final String nombreUsuario;
   final String email;
+  final String? fotoUrl; // <-- AÑADE ESTA LÍNEA
   final int estrellas;
   final int nivelesCompletados;
   final List<LogroModel> logros;
@@ -12,6 +13,7 @@ class UsuarioModel {
     required this.nombre,
     required this.nombreUsuario,
     required this.email,
+    this.fotoUrl,
     this.estrellas = 0,
     this.nivelesCompletados = 0,
     this.logros = const [],
@@ -26,14 +28,34 @@ class UsuarioModel {
       nombreUsuario: json['nombreUsuario'] ?? '',
       email: json['email'] ?? '',
       estrellas: json['estrellas'] ?? 0,
+      fotoUrl: json['fotoUrl'], // <-- AÑADE ESTA LÍNEA
       nivelesCompletados: json['nivelesCompletados'] ?? 0,
       logros: logrosList
           .map((logroJson) => LogroModel.fromJson(logroJson))
           .toList(),
     );
   }
-
-  get fotoUrl => null;
+  UsuarioModel copyWith({
+    int? id,
+    String? nombre,
+    String? nombreUsuario,
+    String? email,
+    String? fotoUrl,
+    int? estrellas,
+    int? nivelesCompletados,
+    List<LogroModel>? logros,
+  }) {
+    return UsuarioModel(
+      id: id ?? this.id,
+      nombre: nombre ?? this.nombre,
+      nombreUsuario: nombreUsuario ?? this.nombreUsuario,
+      email: email ?? this.email,
+      fotoUrl: fotoUrl ?? this.fotoUrl,
+      estrellas: estrellas ?? this.estrellas,
+      nivelesCompletados: nivelesCompletados ?? this.nivelesCompletados,
+      logros: logros ?? this.logros,
+    );
+  }
 }
 
 class LogroModel {

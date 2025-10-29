@@ -1,4 +1,3 @@
-import 'package:camera/camera.dart';
 import 'package:dio/dio.dart';
 import 'package:proyectomanu/utils/http/api_client.dart';
 
@@ -135,6 +134,7 @@ class AuthService {
     String? nuevoNombreUsuario,
     String? nuevoCorreo,
     String? nuevaContrasena,
+    String? nuevaImagenPerfil,
   }) async {
     try {
       final response = await _dio.put(
@@ -143,8 +143,8 @@ class AuthService {
           "contrasenaActual": contrasenaActual,
           "nuevoNombre": nuevoNombre,
           "nuevoNombreUsuario": nuevoNombreUsuario,
-          "nuevoCorreo": nuevoCorreo,
           "nuevaContrasena": nuevaContrasena,
+          "nuevaImagenPerfil": nuevaImagenPerfil, // <-- Añadido
         },
       );
       return response.data;
@@ -154,21 +154,17 @@ class AuthService {
     }
   }
 
-  // En AuthService.dart
-  static Future<Map<String, dynamic>> subirImagenPerfil(XFile imagen) async {
+  static Future<Map<String, dynamic>> borrarCuenta(
+      String contrasenaActual) async {
     try {
-      String fileName = imagen.path.split('/').last;
-      FormData formData = FormData.fromMap({
-        "file": await MultipartFile.fromFile(imagen.path, filename: fileName),
-      });
-
-      // DEBES CREAR ESTE ENDPOINT EN TU API
-      final response =
-          await _dio.post("/usuarios/subir-imagen", data: formData);
+      final response = await _dio.post(
+        "/usuarios/borrar-cuenta",
+        data: {"contrasenaActual": contrasenaActual},
+      );
       return response.data;
     } on DioException catch (e) {
       throw Exception(
-          e.response?.data['message'] ?? 'Error al subir la imagen.');
+          e.response?.data['message'] ?? 'Error al borrar la cuenta.');
     }
   }
 }

@@ -77,11 +77,8 @@ class _NivelScreenState extends State<NivelScreen> {
 
 // Llamamos a la API con el PUNTUAJE (ej. 4)
       NivelService.finalizarNivel(widget.nivelId, _puntaje).then((_) async {
-        // ✅ 1. Actualizar los datos del usuario desde la base de datos
         final userController = Get.find<UserController>();
         await userController.recargarUsuario();
-
-        // ✅ 2. Luego navegar a la pantalla de éxito
         Get.off(() => ExitoNivelLayout(
               mensaje: TTexts.obtenerMensajePorEstrellas(estrellasCalculadas),
               imagenPath: TImages.imagenPorEstrellas(estrellasCalculadas),

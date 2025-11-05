@@ -49,11 +49,11 @@ flutter:
     - assets/images/categorias/
     - assets/images/usuario/
     - assets/images/glosario/
-    - assets/images/ejercicio/
+    - assets/images/general/
     - assets/images/correo/
     - assets/icons/brands/
     - assets/images/logros/
-
+    - assets/images/avatares/
   fonts:
     - family: Bunny
       fonts:

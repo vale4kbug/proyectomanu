@@ -77,7 +77,7 @@ class DiccionarioTarjetaIndividual extends StatelessWidget {
             ),
             const SizedBox(height: TSizes.spaceBtwSections),
 
-            // --- IMAGEN DE ABAJO (Debe mantenerse fija ahora) ---
+            // --- IMAGEN DE ABAJo
             Image.asset(
               gifAbajo,
               height: 200, // Altura fija para la imagen de abajo
@@ -93,12 +93,11 @@ class DiccionarioTarjetaIndividual extends StatelessWidget {
   double _calcularAlturaEstimadaTexto(BuildContext context, String texto) {
     final textStyle =
         Theme.of(context).textTheme.titleMedium?.copyWith(color: Colors.white);
-    if (textStyle == null)
-      return 50.0; // Valor por defecto si el estilo no se carga
+    if (textStyle == null) {
+      return 50.0;
+    }
 
     final screenWidth = MediaQuery.of(context).size.width;
-    // El ancho disponible para el texto dentro de la burbuja
-    // Ancho de pantalla - (defaultSpace * 2) - (padding burbuja * 2) - (margen cola)
     final textMaxWidth = screenWidth -
         (TSizes.defaultSpace * 2) -
         (14 * 2) -
@@ -111,9 +110,6 @@ class DiccionarioTarjetaIndividual extends StatelessWidget {
       textDirection: TextDirection.ltr,
     )..layout(maxWidth: textMaxWidth);
 
-    // Añadimos el padding vertical de la burbuja (10 + 10) y un extra para seguridad
-    return textPainter.height +
-        (10 * 2) +
-        15; // 10 de padding vertical en ColitaPosicion
+    return textPainter.height + (10 * 2) + 15;
   }
 }

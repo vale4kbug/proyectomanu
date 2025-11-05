@@ -3,6 +3,7 @@ class GlosarioItem {
   final String nombre;
   final String? descripcion;
   final String? img;
+  final String? thumbnail;
   final int idCategoria;
 
   GlosarioItem({
@@ -10,16 +11,18 @@ class GlosarioItem {
     required this.nombre,
     this.descripcion,
     this.img,
+    this.thumbnail,
     required this.idCategoria,
   });
 
   // Convierte un JSON a un objeto GlosarioItem
   factory GlosarioItem.fromJson(Map<String, dynamic> json) {
     return GlosarioItem(
-      idGlosario: json['idGlosario'], // Asegúrate que coincida con el JSON
+      idGlosario: json['idGlosario'],
       nombre: json['nombre'],
       descripcion: json['descripcion'],
       img: json['img'],
+      thumbnail: json['thumbnail'],
       idCategoria: json['idCategoria'],
     );
   }

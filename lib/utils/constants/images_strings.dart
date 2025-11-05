@@ -35,13 +35,6 @@ class TImages {
   static const String avatar5 = "assets/logos/applogo.png";
   static const String avatar6 = "assets/logos/applogo.png";
 
-  //Iconos Categoriar
-  static const String dactidologiaIcon = "assets/logos/applogo.png"; //cambiar
-
-  //Imagenes Diccionario Thumbnail
-  static const String thumbnaildactidologiaA =
-      "assets/logos/applogo.png"; //cambiar
-
   //Imagenes Final Nivel
   static const List<String> imagen1Estrella = [
     "assets/logos/applogo.png",

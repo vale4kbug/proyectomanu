@@ -18,10 +18,9 @@ class TDiccionarioCardVertical extends StatelessWidget {
     return GestureDetector(
       onTap: () => Get.to(() => DiccionarioTarjetaIndividual(
             titulo: item.nombre,
-            gifArriba:
-                item.img ?? TImages.imagenperfil, // Usa una imagen por defecto
+            gifArriba: item.img ?? TImages.imagenperfil,
             texto: item.descripcion ?? "No hay descripción.",
-            gifAbajo: TImages.onBoardingImage1, // Puedes cambiar esto
+            gifAbajo: TImages.onBoardingImage1, //estatic
           )),
 
       ///base
@@ -43,13 +42,20 @@ class TDiccionarioCardVertical extends StatelessWidget {
             Expanded(
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(8),
-                child: Image.network(
-                  item.img ?? TImages.imagenperfil,
-                  fit: BoxFit.cover,
-                  errorBuilder: (context, error, stackTrace) {
-                    return Image.asset(TImages.imagenperfil, fit: BoxFit.cover);
-                  },
-                ),
+                child: item.thumbnail != null &&
+                        item.thumbnail!.startsWith('assets/')
+                    ? Image.asset(
+                        item.thumbnail!,
+                        fit: BoxFit.cover,
+                      )
+                    : Image.network(
+                        item.thumbnail ?? TImages.imagenperfil,
+                        fit: BoxFit.cover,
+                        errorBuilder: (context, error, stackTrace) {
+                          return Image.asset(TImages.imagenperfil,
+                              fit: BoxFit.cover);
+                        },
+                      ),
               ),
             ),
             const SizedBox(height: 8),

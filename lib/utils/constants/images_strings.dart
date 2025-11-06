@@ -18,22 +18,24 @@ class TImages {
       "assets/images/on_boarding/OnBoarding2_0000.gif";
   static const String onBoardingImage3 =
       "assets/images/on_boarding/OnBoarding3_0000.gif";
-  //animations
+  //correo
   static const String deliveredEmailIllustration =
       "assets/images/verificaemail.png";
   static const String verifyIllustration =
       "assets/images/correo/verificaemail.png";
   static const String staticSuccesIllutration =
       "assets/images/correo/exito.png";
+  //glosario
+  static const String anaLeyendo = "assets/images/glosario/anaDiccionario.gif";
 
   //AvataresPerfil
 
-  static const String avatar1 = "assets/logos/applogo.png";
-  static const String avatar2 = "assets/correo/exito.png";
-  static const String avatar3 = "assets/logos/applogo.png";
-  static const String avatar4 = "assets/logos/applogo.png";
-  static const String avatar5 = "assets/logos/applogo.png";
-  static const String avatar6 = "assets/logos/applogo.png";
+  static const String avatar1 = "assets/images/avatares/avatar1.png";
+  static const String avatar2 = "assets/images/avatares/avatar2.png";
+  static const String avatar3 = "assets/images/avatares/avatar3.png";
+  static const String avatar4 = "assets/images/avatares/avatar4.png";
+  static const String avatar5 = "assets/images/avatares/avatar5.png";
+  static const String avatar6 = "assets/images/avatares/avatar6.png";
 
   //Imagenes Final Nivel
   static const List<String> imagen1Estrella = [

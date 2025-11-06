@@ -21,7 +21,6 @@ class ConfiguracionDatosScreen extends StatefulWidget {
 class _ConfiguracionDatosScreenState extends State<ConfiguracionDatosScreen> {
   final controller = Get.find<UserController>();
 
-  // Lista de avatares predefinidos
   final List<String> avatares = [
     TImages.avatar1,
     TImages.avatar2,

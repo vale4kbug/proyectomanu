@@ -20,7 +20,7 @@ class TDiccionarioCardVertical extends StatelessWidget {
             titulo: item.nombre,
             gifArriba: item.img ?? TImages.imagenperfil,
             texto: item.descripcion ?? "No hay descripción.",
-            gifAbajo: TImages.onBoardingImage1, //estatic
+            gifAbajo: TImages.anaLeyendo, //estatic
           )),
 
       ///base

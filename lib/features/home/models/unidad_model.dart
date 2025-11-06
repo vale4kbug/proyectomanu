@@ -1,18 +1,11 @@
 class UnidadData {
   final String titulo;
   final double etiquetaY;
-  final List<NivelPosicion> posicionesNiveles;
+  final String categoriaId;
 
   const UnidadData({
+    required this.categoriaId,
     required this.titulo,
     required this.etiquetaY,
-    required this.posicionesNiveles,
   });
-}
-
-class NivelPosicion {
-  final double xFactor;
-  final double y;
-
-  const NivelPosicion({required this.xFactor, required this.y});
 }

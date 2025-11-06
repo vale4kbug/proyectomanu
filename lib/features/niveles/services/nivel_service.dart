@@ -6,9 +6,12 @@ import 'package:proyectomanu/utils/http/api_client.dart';
 class NivelService {
   static final Dio _dio = ApiClient.instance;
 
-  static Future<List<Map<String, Object?>>> getCamino() async {
+  static Future<List<Map<String, Object?>>> getCamino(String categoria) async {
     try {
-      final response = await _dio.get("/niveles/camino");
+      // Llama a la nueva ruta de la API (ej: /api/niveles/camino/Unidad 1)
+      // Nota: Si "Unidad 1" da problemas por el espacio, tal vez necesites
+      // usar Uri.encodeComponent(categoria)
+      final response = await _dio.get("/niveles/camino/$categoria");
 
       List<dynamic> nivelesJson = response.data;
       return nivelesJson
@@ -45,15 +48,13 @@ class NivelService {
     }
   }
 
-// En NivelService.dart, método finalizarNivel
-
   static Future<void> finalizarNivel(int nivelId, int puntaje) async {
     try {
       await _dio.post(
         "/niveles/finalizar",
         data: {
-          "nivelId": nivelId, // <-- 'n' minúscula
-          "puntaje": puntaje, // <-- 'p' minúscula
+          "nivelId": nivelId,
+          "puntaje": puntaje,
         },
       );
     } catch (e) {

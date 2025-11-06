@@ -9,7 +9,7 @@ class CaminoBotones extends StatelessWidget {
   const CaminoBotones({
     super.key,
     required this.levels,
-    required this.unidad, // Recibe el objeto de la unidad
+    required this.unidad,
   });
 
   final List<Map<String, Object?>> levels;

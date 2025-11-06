@@ -27,8 +27,7 @@ class NivelService {
       return ejerciciosJson.map((json) {
         TipoEjercicio tipo = TipoEjercicio.values.firstWhere(
           (e) => e.name == json['tipo'],
-          orElse: () =>
-              TipoEjercicio.lectura, // Valor por defecto en caso de error
+          orElse: () => TipoEjercicio.lectura,
         );
 
         return Ejercicio(
@@ -43,7 +42,7 @@ class NivelService {
     }
   }
 
-  /// (EXTRA) Método para guardar el progreso cuando un nivel se completa
+  ///  para guardar el progreso cuando un nivel se completa
   static Future<void> finalizarNivel(int nivelId, int puntaje) async {
     try {
       final data = {"nivelId": nivelId, "puntaje": puntaje};
@@ -53,7 +52,7 @@ class NivelService {
           "DEBUG: Response finalizarNivel status=${response.statusCode} data=${response.data}");
     } catch (e, st) {
       print("ERROR: No se pudo guardar el progreso del nivel: $e\n$st");
-      rethrow; // para que no se oculte el error
+      rethrow;
     }
   }
 }

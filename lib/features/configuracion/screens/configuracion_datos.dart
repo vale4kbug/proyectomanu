@@ -81,8 +81,9 @@ class _ConfiguracionDatosScreenState extends State<ConfiguracionDatosScreen> {
       ],
     ));
 
-    if (nuevoValor == null || nuevoValor.isEmpty || nuevoValor == valorActual)
+    if (nuevoValor == null || nuevoValor.isEmpty || nuevoValor == valorActual) {
       return;
+    }
 
     final contrasena = await _pedirContrasena("Verificación de Seguridad");
     if (contrasena == null || contrasena.isEmpty) return;
@@ -181,7 +182,7 @@ class _ConfiguracionDatosScreenState extends State<ConfiguracionDatosScreen> {
         child: Padding(
           padding: const EdgeInsets.all(TSizes.defaultSpace),
           child: Obx(() {
-            // Obx para que los subtítulos se actualicen
+            // Obx para que los sub se actualicen
             final usuario = controller.usuario.value;
             if (usuario == null) {
               return const Center(child: CircularProgressIndicator());

@@ -32,10 +32,10 @@ class TImages {
 
   static const String avatar1 = "assets/images/avatares/avatar1.png";
   static const String avatar2 = "assets/images/avatares/avatar2.png";
-  static const String avatar3 = "assets/images/avatares/avatar3.png";
+  static const String avatar3 = "assets/images/avatares/avatar6.png";
   static const String avatar4 = "assets/images/avatares/avatar4.png";
   static const String avatar5 = "assets/images/avatares/avatar5.png";
-  static const String avatar6 = "assets/images/avatares/avatar6.png";
+  static const String avatar6 = "assets/images/avatares/avatar3.png";
 
   //Imagenes Final Nivel
   static const List<String> imagen1Estrella = [

@@ -3,7 +3,7 @@ class UsuarioModel {
   final String nombre;
   final String nombreUsuario;
   final String email;
-  final String? fotoUrl; // <-- AÑADE ESTA LÍNEA
+  final String? fotoUrl;
   final int estrellas;
   final int nivelesCompletados;
   final List<LogroModel> logros;
@@ -28,7 +28,7 @@ class UsuarioModel {
       nombreUsuario: json['nombreUsuario'] ?? '',
       email: json['email'] ?? '',
       estrellas: json['estrellas'] ?? 0,
-      fotoUrl: json['fotoUrl'], // <-- AÑADE ESTA LÍNEA
+      fotoUrl: json['fotoUrl'],
       nivelesCompletados: json['nivelesCompletados'] ?? 0,
       logros: logrosList
           .map((logroJson) => LogroModel.fromJson(logroJson))

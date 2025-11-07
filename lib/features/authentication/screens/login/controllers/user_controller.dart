@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:proyectomanu/features/authentication/screens/login/login.dart';
 import 'package:proyectomanu/features/authentication/screens/login/models/usuario_model.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:proyectomanu/features/authentication/screens/login/services/auth_service.dart';
 import 'package:proyectomanu/navigation_menu.dart';

@@ -139,11 +139,20 @@ class TTexts {
   static const configRetroEnviar = "Enviar";
 
   //Config Soporte
-  static const configAyudaTitle = "Retroalimentación";
+  static const configAyudaTitle = "Ayuda";
   static const configFAQ = "Preguntas Frecuentes";
-  static const configFAQ1 = "¿Quiénes somos?";
-  static const configFAQ2 = "¿Quiénes somos?";
-  static const configFAQ3 = "¿Cómo contacto al soporte?";
+  static const configFAQ1 = "¿Comó cambio mi contraseña?";
+  static const configFAQ2 = "¿En que información se basa la aplicación?";
+  static const configFAQ3 = "¿Por qué no cargan las lecciones?";
+  static const configRespuestaFAQ1 =
+      "En Configuración > Mis Datos > Cambiar Contraseña.\nDeberas escribir tu contraseña actual y luego tu nueva contraseña.";
+  static const configRespuestaFAQ2 =
+      "Se baso en el diccionario de lengua de señas mexicana 'Manos con Voz' (2011) de los autores María Esther Serafín de Fleischmann · Raúl González Pérez"
+      "\nY en el libro 'Mis Manos Que Hablan Lenguaje De Señas Para Sordos' (2008) de los autores Luis Armando Lopez Garcia · Rosa María Rodríguez Cervantes · María Guadalupe Zamora Martínez · Susana San Esteban Sosa";
+
+  static const configRespuestaFAQ3 =
+      "Si tienes problemas con la aplicación, asegúrate de tener conexión a internet. "
+      "También puedes cerrar sesión y volver a iniciar sesión.";
 
   //Ejercicios
   static const ejerciciosBanner1 = "Rigidez Motora";

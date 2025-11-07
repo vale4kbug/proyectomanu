@@ -9,6 +9,7 @@ import 'package:proyectomanu/utils/constants/colors.dart';
 import 'package:proyectomanu/utils/constants/sizes.dart';
 import 'package:proyectomanu/utils/constants/text_strings.dart';
 import 'package:proyectomanu/utils/constants/images_strings.dart';
+import 'package:proyectomanu/utils/validators/validator.dart';
 
 class ConfiguracionDatosScreen extends StatefulWidget {
   const ConfiguracionDatosScreen({super.key});
@@ -63,33 +64,63 @@ class _ConfiguracionDatosScreenState extends State<ConfiguracionDatosScreen> {
     final TextEditingController inputController =
         TextEditingController(text: valorActual);
 
-    final String? nuevoValor = await Get.dialog<String>(AlertDialog(
-      title: Text("Cambiar $tipo",
-          style: TextStyle(
-              fontSize: 28,
-              fontWeight: FontWeight.bold,
-              color: TColors.primaryColor)),
-      content: TextField(
-        controller: inputController,
-        decoration: InputDecoration(labelText: "Nuevo $tipo"),
+    final String? nuevoValor = await Get.dialog<String>(
+      AlertDialog(
+        title: Text("Cambiar $tipo",
+            style: TextStyle(
+                fontSize: 28,
+                fontWeight: FontWeight.bold,
+                color: TColors.primaryColor)),
+        content: TextField(
+          controller: inputController,
+          decoration: InputDecoration(labelText: "Nuevo $tipo"),
+          obscureText: tipo == 'contraseña', // oculta si es contraseña
+        ),
+        actions: [
+          TextButton(
+              onPressed: () => Get.back(), child: const Text("Cancelar")),
+          ElevatedButton(
+              onPressed: () => Get.back(result: inputController.text),
+              child: const Text("Guardar")),
+        ],
       ),
-      actions: [
-        TextButton(onPressed: () => Get.back(), child: const Text("Cancelar")),
-        ElevatedButton(
-            onPressed: () => Get.back(result: inputController.text),
-            child: const Text("Guardar")),
-      ],
-    ));
+    );
 
+    // --- Verificar si canceló o no cambió nada ---
     if (nuevoValor == null || nuevoValor.isEmpty || nuevoValor == valorActual) {
       return;
     }
 
+    // --- Aplicar validaciones según el tipo ---
+    String? error;
+
+    switch (tipo) {
+      case 'nombre':
+        error = TValidator.validateEmptyText('Nombre', nuevoValor);
+        break;
+      case 'nombre de usuario':
+        error = TValidator.validateUsername(nuevoValor);
+        break;
+      case 'contraseña':
+        error = TValidator.validatePassword(nuevoValor);
+        break;
+    }
+
+    if (error != null) {
+      Get.snackbar("Error de validación", error,
+          snackPosition: SnackPosition.BOTTOM,
+          backgroundColor: Colors.red.shade100,
+          colorText: Colors.red.shade900);
+      return;
+    }
+
+    // --- Si pasa validación, pedir contraseña ---
     final contrasena = await _pedirContrasena("Verificación de Seguridad");
     if (contrasena == null || contrasena.isEmpty) return;
 
     Get.dialog(const Center(child: CircularProgressIndicator()),
         barrierDismissible: false);
+
     try {
       await AuthService.actualizarPerfil(
         contrasenaActual: contrasena,
@@ -99,10 +130,16 @@ class _ConfiguracionDatosScreenState extends State<ConfiguracionDatosScreen> {
       );
       await controller.recargarUsuario();
       Get.back(); // Cierra el spinner
-      Get.snackbar("Éxito", "Tu $tipo se ha actualizado.");
+      Get.snackbar("Éxito", "Tu $tipo se ha actualizado correctamente.",
+          snackPosition: SnackPosition.BOTTOM,
+          backgroundColor: Colors.green.shade100,
+          colorText: Colors.green.shade900);
     } catch (e) {
       Get.back(); // Cierra el spinner
-      Get.snackbar("Error", e.toString().replaceFirst("Exception: ", ""));
+      Get.snackbar("Error", e.toString().replaceFirst("Exception: ", ""),
+          snackPosition: SnackPosition.BOTTOM,
+          backgroundColor: Colors.red.shade100,
+          colorText: Colors.red.shade900);
     }
   }
 
@@ -215,14 +252,27 @@ class _ConfiguracionDatosScreenState extends State<ConfiguracionDatosScreen> {
                 const Divider(),
                 const SizedBox(height: TSizes.spaceBtwItems),
                 TConfigDatosMenu(
-                  title: TTexts.configDatosID,
-                  subTitle: usuario.id.toString(),
-                  onPressed: () {}, //vista
-                ),
+                    title: TTexts.configDatosID,
+                    subTitle: usuario.id.toString(),
+                    onPressed: () {
+                      Get.snackbar(
+                        "Campo protegido",
+                        "El ID del usuario no se puede modificar.",
+                        snackPosition: SnackPosition.BOTTOM,
+                        colorText: TColors.secondaryColor,
+                      );
+                    }),
                 TConfigDatosMenu(
                   title: 'Correo',
                   subTitle: usuario.email,
-                  onPressed: () {},
+                  onPressed: () {
+                    Get.snackbar(
+                      "Campo protegido",
+                      "El correo electrónico no se puede modificar.",
+                      snackPosition: SnackPosition.BOTTOM,
+                      colorText: TColors.secondaryColor,
+                    );
+                  },
                 ), //solo vista
                 TConfigDatosMenu(
                   title: 'Contraseña',

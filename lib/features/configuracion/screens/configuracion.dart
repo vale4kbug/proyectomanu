@@ -6,7 +6,6 @@ import 'package:proyectomanu/common/widgets/list_tiles/config_menu_tile.dart';
 import 'package:proyectomanu/features/authentication/screens/login/controllers/user_controller.dart';
 import 'package:proyectomanu/features/configuracion/screens/configuracion_datos.dart';
 import 'package:proyectomanu/features/configuracion/screens/configuracion_notificaciones.dart';
-import 'package:proyectomanu/features/configuracion/screens/configuracion_retroalimentacion.dart';
 import 'package:proyectomanu/features/configuracion/screens/configuracion_soporte.dart';
 import 'package:proyectomanu/features/diccionario/widgets/heading_section.dart';
 import 'package:proyectomanu/utils/constants/colors.dart';
@@ -81,13 +80,13 @@ class ConfiguracionScreen extends StatelessWidget {
                 subTitle: TTexts.configAyudaSub,
                 onTap: () => Get.to(() => const ConfiguracionAyudaScreen()),
               ),
-              TConfigMenuTile(
-                icon: Iconsax.refresh,
-                title: TTexts.configRetro,
-                subTitle: TTexts.configRetroSub,
-                onTap: () =>
-                    Get.to(() => const ConfiguracionRetroalimentacionScreen()),
-              ),
+              // TConfigMenuTile(
+              // icon: Iconsax.refresh,
+              //title: TTexts.configRetro,
+              //subTitle: TTexts.configRetroSub,
+              //onTap: () =>
+              //  Get.to(() => const ConfiguracionRetroalimentacionScreen()),
+              //),
               const SizedBox(height: TSizes.spaceBtwItems),
               const Divider(),
               const SizedBox(height: TSizes.spaceBtwItems),

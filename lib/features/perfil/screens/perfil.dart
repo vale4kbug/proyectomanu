@@ -14,6 +14,14 @@ import 'package:proyectomanu/utils/constants/sizes.dart';
 import 'package:proyectomanu/utils/constants/text_strings.dart';
 import 'package:proyectomanu/utils/helpers/helper_functions.dart';
 
+import 'dart:io';
+import 'dart:typed_data';
+import 'package:path_provider/path_provider.dart';
+import 'package:share_plus/share_plus.dart';
+import 'package:screenshot/screenshot.dart';
+import 'package:proyectomanu/features/authentication/screens/login/models/usuario_model.dart';
+import 'package:proyectomanu/features/perfil/widgets/perfil_banner.dart';
+
 class PerfilScreen extends StatefulWidget {
   const PerfilScreen({super.key});
 
@@ -25,11 +33,12 @@ class _PerfilScreenState extends State<PerfilScreen> {
   List<dynamic> logros = [];
   bool cargando = true;
 
+  final _screenshotController = ScreenshotController();
+
   @override
   void initState() {
     super.initState();
-    final controller =
-        Get.find<UserController>(); //para recarga de nuevos stats
+    final controller = Get.find<UserController>();
     controller.recargarUsuario(); //
     cargarLogros();
   }
@@ -43,6 +52,63 @@ class _PerfilScreenState extends State<PerfilScreen> {
       });
     } catch (e) {
       setState(() => cargando = false);
+    }
+  }
+
+// --- FUNCIÓN DE COMPARTIR CORREGIDA ---
+  Future<void> _compartirBanner(UsuarioModel usuario) async {
+    // Muestra un spinner mientras se genera la imagen
+    Get.dialog(
+      const Center(child: CircularProgressIndicator()),
+      barrierDismissible: false,
+    );
+
+    try {
+      final int logrosDesbloqueados =
+          logros.where((l) => l['desbloqueado'] == true).length;
+      final int logrosTotales = logros.length;
+
+      final String fotoParaBanner;
+      if (usuario.fotoUrl != null && usuario.fotoUrl!.isNotEmpty) {
+        fotoParaBanner = usuario.fotoUrl!;
+      } else {
+        fotoParaBanner = TImages.imagenperfil;
+      }
+
+      final banner = PerfilBannerWidget(
+        nombre: usuario.nombre,
+        usuario: usuario.nombreUsuario,
+        fotoUrl: fotoParaBanner,
+        estrellas: usuario.estrellas,
+        niveles: usuario.nivelesCompletados,
+        logrosTotales: logrosTotales,
+        logrosDesbloqueados: logrosDesbloqueados,
+      );
+
+      final Uint8List? imageBytes =
+          await _screenshotController.captureFromWidget(
+        Theme(
+          data: Theme.of(context),
+          child: banner,
+        ),
+        delay: const Duration(milliseconds: 1000),
+      );
+
+      if (imageBytes == null) throw Exception("No se pudo generar la imagen.");
+
+      final tempDir = await getTemporaryDirectory();
+      final file = await File('${tempDir.path}/perfil_banner.png')
+          .writeAsBytes(imageBytes);
+
+      Get.back();
+
+      await Share.shareXFiles(
+        [XFile(file.path)],
+        text: "¡Mira mi progreso en Manolingo ᗧ(｡◝‿◜｡)ᗤ!",
+      );
+    } catch (e) {
+      Get.back();
+      Get.snackbar("Error", "No se pudo generar el banner: $e");
     }
   }
 
@@ -72,7 +138,6 @@ class _PerfilScreenState extends State<PerfilScreen> {
         return SingleChildScrollView(
           child: Column(
             children: [
-              // === Encabezado con imagen y nombre ===
               TPrimaryHeaderContainer(
                 child: Stack(
                   children: [
@@ -196,7 +261,10 @@ class _PerfilScreenState extends State<PerfilScreen> {
                 child: SizedBox(
                   width: double.infinity,
                   child: OutlinedButton.icon(
-                    onPressed: () {/* Lógica para compartir */},
+                    // --- 3. CONECTA EL BOTÓN ---
+                    onPressed: () async {
+                      await _compartirBanner(usuario);
+                    },
                     label: const Text(TTexts.perfilCompartir),
                     icon: const Icon(Iconsax.send_2),
                   ),

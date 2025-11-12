@@ -49,7 +49,6 @@ flutter:
     - assets/icons/
     - assets/images/
     - assets/images/on_boarding/
-    - assets/images/animations/
     - assets/images/categorias/
     - assets/images/sprites/
     - assets/images/glosario/
@@ -58,6 +57,9 @@ flutter:
     - assets/icons/brands/
     - assets/images/logros/
     - assets/images/avatares/
+    - assets/images/exito/
+    - assets/images/ejercicios/
+
   fonts:
     - family: Bunny
       fonts:

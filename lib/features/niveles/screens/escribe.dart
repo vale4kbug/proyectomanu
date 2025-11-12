@@ -61,11 +61,11 @@ class _NivelEscrituraScreenState extends State<NivelEscrituraScreen> {
               style: Theme.of(context).textTheme.headlineSmall,
               textAlign: TextAlign.center,
             ),
-            const SizedBox(height: TSizes.spaceBtwSections),
+            const SizedBox(height: TSizes.spaceBtwSections * 3),
 
             /// Imagen
-            Image.asset(widget.imagenPath, height: 200),
-            const SizedBox(height: TSizes.spaceBtwSections),
+            Image.asset(widget.imagenPath, height: 300),
+            const SizedBox(height: TSizes.spaceBtwSections * 3),
 
             /// Campo de texto
             TextField(

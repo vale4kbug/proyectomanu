@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:proyectomanu/utils/constants/colors.dart';
 import 'package:proyectomanu/utils/constants/sizes.dart';
 import 'package:proyectomanu/utils/constants/text_strings.dart';
 
@@ -58,7 +59,6 @@ class _NivelHistoriaScreenState extends State<NivelHistoriaScreen> {
 
   void _siguiente() {
     if (!_completo) {
-      // Si aún no terminó, mostrar todo el texto de golpe
       setState(() {
         _textoVisible = widget.dialogos[_indice]["texto"] ?? "";
         _completo = true;
@@ -83,30 +83,25 @@ class _NivelHistoriaScreenState extends State<NivelHistoriaScreen> {
       body: Stack(
         fit: StackFit.expand,
         children: [
-          /// Fondo
-          Image.asset(
-            actual["fondo"]!,
-            fit: BoxFit.cover,
-          ),
+          Image.asset(actual["fondo"]!, fit: BoxFit.cover),
 
-          /// Personaje
+          // 2) Personaje
           Align(
             alignment: Alignment.bottomCenter,
             child: Image.asset(
               actual["personaje"]!,
-              height: 500,
+              height: 900,
               fit: BoxFit.contain,
             ),
           ),
 
-          /// Cuadro de diálogo
           Align(
             alignment: Alignment.bottomCenter,
             child: Container(
               padding: const EdgeInsets.all(16),
               margin: const EdgeInsets.all(8),
               decoration: BoxDecoration(
-                color: const Color.fromARGB(127, 255, 186, 58),
+                color: const Color.fromARGB(221, 139, 171, 241),
                 borderRadius: BorderRadius.circular(TSizes.borderRadiusMd),
               ),
               child: Column(
@@ -118,12 +113,10 @@ class _NivelHistoriaScreenState extends State<NivelHistoriaScreen> {
                     style: const TextStyle(
                       color: Colors.white,
                       fontWeight: FontWeight.bold,
-                      fontSize: TSizes.fontSizeMD,
+                      fontSize: TSizes.fontSizeLG,
                     ),
                   ),
                   const SizedBox(height: TSizes.sm),
-
-                  /// Texto con efecto máquina de escribir
                   Text(
                     _textoVisible,
                     style: const TextStyle(
@@ -131,7 +124,6 @@ class _NivelHistoriaScreenState extends State<NivelHistoriaScreen> {
                       fontSize: TSizes.fontSizeSM,
                     ),
                   ),
-
                   const SizedBox(height: TSizes.spaceBtwItems),
                   Align(
                     alignment: Alignment.bottomRight,
@@ -147,6 +139,25 @@ class _NivelHistoriaScreenState extends State<NivelHistoriaScreen> {
                   ),
                 ],
               ),
+            ),
+          ),
+
+          Positioned(
+            top: MediaQuery.of(context).padding.top + 12,
+            right: 16.0,
+            child: TextButton.icon(
+              onPressed: () {
+                widget.onNext();
+              },
+              style: TextButton.styleFrom(
+                backgroundColor: TColors.primaryColor.withOpacity(0.5),
+                foregroundColor: Colors.white,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(TSizes.borderRadiusMd),
+                ),
+              ),
+              icon: const Icon(Iconsax.forward, size: 16),
+              label: const Text("Saltar"),
             ),
           ),
         ],

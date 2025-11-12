@@ -22,11 +22,11 @@ class LoginScreen extends StatelessWidget {
               //LOGO TITULO SUBTITULO
               TLoginHeader(),
               TLoginForm(),
-              //Divisor
+              // Divisor
               TFormDivider(dividerText: TTexts.orSignIn.capitalize!),
               const SizedBox(height: TSizes.spaceBtwSections),
               //footer
-              TSocialButtons(),
+              TSocialButtons(), //comentados de momento
             ],
           ),
         ),

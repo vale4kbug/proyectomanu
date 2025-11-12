@@ -19,10 +19,10 @@ class ImagenContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     return ClipRRect(
       borderRadius: BorderRadius.circular(16),
-      child: Container(
+      child: SizedBox(
         width: double.infinity,
         height: height,
-        color: Colors.black12,
+        // color: Colors.black12,
         child: Image.asset(
           imagen,
           fit: fit,

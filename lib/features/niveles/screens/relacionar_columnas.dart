@@ -75,7 +75,7 @@ class _NivelRelacionScreenState extends State<NivelRelacionScreen> {
                         return GestureDetector(
                           onTap: () => _seleccionarPalabra(palabra),
                           child: Container(
-                            height: 120, // altura uniforme
+                            height: 130, // altura uniforme
                             margin: const EdgeInsets.all(8),
                             padding: const EdgeInsets.all(20),
                             decoration: BoxDecoration(
@@ -91,7 +91,7 @@ class _NivelRelacionScreenState extends State<NivelRelacionScreen> {
                             child: Center(
                               child: Text(
                                 palabra,
-                                style: Theme.of(context).textTheme.bodyMedium,
+                                style: Theme.of(context).textTheme.titleSmall,
                               ),
                             ),
                           ),
@@ -116,7 +116,7 @@ class _NivelRelacionScreenState extends State<NivelRelacionScreen> {
                         return GestureDetector(
                           onTap: () => _emparejar(img),
                           child: Container(
-                            height: 120,
+                            height: 130,
                             margin: const EdgeInsets.all(8),
                             padding: const EdgeInsets.all(12),
                             decoration: BoxDecoration(
@@ -141,7 +141,7 @@ class _NivelRelacionScreenState extends State<NivelRelacionScreen> {
                                 Column(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    Image.asset(img, height: 60),
+                                    Image.asset(img, height: 80),
                                     if (palabraAsignada != null)
                                       Text(
                                         palabraAsignada,

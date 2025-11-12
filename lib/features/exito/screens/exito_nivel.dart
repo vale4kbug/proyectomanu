@@ -37,13 +37,11 @@ class _ExitoNivelLayoutState extends State<ExitoNivelLayout>
   @override
   void initState() {
     super.initState();
-    // 2. Se crea un único controlador para sincronizar ambas animaciones
     _controller = AnimationController(
       vsync: this,
       duration: const Duration(milliseconds: 2500),
     );
 
-    // 3. La animación se configura para llegar al valor correcto
     _progressAnimation = Tween<double>(
       begin: 0.0,
       end: widget.estrellasGanadas / widget.maxEstrellas,
@@ -67,22 +65,19 @@ class _ExitoNivelLayoutState extends State<ExitoNivelLayout>
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              const SizedBox(height: TSizes.spaceBtwSections * 2),
               Text(
                 TTexts.nivelCompleto,
                 style: Theme.of(context).textTheme.headlineLarge,
                 textAlign: TextAlign.center,
               ),
               const SizedBox(height: TSizes.spaceBtwSections),
-
-              // 4. Se pasa el controlador y las estrellas ganadas al widget de estrellas
               EstrellasAnimadas(
                 controller: _controller,
                 estrellasGanadas: widget.estrellasGanadas,
                 maxEstrellas: widget.maxEstrellas,
               ),
               const SizedBox(height: TSizes.spaceBtwSections),
-
-              // 5. La barra de progreso se actualiza usando el valor de la animación
               AnimatedBuilder(
                 animation: _progressAnimation,
                 builder: (context, child) {
@@ -92,13 +87,10 @@ class _ExitoNivelLayoutState extends State<ExitoNivelLayout>
                 },
               ),
               const SizedBox(height: TSizes.spaceBtwSections),
-
               TextoMotivacional(mensaje: widget.mensaje),
               const SizedBox(height: TSizes.spaceBtwItems),
               ImagenVictoria(imagenPath: widget.imagenPath),
-
               const Spacer(),
-
               BotonContinuar(
                 onPressed: widget.onPressed,
               ),

@@ -18,30 +18,37 @@ class NivelLecturaScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(),
-      body: Padding(
+      body: SingleChildScrollView(
         padding: const EdgeInsets.all(24.0),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            /// titulo
             Text(
               titulo,
               style: Theme.of(context).textTheme.headlineSmall?.copyWith(
                     fontWeight: FontWeight.bold,
+                    color: Colors.blue.shade800,
                   ),
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: TSizes.spaceBtwSections),
-
-            /// Texto
-            Text(
-              texto,
-              style: Theme.of(context).textTheme.bodyLarge,
-              textAlign: TextAlign.center,
+            Container(
+              padding: const EdgeInsets.all(20),
+              decoration: BoxDecoration(
+                color: Colors.blue.shade50,
+                borderRadius: BorderRadius.circular(16),
+              ),
+              child: Text(
+                texto.replaceAll("\\n", "\n"),
+                style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                      height: 1.6,
+                      fontSize: 16,
+                      color: Colors.black87,
+                    ),
+                textAlign: TextAlign.center,
+              ),
             ),
             const SizedBox(height: TSizes.spaceBtwSections),
-
-            ///  continuar
             SizedBox(
               width: double.infinity,
               child: ElevatedButton(

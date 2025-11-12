@@ -9,9 +9,9 @@ class TTexts {
   static const onBoardingSubTitle1 =
       "Aprende Lengua de Señas Mexicana (LSM) de forma divertida y práctica.";
   static const onBoardingSubTitle2 =
-      "Repite señas frente a la cámara, asocia imágenes, toma quizzes ¡y mejora cada día!";
+      "Repite señas frente a la cámara, asocia imágenes, toma cuestionarios ¡y mejora cada día!";
   static const onBoardingSubTitle3 =
-      "Desbloquea medallas, sube de nivel e invita a tus amigos a aprender contigo.";
+      "Desbloquea logros e invita a tus amigos a aprender contigo.";
 
   //login
   static const loginTitle = "¡Hola! @(* ᗢ *)@/";
@@ -196,21 +196,21 @@ class TTexts {
   static const finalizar = "Entiendo @( o･ω･)@";
 
   static const List<String> mensajes1Estrella = [
-    "¡Buen comienzo! ¡La práctica te hará un experto!",
-    "¡No te rindas! Cada paso es un avance.",
-    "¡Sigue adelante! Estás construyendo una base sólida."
+    "¡Buen comienzo! ¡La práctica hace al maestro! @(o・ｪ・o)@",
+    "¡No te rindas! Cada paso es un avance. @(｡・o・)@",
+    "¡Sigue adelante! Creemos en ti. @( o・ꎴ・)@"
   ];
 
   static const List<String> mensajes2Estrellas = [
-    "¡Excelente trabajo! Estás muy cerca de la perfección.",
-    "¡Muy bien hecho! Tu esfuerzo está dando frutos.",
-    "¡Casi lo tienes! Sigue así y dominarás el tema."
+    "¡Excelente trabajo! Se nota que estas entendiendo. @(*^ｪ^)@",
+    "¡Muy bien hecho! Tu esfuerzo está dando frutos. @( o･ω･)@",
+    "¡Casi lo tienes! Sigue así y dominarás. @(*^ｪ^)@"
   ];
 
   static const List<String> mensajes3Estrellas = [
-    "¡Perfecto! ¡Eres un verdadero maestro de las señas!",
-    "¡Increíble! Has dominado este nivel por completo.",
-    "¡Felicidades! Tu desempeño ha sido impecable."
+    "¡Perfecto! ¡Wuuuujuuuu! ᗧ(｡ ◝ w ◜｡) ᗤ",
+    "¡Increíble! Has dominado este nivel por completo. ᗧ(・ω・)ᗤ",
+    "¡Felicidades! Tu desempeño ha sido impecable. @( o･ω･)@"
   ];
   static String obtenerMensajePorEstrellas(int estrellas) {
     final random = Random();
@@ -234,13 +234,13 @@ class TTexts {
     "✅ ¡Correcto!",
     "✅ ¡Muy bien!",
     "✅ ¡Genial!",
-    "✅ ¡Sigue así!",
+    "✅ ¡Wuuuu!",
     "✅ ¡Excelente!"
   ];
 
   static const List<String> mensajesIncorrectos = [
     "❌ Incorrecto",
-    "❌ Inténtalo de nuevo",
+    "❌ Casi",
     "❌ Casi lo tienes",
     "❌ No te preocupes, ¡la práctica ayuda!"
   ];

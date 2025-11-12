@@ -16,7 +16,6 @@ class TLoginForm extends StatefulWidget {
 }
 
 class _TLoginFormState extends State<TLoginForm> {
-  // 1. Clave global para identificar y validar el formulario
   final _formKey = GlobalKey<FormState>();
   final userController = Get.find<UserController>();
   final _emailController = TextEditingController();
@@ -25,9 +24,8 @@ class _TLoginFormState extends State<TLoginForm> {
   bool _passwordVisible = false;
 
   Future<void> _login() async {
-    // 3. Validar el formulario antes de continuar
     if (!_formKey.currentState!.validate()) {
-      return; // Si no es válido, no hagas nada.
+      return; // no hagas nada.
     }
 
     setState(() => _loading = true);
@@ -36,10 +34,6 @@ class _TLoginFormState extends State<TLoginForm> {
       _passwordController.text.trim(),
     );
 
-    // Si el login falla, el controlador mostrará un snackbar
-    // y la ejecución volverá aquí. Necesitamos detener el spinner.
-    // Si tiene éxito, el controlador navega y este widget se "desmonta",
-    // por lo que el `if (mounted)` previene un error.
     if (mounted) {
       setState(() => _loading = false);
     }
@@ -60,7 +54,6 @@ class _TLoginFormState extends State<TLoginForm> {
           backgroundColor: Colors.redAccent,
           colorText: Colors.white);
     } finally {
-      // Asegurarse de que el widget todavía está "montado" antes de llamar a setState
       if (mounted) {
         setState(() => _loading = false);
       }

@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/get_navigation.dart';
@@ -29,6 +30,8 @@ class _TContenidoLayoutState extends State<TContenidoLayout> {
   late Future<Map<String, dynamic>> futureContenido;
   int currentIndex = 0;
 
+  double? _alturaEstimadaBurbuja;
+
   @override
   void initState() {
     super.initState();
@@ -49,6 +52,33 @@ class _TContenidoLayoutState extends State<TContenidoLayout> {
     return Colors.blue; // Color por defecto
   }
 
+  double _calcularAlturaEstimadaTexto(BuildContext context, String texto) {
+    final textStyle =
+        Theme.of(context).textTheme.titleMedium?.copyWith(color: Colors.white);
+    if (textStyle == null) {
+      return 150.0; // Altura de fallback
+    }
+
+    final screenWidth = MediaQuery.of(context).size.width;
+
+    final double anchoImagenSmall = 60.0;
+    final double paddingTotal =
+        (12.0 * 2) + // Padding del SingleChildScrollView
+            (TSizes.md * 2) + // Padding interno de la burbuja
+            anchoImagenSmall + // Ancho de la imagen 'small'
+            (TSizes.sm * 2); // Padding de la imagen 'small'
+    final textMaxWidth = screenWidth - paddingTotal;
+
+    final textPainter = TextPainter(
+      text: TextSpan(text: texto, style: textStyle),
+      maxLines: null,
+      textDirection: TextDirection.ltr,
+    )..layout(maxWidth: textMaxWidth);
+
+    final double alturaTextoCalculada = textPainter.height + (TSizes.md * 2);
+    return alturaTextoCalculada > 80.0 ? alturaTextoCalculada : 80.0;
+  }
+
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<Map<String, dynamic>>(
@@ -67,6 +97,15 @@ class _TContenidoLayoutState extends State<TContenidoLayout> {
 
         final contenido = snapshot.data!;
         final pasos = contenido['pasos'] as List<dynamic>;
+
+        if (_alturaEstimadaBurbuja == null && pasos.isNotEmpty) {
+          String textoMasLargo = pasos
+              .map((p) => p['texto'] as String)
+              .reduce((a, b) => a.length > b.length ? a : b);
+          _alturaEstimadaBurbuja =
+              _calcularAlturaEstimadaTexto(context, textoMasLargo);
+        }
+
         final pasoActual = pasos[currentIndex] as Map<String, dynamic>;
 
         return Scaffold(
@@ -75,16 +114,21 @@ class _TContenidoLayoutState extends State<TContenidoLayout> {
             padding: const EdgeInsets.all(12),
             child: Column(
               children: [
-                DialogoBurbujaPersonaje(
-                  texto: pasoActual['texto'],
-                  imagenSmall: pasoActual['imagenSmall'],
-                  colorburbuja: _getColorFromString(contenido['colorBurbuja']),
-                  tailPosition: BubbleTailPosition.left,
+                SizedBox(
+                  height: _alturaEstimadaBurbuja ?? 150.0,
+                  child: DialogoBurbujaPersonaje(
+                    texto: pasoActual['texto'],
+                    imagenSmall: pasoActual['imagenSmall'],
+                    colorburbuja:
+                        _getColorFromString(contenido['colorBurbuja']),
+                    tailPosition: BubbleTailPosition.left,
+                  ),
                 ),
                 const SizedBox(height: TSizes.spaceBtwSections / 2),
                 ImagenContainer(
                   imagen: pasoActual['imagenBig'],
                   height: 450,
+                  fit: BoxFit.contain,
                 ),
                 const SizedBox(height: TSizes.spaceBtwSections),
                 SizedBox(

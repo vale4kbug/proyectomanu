@@ -14,7 +14,7 @@ import 'package:proyectomanu/features/niveles/screens/relacionar_texto.dart';
 import 'package:proyectomanu/utils/http/nivel_service.dart';
 import 'package:proyectomanu/utils/constants/images_strings.dart';
 import 'package:proyectomanu/utils/constants/text_strings.dart';
-import 'package:proyectomanu/navigation_menu.dart'; // Importa tu NavigationMenu
+import 'package:proyectomanu/navigation_menu.dart';
 
 class NivelScreen extends StatefulWidget {
   const NivelScreen({super.key, required this.nivelId});
@@ -27,7 +27,7 @@ class NivelScreen extends StatefulWidget {
 class _NivelScreenState extends State<NivelScreen> {
   late Future<List<Ejercicio>> futureEjercicios;
   int _indiceActual = 0;
-  int _puntaje = 0; // Esta es la variable de ACIERTOS
+  int _puntaje = 0;
 
   @override
   void initState() {
@@ -35,9 +35,7 @@ class _NivelScreenState extends State<NivelScreen> {
     futureEjercicios = NivelService.getEjercicios(widget.nivelId);
   }
 
-  // --- ¡ESTA ES LA FUNCIÓN CORREGIDA! ---
   void _siguiente(List<Ejercicio> ejercicios, {bool? correcto}) {
-    // 1. Incrementar el puntaje (aciertos)
     if (correcto == true) {
       _puntaje++;
       print(
@@ -48,12 +46,8 @@ class _NivelScreenState extends State<NivelScreen> {
     }
 
     if (_indiceActual < ejercicios.length - 1) {
-      // 2. Avanzar al siguiente ejercicio
       setState(() => _indiceActual++);
     } else {
-      // 3. ¡LÓGICA DE FINALIZACIÓN CORREGIDA!
-
-      // Contamos cuántos ejercicios SÍ eran evaluables (ignora los de historia, etc.)
       final int ejerciciosEvaluables = ejercicios.where((ej) {
         return ej.tipo != TipoEjercicio.historia &&
             ej.tipo != TipoEjercicio.presentacion &&
@@ -62,7 +56,6 @@ class _NivelScreenState extends State<NivelScreen> {
       print(
           "DEBUG: Finalizando nivel. ejerciciosEvaluables = $ejerciciosEvaluables, puntaje local = $_puntaje");
 
-      // Calculamos las estrellas aquí en Flutter (igual que en tu C#)
       int estrellasCalculadas = 0;
       if (ejerciciosEvaluables > 0) {
         double porcentaje = _puntaje / ejerciciosEvaluables;
@@ -75,7 +68,6 @@ class _NivelScreenState extends State<NivelScreen> {
         }
       }
 
-// Llamamos a la API con el PUNTUAJE (ej. 4)
       NivelService.finalizarNivel(widget.nivelId, _puntaje).then((_) async {
         final userController = Get.find<UserController>();
         await userController.recargarUsuario();

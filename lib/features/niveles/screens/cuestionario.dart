@@ -53,10 +53,10 @@ class _NivelCuestionarioScreenState extends State<NivelCuestionarioScreen> {
               style: Theme.of(context).textTheme.headlineSmall,
               textAlign: TextAlign.center,
             ),
-            const SizedBox(height: TSizes.spaceBtwSections),
+            const SizedBox(height: TSizes.spaceBtwSections * 3),
 
             /// Imagen
-            Image.asset(widget.imagenPath, height: 200),
+            Image.asset(widget.imagenPath, height: 300),
             const SizedBox(height: TSizes.spaceBtwSections),
 
             /// Opciones
@@ -77,7 +77,10 @@ class _NivelCuestionarioScreenState extends State<NivelCuestionarioScreen> {
                     foregroundColor: Colors.white,
                   ),
                   onPressed: () => _seleccionarRespuesta(opcion),
-                  child: Text(opcion),
+                  child: Text(
+                    opcion,
+                    textAlign: TextAlign.center,
+                  ),
                 ),
               );
             }),

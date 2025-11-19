@@ -3,14 +3,13 @@ import 'package:get/get.dart';
 import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:proyectomanu/app.dart';
 import 'package:proyectomanu/features/authentication/screens/login/controllers/user_controller.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   await AwesomeNotifications().initialize(
-    //    'resource://drawable/ic_noti',
-
-    null, // por defecto del app
+    'resource://drawable/ic_noti',
     [
       NotificationChannel(
         channelKey: 'general_channel',
@@ -46,5 +45,10 @@ void main() async {
   // Inicia GetX
   Get.put(UserController());
 
-  runApp(const App());
+  // Verificar si ya vio el onboarding
+  final prefs = await SharedPreferences.getInstance();
+  final bool hasSeenOnboarding = prefs.getBool('hasSeenOnboarding') ?? false;
+  runApp(App(
+    showOnboarding: !hasSeenOnboarding,
+  ));
 }

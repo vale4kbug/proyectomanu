@@ -20,7 +20,7 @@ class TImages {
       "assets/images/on_boarding/OnBoarding3_0000.gif";
   //correo
   static const String deliveredEmailIllustration =
-      "assets/images/verificaemail.png";
+      "assets/images/correo/verificaemail.png";
   static const String verifyIllustration =
       "assets/images/correo/verificaemail.png";
   static const String staticSuccesIllutration =

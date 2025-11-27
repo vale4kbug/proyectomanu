@@ -42,7 +42,7 @@ class TTexts {
   static const done = "Listo";
 
   //Forma de autetificacion headers
-  static const signupTitle = "Vamos a crearte una cuenta @( o･ω･)@";
+  static const signupTitle = "Vamos a crearte una cuenta \n@( o･ω･)@";
   static const forgetPasswordTitle = "Olvidé mi contraseña\n @(´･ｪ･`)@";
   static const forgetPasswordSubTitle =
       "No te preocupes, aveces pasa. Ingresa tu correo para mandarte un link para reiniciar tu contraseña.";
@@ -196,21 +196,21 @@ class TTexts {
   static const finalizar = "Entiendo @( o･ω･)@";
 
   static const List<String> mensajes1Estrella = [
-    "¡Buen comienzo! ¡La práctica hace al maestro! @(o・ｪ・o)@",
-    "¡No te rindas! Cada paso es un avance. @(｡・o・)@",
-    "¡Sigue adelante! Creemos en ti. @( o・ꎴ・)@"
+    "¡Buen comienzo!\n¡La práctica hace al maestro!\n@(o・ｪ・o)@",
+    "¡No te rindas!\nCada paso es un avance.\n@(｡・o・)@",
+    "¡Sigue adelante!\nCreemos en ti.\n@( o・ꎴ・)@"
   ];
 
   static const List<String> mensajes2Estrellas = [
-    "¡Excelente trabajo! Se nota que estas entendiendo. @(*^ｪ^)@",
-    "¡Muy bien hecho! Tu esfuerzo está dando frutos. @( o･ω･)@",
-    "¡Casi lo tienes! Sigue así y dominarás. @(*^ｪ^)@"
+    "¡Excelente trabajo!\nSe nota que estas entendiendo.\n@(*^ｪ^)@",
+    "¡Muy bien hecho!\nTu esfuerzo está dando frutos.\n@( o･ω･)@",
+    "¡Casi lo tienes!\nSigue así y dominarás.\n@(*^ｪ^)@"
   ];
 
   static const List<String> mensajes3Estrellas = [
-    "¡Perfecto! ¡Wuuuujuuuu! ᗧ(｡ ◝ w ◜｡) ᗤ",
-    "¡Increíble! Has dominado este nivel por completo. ᗧ(・ω・)ᗤ",
-    "¡Felicidades! Tu desempeño ha sido impecable. @( o･ω･)@"
+    "¡Perfecto!\n¡Wuuuujuuuu!\nᗧ(｡ ◝ w ◜｡) ᗤ",
+    "¡Increíble!\nHas dominado este nivel por completo.\nᗧ(・ω・)ᗤ",
+    "¡Felicidades!\nTu desempeño ha sido impecable.\n@( o･ω･)@"
   ];
   static String obtenerMensajePorEstrellas(int estrellas) {
     final random = Random();

@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:proyectomanu/common/widgets/appbar/appbar_ejercicios.dart';
 import 'package:proyectomanu/utils/constants/colors.dart';
 import 'package:proyectomanu/utils/constants/sizes.dart';
 import 'package:proyectomanu/utils/constants/text_strings.dart';
@@ -78,89 +79,97 @@ class _NivelHistoriaScreenState extends State<NivelHistoriaScreen> {
   Widget build(BuildContext context) {
     final actual = widget.dialogos[_indice];
 
-    return Scaffold(
-      appBar: AppBar(),
-      body: Stack(
-        fit: StackFit.expand,
-        children: [
-          Image.asset(actual["fondo"]!, fit: BoxFit.cover),
+    return PopScope(
+      canPop: false,
+      onPopInvoked: (didPop) async {
+        if (didPop) return;
+        // Reutilizamos la lógica que escribimos en la AppBar
+        await EjercicioAppBar.mostrarAlertaSalida(context);
+      },
+      child: Scaffold(
+        appBar: AppBar(),
+        body: Stack(
+          fit: StackFit.expand,
+          children: [
+            Image.asset(actual["fondo"]!, fit: BoxFit.cover),
 
-          // 2) Personaje
-          Align(
-            alignment: Alignment.bottomCenter,
-            child: Image.asset(
-              actual["personaje"]!,
-              height: 900,
-              fit: BoxFit.contain,
-            ),
-          ),
-
-          Align(
-            alignment: Alignment.bottomCenter,
-            child: Container(
-              padding: const EdgeInsets.all(16),
-              margin: const EdgeInsets.all(8),
-              decoration: BoxDecoration(
-                color: const Color.fromARGB(221, 139, 171, 241),
-                borderRadius: BorderRadius.circular(TSizes.borderRadiusMd),
-              ),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    actual["nombre"] ?? "",
-                    style: const TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                      fontSize: TSizes.fontSizeLG,
-                    ),
-                  ),
-                  const SizedBox(height: TSizes.sm),
-                  Text(
-                    _textoVisible,
-                    style: const TextStyle(
-                      color: Colors.white,
-                      fontSize: TSizes.fontSizeSM,
-                    ),
-                  ),
-                  const SizedBox(height: TSizes.spaceBtwItems),
-                  Align(
-                    alignment: Alignment.bottomRight,
-                    child: SizedBox(
-                      width: 100,
-                      child: ElevatedButton(
-                        onPressed: _siguiente,
-                        child: _completo
-                            ? Text(TTexts.botonSiguiente)
-                            : const Icon(Iconsax.arrow_right_3),
-                      ),
-                    ),
-                  ),
-                ],
+            // 2) Personaje
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: Image.asset(
+                actual["personaje"]!,
+                height: 900,
+                fit: BoxFit.contain,
               ),
             ),
-          ),
 
-          Positioned(
-            top: MediaQuery.of(context).padding.top + 12,
-            right: 16.0,
-            child: TextButton.icon(
-              onPressed: () {
-                widget.onNext();
-              },
-              style: TextButton.styleFrom(
-                backgroundColor: TColors.primaryColor.withOpacity(0.5),
-                foregroundColor: Colors.white,
-                shape: RoundedRectangleBorder(
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: Container(
+                padding: const EdgeInsets.all(16),
+                margin: const EdgeInsets.all(8),
+                decoration: BoxDecoration(
+                  color: const Color.fromARGB(221, 139, 171, 241),
                   borderRadius: BorderRadius.circular(TSizes.borderRadiusMd),
                 ),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      actual["nombre"] ?? "",
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: TSizes.fontSizeLG,
+                      ),
+                    ),
+                    const SizedBox(height: TSizes.sm),
+                    Text(
+                      _textoVisible,
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: TSizes.fontSizeSM,
+                      ),
+                    ),
+                    const SizedBox(height: TSizes.spaceBtwItems),
+                    Align(
+                      alignment: Alignment.bottomRight,
+                      child: SizedBox(
+                        width: 100,
+                        child: ElevatedButton(
+                          onPressed: _siguiente,
+                          child: _completo
+                              ? Text(TTexts.botonSiguiente)
+                              : const Icon(Iconsax.arrow_right_3),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ),
-              icon: const Icon(Iconsax.forward, size: 16),
-              label: const Text("Saltar"),
             ),
-          ),
-        ],
+
+            Positioned(
+              top: MediaQuery.of(context).padding.top + 12,
+              right: 16.0,
+              child: TextButton.icon(
+                onPressed: () {
+                  widget.onNext();
+                },
+                style: TextButton.styleFrom(
+                  backgroundColor: TColors.primaryColor.withOpacity(0.5),
+                  foregroundColor: Colors.white,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(TSizes.borderRadiusMd),
+                  ),
+                ),
+                icon: const Icon(Iconsax.forward, size: 16),
+                label: const Text("Saltar"),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

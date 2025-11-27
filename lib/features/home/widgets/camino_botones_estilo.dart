@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:chiclet/chiclet.dart'; // <-- USAMOS EL PAQUETE CORRECTO
+import 'package:chiclet/chiclet.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:proyectomanu/features/home/models/unidad_model.dart';
 import 'package:proyectomanu/features/home/widgets/etiqueta_camino.dart';
@@ -27,14 +27,12 @@ class CaminoBotones extends StatelessWidget {
             children: [
               ...levels.map((level) {
                 return Positioned(
-                  // Centramos el Column que contiene el botón y las estrellas
-                  left: (level['x'] as double? ?? 0) -
-                      45, // Ancho del Column es aprox 90
+                  left: (level['x'] as double? ?? 0) - 45,
                   top: (level['y'] as double? ?? 0) - 40,
                   child: TBotonCamino(
                     stars: level['stars'] as int? ?? 0,
                     isLocked: level['isLocked'] as bool? ?? true,
-                    totalStars: 3, // Asumimos 3 estrellas por nivel
+                    totalStars: 3,
                     onPressed: level['onPressed'] as void Function()?,
                     isSpecial: level['special'] as bool? ?? false,
                     child: (level['special'] as bool? ?? false)
@@ -51,11 +49,9 @@ class CaminoBotones extends StatelessWidget {
                 );
               }),
               Positioned(
-                top: unidad.etiquetaY + 25, // Usa la posición Y del modelo
+                top: unidad.etiquetaY + 25,
                 right: 0,
-                child: Center(
-                    child: TUnidadEtiqueta(
-                        titulo: unidad.titulo)), // Esta llamada ahora es segura
+                child: Center(child: TUnidadEtiqueta(titulo: unidad.titulo)),
               ),
             ],
           ),
@@ -96,10 +92,8 @@ class TBotonCamino extends StatelessWidget {
         : (isSpecial ? TColors.superBoton : TColors.primarioBoton);
 
     return Column(
-      // Envolvemos todo en una Columna para separar botón y estrellas
       mainAxisSize: MainAxisSize.min,
       children: [
-        // El Botón Chiclet
         ChicletAnimatedButton(
           buttonType: ChicletButtonTypes.circle,
           height: 80,
@@ -114,30 +108,26 @@ class TBotonCamino extends StatelessWidget {
                   color: Colors.white.withOpacity(0.7), size: 40)
               : child,
         ),
-
-        const SizedBox(height: 4), // Espacio entre el botón y las estrellas
-
-        // Contenedor para las estrellas
+        const SizedBox(height: 4),
         SizedBox(
           width: 90,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
-            // Mostramos las estrellas solo si el nivel no está bloqueado
             children: isLocked
                 ? []
                 : List.generate(totalStars, (index) {
                     final bool isFilled = index < stars;
-                    return Icon(
-                      isFilled
-                          ? Icons.star_rounded
-                          : Icons.star_outline_rounded,
-                      color: isFilled
-                          ? Colors.yellow.shade700
-                          : Colors.grey.shade400,
-                      // --- LÓGICA DE TAMAÑO ---
-                      size: isFilled
-                          ? 26
-                          : 18, // Estrellas rellenas son más grandes
+                    return Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                      child: Icon(
+                        isFilled
+                            ? Icons.star_rounded
+                            : Icons.star_outline_rounded,
+                        color: isFilled
+                            ? const Color(0xFFFFC107)
+                            : Colors.grey.shade300,
+                        size: isFilled ? 26 : 18,
+                      ),
                     );
                   }),
           ),

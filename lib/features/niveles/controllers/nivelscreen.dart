@@ -183,6 +183,7 @@ class _NivelScreenState extends State<NivelScreen> {
                 key: ValueKey(_indiceActual),
                 titulo: ejercicio.data["titulo"],
                 texto: ejercicio.data["texto"],
+                imagenPath: ejercicio.data["imagenPath"],
                 onNext: () => _siguiente(ejercicios), // No cuenta como puntaje
               );
             case TipoEjercicio.historia:

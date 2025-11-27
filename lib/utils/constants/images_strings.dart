@@ -40,19 +40,19 @@ class TImages {
   //Imagenes Final Nivel
   static const List<String> imagen1Estrella = [
     "assets/images/exito/unaestrellas1.png",
-    //  "assets/logos/applogo.png",
+    "assets/images/exito/unaestrellas2.png",
     //"assets/logos/applogo.png"
   ];
 
   static const List<String> imagen2Estrellas = [
     "assets/images/exito/dosestrellas1.png",
-    //"assets/logos/applogo.png",
+    "assets/images/exito/dosestrellas2.png",
     //"assets/logos/applogo.png"
   ];
 
   static const List<String> imagen3Estrellas = [
     "assets/images/exito/tresestrellas1.png",
-    //  "assets/logos/applogo.png",
+    "assets/images/exito/tresestrellas2.png",
     //"assets/logos/applogo.png"
   ];
   static String imagenPorEstrellas(int estrellas) {
@@ -68,7 +68,7 @@ class TImages {
       case 3:
         return imagen3Estrellas[random.nextInt(imagen3Estrellas.length)];
       default:
-        return imagen3Estrellas[random.nextInt(imagen3Estrellas.length)];
+        return imagen3Estrellas[random.nextInt(imagen2Estrellas.length)];
     }
   }
 }

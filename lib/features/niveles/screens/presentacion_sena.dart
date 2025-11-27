@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:proyectomanu/common/widgets/appbar/appbar_ejercicios.dart';
 import 'package:proyectomanu/common/widgets/custom_shapes/containers/imagen_container.dart';
 import 'package:proyectomanu/features/ejercicios/widgets/dialogo_burbuja.dart';
 import 'package:proyectomanu/features/ejercicios/widgets/burbujacolita.dart';
@@ -113,40 +114,48 @@ class _NivelPresentacionScreenState extends State<NivelPresentacionScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.all(12.0),
-        child: Column(
-          children: [
-            SizedBox(
-              height: _alturaEstimadaBurbuja,
-              child: DialogoBurbujaPersonaje(
-                texto: widget.textos[currentIndex],
-                imagenSmall: widget.imagenesSmall[currentIndex],
-                colorburbuja: widget.colorBurbuja,
-                tailPosition: widget.tailPosition,
-              ),
-            ),
-            const SizedBox(height: TSizes.spaceBtwItems / 3),
-            ImagenContainer(
-              imagen: widget.imagenesBig[currentIndex],
-              height: 450,
-              fit: BoxFit.contain,
-            ),
-            const SizedBox(height: TSizes.spaceBtwSections),
-            SizedBox(
-              width: double.infinity,
-              child: ElevatedButton.icon(
-                onPressed: _siguiente,
-                label: Text(
-                  currentIndex < widget.textos.length - 1
-                      ? TTexts.botonSiguiente
-                      : TTexts.botonContinuar,
+    return PopScope(
+      canPop: false,
+      onPopInvoked: (didPop) async {
+        if (didPop) return;
+        // Reutilizamos la lógica que escribimos en la AppBar
+        await EjercicioAppBar.mostrarAlertaSalida(context);
+      },
+      child: Scaffold(
+        appBar: AppBar(),
+        body: SingleChildScrollView(
+          padding: const EdgeInsets.all(12.0),
+          child: Column(
+            children: [
+              SizedBox(
+                height: _alturaEstimadaBurbuja,
+                child: DialogoBurbujaPersonaje(
+                  texto: widget.textos[currentIndex],
+                  imagenSmall: widget.imagenesSmall[currentIndex],
+                  colorburbuja: widget.colorBurbuja,
+                  tailPosition: widget.tailPosition,
                 ),
               ),
-            ),
-          ],
+              const SizedBox(height: TSizes.spaceBtwItems / 3),
+              ImagenContainer(
+                imagen: widget.imagenesBig[currentIndex],
+                height: 450,
+                fit: BoxFit.contain,
+              ),
+              const SizedBox(height: TSizes.spaceBtwSections),
+              SizedBox(
+                width: double.infinity,
+                child: ElevatedButton.icon(
+                  onPressed: _siguiente,
+                  label: Text(
+                    currentIndex < widget.textos.length - 1
+                        ? TTexts.botonSiguiente
+                        : TTexts.botonContinuar,
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

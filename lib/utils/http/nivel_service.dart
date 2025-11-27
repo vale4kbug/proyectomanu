@@ -5,16 +5,18 @@ import 'package:proyectomanu/utils/http/api_client.dart';
 class NivelService {
   static final Dio _dio = ApiClient.instance;
 
-  static Future<List<Map<String, Object?>>> getCamino(String categoria) async {
+  static Future<List<Map<String, Object?>>> getCaminoCompleto() async {
     try {
-      final response = await _dio.get("/niveles/camino");
+      // Llamamos al endpoint que devuelve TODO el mapa ordenado
+      final response = await _dio.get("/niveles/camino_completo");
+
       List<dynamic> nivelesJson = response.data;
       return nivelesJson
           .map((nivel) => Map<String, Object?>.from(nivel))
           .toList();
     } on DioException catch (e) {
-      final errorMessage = e.response?.data['message'] ??
-          'Error al obtener el camino de niveles.';
+      final errorMessage =
+          e.response?.data['message'] ?? 'Error al obtener el mapa completo.';
       throw Exception(errorMessage);
     }
   }

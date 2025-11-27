@@ -10,8 +10,7 @@ class HomeScreen extends StatelessWidget {
     return PageView.builder(
       itemCount: MapaData.unidades.length,
       itemBuilder: (context, index) {
-        final unidad = MapaData.unidades[index];
-        return TCaminoScreen(unidad: unidad);
+        return TCaminoScreen();
       },
     );
   }

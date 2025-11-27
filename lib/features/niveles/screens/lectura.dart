@@ -8,10 +8,12 @@ class NivelLecturaScreen extends StatelessWidget {
     required this.titulo,
     required this.texto,
     required this.onNext,
+    this.imagenPath, // <--- 1. Nuevo parámetro opcional
   });
 
   final String titulo;
   final String texto;
+  final String? imagenPath; // <--- 2. Variable nullable
   final VoidCallback onNext;
 
   @override
@@ -32,6 +34,8 @@ class NivelLecturaScreen extends StatelessWidget {
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: TSizes.spaceBtwSections),
+
+            // Contenedor del Texto
             Container(
               padding: const EdgeInsets.all(20),
               decoration: BoxDecoration(
@@ -45,10 +49,29 @@ class NivelLecturaScreen extends StatelessWidget {
                       fontSize: 16,
                       color: Colors.black87,
                     ),
-                textAlign: TextAlign.center,
+                textAlign:
+                    TextAlign.justify, // Se ve mejor justificado en lecturas
               ),
             ),
+
             const SizedBox(height: TSizes.spaceBtwSections),
+
+            // --- 3. Lógica para mostrar la imagen si existe ---
+            if (imagenPath != null && imagenPath!.isNotEmpty) ...[
+              ClipRRect(
+                borderRadius: BorderRadius.circular(16),
+                child: Image.asset(
+                  imagenPath!,
+                  height: 200, // Misma altura que usas en otros lados
+                  fit: BoxFit.contain,
+                  errorBuilder: (context, error, stackTrace) {
+                    return const Text("No se pudo cargar la imagen");
+                  },
+                ),
+              ),
+              const SizedBox(height: TSizes.spaceBtwSections),
+            ],
+
             SizedBox(
               width: double.infinity,
               child: ElevatedButton(

@@ -77,9 +77,16 @@ class ConfiguracionAyudaScreen extends StatelessWidget {
               leading:
                   const Icon(Icons.email_outlined, color: TColors.teciaryColor),
               title: const Text("Contactar al soporte"),
-              subtitle: const Text("manolingolsm@gmail.com"),
               onTap: () => _launchUrl(
                   "mailto:manolingolsm@gmail.com?subject=Ayuda%20Manolingo"),
+            ),
+            ListTile(
+              leading:
+                  const Icon(Icons.email_outlined, color: TColors.teciaryColor),
+              title:
+                  const Text("Contactar al Programador/Desarrollador/Artista"),
+              onTap: () => _launchUrl(
+                  "mailto:chavirava@outlook.com?subject=Servicio%20Requerido"),
             ),
             ListTile(
               leading: const Icon(Icons.launch_outlined,
@@ -87,13 +94,6 @@ class ConfiguracionAyudaScreen extends StatelessWidget {
               title: const Text("Dependencia de Innovacion"),
               onTap: () => _launchUrl(
                   "https://heroicanogales.gob.mx/dependencia/direccion-de-innovacion-y-proyectos-especiales"),
-            ),
-            ListTile(
-              leading:
-                  const Icon(Icons.email_outlined, color: TColors.teciaryColor),
-              title: const Text("Programador"),
-              onTap: () => _launchUrl(
-                  "mailto:chavirava@outlook.com?subject=Servicio%20Requerido"),
             ),
           ],
         ),

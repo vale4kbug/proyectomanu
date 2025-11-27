@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:proyectomanu/common/widgets/appbar/appbar_ejercicios.dart';
 import 'package:proyectomanu/utils/constants/colors.dart';
 import 'package:proyectomanu/utils/constants/sizes.dart';
 import 'package:proyectomanu/utils/constants/text_strings.dart';
@@ -41,80 +42,88 @@ class _NivelOpcionMultipleScreenState extends State<NivelOpcionMultipleScreen> {
   Widget build(BuildContext context) {
     final esCorrecta = seleccion == widget.respuestaCorrecta;
 
-    return Scaffold(
-      appBar: AppBar(),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          children: [
-            ///
-            Text(
-              widget.instruccion,
-              style: Theme.of(context).textTheme.headlineSmall,
-              textAlign: TextAlign.center,
-            ),
-            const SizedBox(height: TSizes.spaceBtwSections * 3),
-
-            /// Imagen
-            Image.asset(widget.imagenSena, height: 300),
-            const SizedBox(height: TSizes.spaceBtwSections * 3),
-
-            Expanded(
-              child: GridView.builder(
-                itemCount: widget.opciones.length,
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 3,
-                  crossAxisSpacing: 8,
-                  mainAxisSpacing: 8,
-                  childAspectRatio: 2,
-                ),
-                itemBuilder: (context, index) {
-                  final opcion = widget.opciones[index];
-                  final seleccionada = opcion == seleccion;
-
-                  final color = !respondido
-                      ? TColors.primarioBoton
-                      : (opcion == widget.respuestaCorrecta
-                          ? Colors.green
-                          : (seleccionada ? Colors.red : Colors.grey));
-
-                  return ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: color,
-                      foregroundColor: Colors.white,
-                    ),
-                    onPressed: () => _seleccionarRespuesta(opcion),
-                    child: Text(opcion, textAlign: TextAlign.center),
-                  );
-                },
-              ),
-            ),
-
-            /// Feedback
-            if (respondido)
+    return PopScope(
+      canPop: false,
+      onPopInvoked: (didPop) async {
+        if (didPop) return;
+        // Reutilizamos la lógica que escribimos en la AppBar
+        await EjercicioAppBar.mostrarAlertaSalida(context);
+      },
+      child: Scaffold(
+        appBar: AppBar(),
+        body: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            children: [
+              ///
               Text(
-                esCorrecta
-                    ? TTexts.obtenerMensajeCorrecto()
-                    : TTexts.obtenerMensajeIncorrecto(),
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                  color: esCorrecta ? Colors.green : Colors.red,
+                widget.instruccion,
+                style: Theme.of(context).textTheme.headlineSmall,
+                textAlign: TextAlign.center,
+              ),
+              const SizedBox(height: TSizes.spaceBtwSections * 3),
+
+              /// Imagen
+              Image.asset(widget.imagenSena, height: 300),
+              const SizedBox(height: TSizes.spaceBtwSections * 3),
+
+              Expanded(
+                child: GridView.builder(
+                  itemCount: widget.opciones.length,
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 3,
+                    crossAxisSpacing: 8,
+                    mainAxisSpacing: 8,
+                    childAspectRatio: 2,
+                  ),
+                  itemBuilder: (context, index) {
+                    final opcion = widget.opciones[index];
+                    final seleccionada = opcion == seleccion;
+
+                    final color = !respondido
+                        ? TColors.primarioBoton
+                        : (opcion == widget.respuestaCorrecta
+                            ? Colors.green
+                            : (seleccionada ? Colors.red : Colors.grey));
+
+                    return ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: color,
+                        foregroundColor: Colors.white,
+                      ),
+                      onPressed: () => _seleccionarRespuesta(opcion),
+                      child: Text(opcion, textAlign: TextAlign.center),
+                    );
+                  },
                 ),
               ),
 
-            const SizedBox(height: TSizes.spaceBtwItems),
-
-            /// Botón siguiente
-            if (respondido)
-              SizedBox(
-                width: double.infinity,
-                child: ElevatedButton(
-                  onPressed: () => widget.onNext(esCorrecta),
-                  child: Text(TTexts.botonSiguiente),
+              /// Feedback
+              if (respondido)
+                Text(
+                  esCorrecta
+                      ? TTexts.obtenerMensajeCorrecto()
+                      : TTexts.obtenerMensajeIncorrecto(),
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                    color: esCorrecta ? Colors.green : Colors.red,
+                  ),
                 ),
-              ),
-          ],
+
+              const SizedBox(height: TSizes.spaceBtwItems),
+
+              /// Botón siguiente
+              if (respondido)
+                SizedBox(
+                  width: double.infinity,
+                  child: ElevatedButton(
+                    onPressed: () => widget.onNext(esCorrecta),
+                    child: Text(TTexts.botonSiguiente),
+                  ),
+                ),
+            ],
+          ),
         ),
       ),
     );

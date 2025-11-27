@@ -36,24 +36,33 @@ class _ConfiguracionDatosScreenState extends State<ConfiguracionDatosScreen> {
     final TextEditingController passController = TextEditingController();
     return Get.dialog<String>(
       AlertDialog(
-        title: Text(titulo,
-            style: TextStyle(
-                fontSize: 28,
+        // APLICANDO ESTILO DEL TEMA
+        title: Text(
+          titulo,
+          style: Theme.of(context).textTheme.headlineSmall?.copyWith(
                 fontWeight: FontWeight.bold,
-                color: TColors.primaryColor)),
+                color: TColors.primarioBoton,
+              ),
+        ),
         content: TextField(
           controller: passController,
           obscureText: true,
-          decoration:
-              const InputDecoration(labelText: "Ingresa tu contraseña actual"),
+          decoration: const InputDecoration(
+            labelText: "Ingresa tu contraseña actual",
+          ),
         ),
         actions: [
           TextButton(
-              onPressed: () => Get.back(result: null),
-              child: const Text("Cancelar")),
+            onPressed: () => Get.back(result: null),
+            child: Text(
+              "Cancelar",
+              style: Theme.of(context).textTheme.labelLarge,
+            ),
+          ),
           ElevatedButton(
-              onPressed: () => Get.back(result: passController.text),
-              child: const Text("Confirmar")),
+            onPressed: () => Get.back(result: passController.text),
+            child: const Text("Confirmar"),
+          ),
         ],
       ),
     );
@@ -66,11 +75,14 @@ class _ConfiguracionDatosScreenState extends State<ConfiguracionDatosScreen> {
 
     final String? nuevoValor = await Get.dialog<String>(
       AlertDialog(
-        title: Text("Cambiar $tipo",
-            style: TextStyle(
-                fontSize: 28,
+        // APLICANDO ESTILO DEL TEMA
+        title: Text(
+          "Cambiar $tipo",
+          style: Theme.of(context).textTheme.headlineSmall?.copyWith(
                 fontWeight: FontWeight.bold,
-                color: TColors.primaryColor)),
+                color: TColors.primarioBoton,
+              ),
+        ),
         content: TextField(
           controller: inputController,
           decoration: InputDecoration(labelText: "Nuevo $tipo"),
@@ -78,10 +90,16 @@ class _ConfiguracionDatosScreenState extends State<ConfiguracionDatosScreen> {
         ),
         actions: [
           TextButton(
-              onPressed: () => Get.back(), child: const Text("Cancelar")),
+            onPressed: () => Get.back(),
+            child: Text(
+              "Cancelar",
+              style: Theme.of(context).textTheme.labelLarge,
+            ),
+          ),
           ElevatedButton(
-              onPressed: () => Get.back(result: inputController.text),
-              child: const Text("Guardar")),
+            onPressed: () => Get.back(result: inputController.text),
+            child: const Text("Guardar"),
+          ),
         ],
       ),
     );
@@ -107,10 +125,13 @@ class _ConfiguracionDatosScreenState extends State<ConfiguracionDatosScreen> {
     }
 
     if (error != null) {
-      Get.snackbar("Error de validación", error,
-          snackPosition: SnackPosition.BOTTOM,
-          backgroundColor: Colors.red.shade100,
-          colorText: Colors.red.shade900);
+      Get.snackbar(
+        "Error de validación",
+        error,
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: Colors.red.shade100,
+        colorText: Colors.red.shade900,
+      );
       return;
     }
 
@@ -130,27 +151,36 @@ class _ConfiguracionDatosScreenState extends State<ConfiguracionDatosScreen> {
       );
       await controller.recargarUsuario();
       Get.back(); // Cierra el spinner
-      Get.snackbar("Éxito", "Tu $tipo se ha actualizado correctamente.",
-          snackPosition: SnackPosition.BOTTOM,
-          backgroundColor: Colors.green.shade100,
-          colorText: Colors.green.shade900);
+      Get.snackbar(
+        "Éxito",
+        "Tu $tipo se ha actualizado correctamente.",
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: Colors.green.shade100,
+        colorText: Colors.green.shade900,
+      );
     } catch (e) {
       Get.back(); // Cierra el spinner
-      Get.snackbar("Error", e.toString().replaceFirst("Exception: ", ""),
-          snackPosition: SnackPosition.BOTTOM,
-          backgroundColor: Colors.red.shade100,
-          colorText: Colors.red.shade900);
+      Get.snackbar(
+        "Error",
+        e.toString().replaceFirst("Exception: ", ""),
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: Colors.red.shade100,
+        colorText: Colors.red.shade900,
+      );
     }
   }
 
   // --- Diálogo para seleccionar avatar ---
   Future<void> _seleccionarAvatar() async {
     final String? avatarSeleccionado = await Get.dialog<String>(AlertDialog(
-      title: const Text("Elige tu Avatar",
-          style: TextStyle(
-              fontSize: 28,
+      // APLICANDO ESTILO DEL TEMA
+      title: Text(
+        "Elige tu Avatar",
+        style: Theme.of(context).textTheme.headlineSmall?.copyWith(
               fontWeight: FontWeight.bold,
-              color: TColors.primaryColor)),
+              color: TColors.primarioBoton,
+            ),
+      ),
       content: SizedBox(
         width: double.maxFinite,
         child: GridView.builder(
@@ -168,7 +198,13 @@ class _ConfiguracionDatosScreenState extends State<ConfiguracionDatosScreen> {
         ),
       ),
       actions: [
-        TextButton(onPressed: () => Get.back(), child: const Text("Cancelar")),
+        TextButton(
+          onPressed: () => Get.back(),
+          child: Text(
+            "Cancelar",
+            style: Theme.of(context).textTheme.labelLarge,
+          ),
+        ),
       ],
     ));
 
@@ -195,7 +231,8 @@ class _ConfiguracionDatosScreenState extends State<ConfiguracionDatosScreen> {
 
   // --- Diálogo para borrar cuenta ---
   Future<void> _borrarCuenta() async {
-    final contrasena = await _pedirContrasena("¡Acción Permanente!");
+    final contrasena = await _pedirContrasena(
+        "¡Acción Permanente!\nEstas a punto de borrar tu cuenta. @(｡・o・)@");
     if (contrasena == null || contrasena.isEmpty) return;
 
     Get.dialog(const Center(child: CircularProgressIndicator()),

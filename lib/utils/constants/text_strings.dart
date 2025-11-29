@@ -174,9 +174,6 @@ class TTexts {
   //Success
   static const botonContinuar = "Continuar";
 
-//Unidades Nombres
-  static const unidad1 = "Unidad 1: Dactilología";
-
   //Relacionar Nivel
 
   static const nivelRelacionarTitle =

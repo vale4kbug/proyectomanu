@@ -124,13 +124,13 @@ class _TContenidoLayoutState extends State<TContenidoLayout> {
                     tailPosition: BubbleTailPosition.left,
                   ),
                 ),
-                const SizedBox(height: TSizes.spaceBtwSections / 2),
+                //const SizedBox(height: TSizes.spaceBtwSections / 2),
                 ImagenContainer(
                   imagen: pasoActual['imagenBig'],
                   height: 450,
                   fit: BoxFit.contain,
                 ),
-                const SizedBox(height: TSizes.spaceBtwSections),
+                //const SizedBox(height: TSizes.spaceBtwSections),
                 SizedBox(
                   width: double.infinity,
                   child: ElevatedButton.icon(

@@ -28,14 +28,18 @@ class TVerticalImageText extends StatelessWidget {
           TCircularImage(image: image),
           const SizedBox(height: TSizes.spaceBtwItems / 2),
 
-          Text(
-            title,
-            style: Theme.of(
-              context,
-            ).textTheme.labelMedium!.apply(color: textColor),
-            maxLines: 2,
-            textAlign: TextAlign.center,
-            overflow: TextOverflow.ellipsis,
+          ///texto
+          Flexible(
+            fit: FlexFit.loose,
+            child: Text(
+              title,
+              style: Theme.of(
+                context,
+              ).textTheme.labelMedium!.apply(color: textColor),
+              maxLines: 2,
+              textAlign: TextAlign.center,
+              overflow: TextOverflow.ellipsis,
+            ),
           ),
         ],
       ),

@@ -37,12 +37,12 @@ class _EjerciciosScreenState extends State<EjerciciosScreen> {
           final practicas = snapshot.data!;
 
           return ListView.builder(
-            padding: const EdgeInsets.all(8.0),
+            padding: const EdgeInsets.all(10.0),
             itemCount: practicas.length,
             itemBuilder: (context, index) {
               final practica = practicas[index];
               return Padding(
-                padding: const EdgeInsets.symmetric(vertical: 8.0),
+                padding: const EdgeInsets.symmetric(vertical: 9.0),
                 child: BotonBanner(
                   imagen: practica['imagenBanner'],
                   titulo: practica['nombre'],

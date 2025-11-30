@@ -8,7 +8,7 @@ class ImagenVictoria extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 350,
+      height: 300,
       child: Image.asset(
         imagenPath,
         fit: BoxFit.contain,

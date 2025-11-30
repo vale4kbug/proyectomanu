@@ -41,16 +41,15 @@ class BotonBanner extends StatelessWidget {
 
             const SizedBox(width: 16),
 
-            // Texto expandible
+            // Texto
             Expanded(
               child: Text(
                 titulo,
-                style: Theme.of(context).textTheme.headlineLarge?.copyWith(
-                  fontWeight: FontWeight.bold,
-                ),
-                maxLines: 3, // <- Permite varias líneas
-                overflow: TextOverflow
-                    .ellipsis, // <- Opcional: puntos suspensivos si se pasa
+                style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                      fontWeight: FontWeight.bold,
+                    ),
+                maxLines: 4,
+                overflow: TextOverflow.ellipsis,
               ),
             ),
           ],

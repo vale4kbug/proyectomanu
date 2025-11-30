@@ -21,62 +21,55 @@ class TAchievementCard extends StatelessWidget {
       padding: const EdgeInsets.all(8.0),
       child: Column(
         mainAxisSize: MainAxisSize.min,
-        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Stack(
             alignment: Alignment.center,
             children: [
-              // Imagen del logro
               Padding(
                 padding: const EdgeInsets.all(TSizes.defaultSpace),
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(12),
                   child: Image.asset(
                     image,
-                    height: 100,
-                    width: 100,
+                    height: 90, // 🔹 Reducido para dar más espacio al texto
+                    width: 90,
                     fit: BoxFit.cover,
                   ),
                 ),
               ),
-
-              // Overlay oscuro si establoqueado
               if (locked)
                 Container(
-                  height: 100,
-                  width: 100,
+                  height: 90,
+                  width: 90,
                   decoration: BoxDecoration(
-                    color: const Color.fromARGB(65, 0, 0, 0),
+                    color: const Color.fromARGB(80, 0, 0, 0),
                     borderRadius: BorderRadius.circular(12),
                   ),
-                  child: const Icon(
-                    Iconsax.lock,
-                    color: Colors.white,
-                    size: 28,
-                  ),
+                  child:
+                      const Icon(Iconsax.lock, color: Colors.white, size: 26),
                 ),
             ],
           ),
-          const SizedBox(height: 8),
 
-          // Título / descripción
-          Expanded(
-            child: Text(
-              title,
-              textAlign: TextAlign.center,
-              style: Theme.of(context).textTheme.headlineSmall,
-              maxLines: 2,
-              overflow: TextOverflow.ellipsis,
-            ),
+          const SizedBox(height: 4),
+
+          /// 🔥 Este bloque ya NO hace overflow
+          Text(
+            title,
+            textAlign: TextAlign.center,
+            style: Theme.of(context).textTheme.headlineSmall,
+            maxLines: 2,
+            overflow: TextOverflow.ellipsis,
           ),
-          Expanded(
-            child: Text(
-              subtitle,
-              textAlign: TextAlign.center,
-              style: Theme.of(context).textTheme.bodySmall,
-              maxLines: 2,
-              overflow: TextOverflow.ellipsis,
-            ),
+
+          const SizedBox(height: 2),
+
+          Text(
+            subtitle,
+            textAlign: TextAlign.center,
+            style: Theme.of(context).textTheme.bodySmall,
+            maxLines: 2,
+            overflow: TextOverflow.ellipsis,
           ),
         ],
       ),

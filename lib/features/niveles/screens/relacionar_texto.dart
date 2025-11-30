@@ -61,11 +61,11 @@ class _NivelOpcionMultipleScreenState extends State<NivelOpcionMultipleScreen> {
                 style: Theme.of(context).textTheme.headlineSmall,
                 textAlign: TextAlign.center,
               ),
-              const SizedBox(height: TSizes.spaceBtwSections * 3),
+              const SizedBox(height: TSizes.spaceBtwSections),
 
               /// Imagen
               Image.asset(widget.imagenSena, height: 300),
-              const SizedBox(height: TSizes.spaceBtwSections * 3),
+              const SizedBox(height: TSizes.spaceBtwSections * 2),
 
               Expanded(
                 child: GridView.builder(

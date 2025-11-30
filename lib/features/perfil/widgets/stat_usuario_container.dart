@@ -47,9 +47,9 @@ class TStatUsuarioContainer extends StatelessWidget {
           ),
           Text(
             subtitle,
-            style: Theme.of(context).textTheme.headlineMedium!.copyWith(
-              color: dark ? Colors.white : TColors.primaryColor,
-            ),
+            style: Theme.of(context).textTheme.headlineSmall!.copyWith(
+                  color: dark ? Colors.white : TColors.primaryColor,
+                ),
           ),
         ],
       ),

@@ -136,10 +136,10 @@ class _NivelPresentacionScreenState extends State<NivelPresentacionScreen> {
                   tailPosition: widget.tailPosition,
                 ),
               ),
-              const SizedBox(height: TSizes.spaceBtwItems / 3),
+              //const SizedBox(height: TSizes.spaceBtwItems / 3),
               ImagenContainer(
                 imagen: widget.imagenesBig[currentIndex],
-                height: 450,
+                height: 400,
                 fit: BoxFit.contain,
               ),
               const SizedBox(height: TSizes.spaceBtwSections),

@@ -58,24 +58,24 @@ class _NivelEscrituraScreenState extends State<NivelEscrituraScreen> {
         await EjercicioAppBar.mostrarAlertaSalida(context);
       },
       child: Scaffold(
+        resizeToAvoidBottomInset: true,
         appBar: AppBar(),
-        body: Padding(
-          padding: const EdgeInsets.all(16.0),
+        body: SingleChildScrollView(
+          padding: EdgeInsets.only(
+            left: 16,
+            right: 16,
+            bottom: MediaQuery.of(context).viewInsets.bottom + 16,
+          ),
           child: Column(
             children: [
-              /// Pregunta
               Text(
                 widget.pregunta,
                 style: Theme.of(context).textTheme.headlineSmall,
                 textAlign: TextAlign.center,
               ),
               const SizedBox(height: TSizes.spaceBtwSections * 3),
-
-              /// Imagen
               Image.asset(widget.imagenPath, height: 300),
               const SizedBox(height: TSizes.spaceBtwSections * 3),
-
-              /// Campo de texto
               TextField(
                 controller: _controller,
                 enabled: !_respondido,
@@ -88,8 +88,6 @@ class _NivelEscrituraScreenState extends State<NivelEscrituraScreen> {
                 onSubmitted: (_) => _validarRespuesta(),
               ),
               const SizedBox(height: TSizes.spaceBtwSections),
-
-              /// boton validar
               if (!_respondido)
                 SizedBox(
                   width: double.infinity,
@@ -98,8 +96,6 @@ class _NivelEscrituraScreenState extends State<NivelEscrituraScreen> {
                     child: const Text(TTexts.nivelEscribirBoton),
                   ),
                 ),
-
-              /// Feedback
               if (_respondido)
                 Column(
                   children: [

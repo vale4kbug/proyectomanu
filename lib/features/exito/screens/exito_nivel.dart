@@ -65,7 +65,7 @@ class _ExitoNivelLayoutState extends State<ExitoNivelLayout>
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const SizedBox(height: TSizes.spaceBtwSections * 2),
+              const SizedBox(height: TSizes.spaceBtwSections),
               Text(
                 TTexts.nivelCompleto,
                 style: Theme.of(context).textTheme.headlineLarge,

@@ -110,7 +110,7 @@ class _VerifyEmailScreenState extends State<VerifyEmailScreen> {
                 ),
               ),
               const SizedBox(height: TSizes.spaceBtwItems),
-              SizedBox(
+              /*    SizedBox(
                 width: double.infinity,
                 child: TextButton(
                   // 4. Implementar el onPressed
@@ -122,7 +122,7 @@ class _VerifyEmailScreenState extends State<VerifyEmailScreen> {
                           child: CircularProgressIndicator())
                       : const Text(TTexts.resendEmail),
                 ),
-              ),
+              ),*/
             ],
           ),
         ),

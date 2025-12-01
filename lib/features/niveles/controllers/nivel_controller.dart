@@ -15,8 +15,11 @@ class NivelController extends GetxController {
       final notifLogrosActivas = prefs.getBool('notif_logros') ?? true;
 
       // --- Notificación de nuevo nivel ---
-      if (result["nuevoNivel"] != null) {
-        NotificationController.showNewLevelNotification(result["nuevoNivel"]);
+      if (result['nivelDesbloqueado'] == true && result['nuevoNivel'] != null) {
+        print("DEBUG: ¡Nuevo nivel desbloqueado! Enviando notificación.");
+        NotificationController.showNewLevelNotification(result['nuevoNivel']);
+      } else {
+        print("DEBUG: Nivel completado, pero no hubo desbloqueo nuevo.");
       }
 
       // --- Notificación de logros desbloqueados ---

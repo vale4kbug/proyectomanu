@@ -35,7 +35,7 @@ class _TSignupFormState extends State<TSignupForm> {
       return; // Si los campos no son válidos, no continúa.
     }
 
-    if (!_termsAccepted) {
+    /* if (!_termsAccepted) {
       // Muestra un error si no se aceptan los términos
       Get.snackbar("Aceptar Términos",
           "Debes aceptar los términos y condiciones para continuar.",
@@ -44,7 +44,7 @@ class _TSignupFormState extends State<TSignupForm> {
           colorText: Colors.white);
       return;
     }
-
+*/
     setState(() => _loading = true);
 
     try {
@@ -62,7 +62,6 @@ class _TSignupFormState extends State<TSignupForm> {
           response["message"] ??
               "Registro exitoso. Por favor verifica tu correo.");
 
-      // --- CAMBIO CLAVE AQUÍ ---
       // Se pasa el email a la pantalla de verificación.
       Get.to(() => VerifyEmailScreen(email: _emailController.text.trim()));
     } catch (e) {
@@ -149,7 +148,7 @@ class _TSignupFormState extends State<TSignupForm> {
           ),
           const SizedBox(height: TSizes.spaceBtwInputFields),
 
-          // 5. Checkbox de Términos y Condiciones
+          /*  // 5. Checkbox de Términos y Condiciones
           Row(
             children: [
               SizedBox(
@@ -164,7 +163,7 @@ class _TSignupFormState extends State<TSignupForm> {
                   },
                 ),
               ),
-              const SizedBox(width: TSizes.spaceBtwItems),
+             const SizedBox(width: TSizes.spaceBtwItems),
               Expanded(
                 child: Text.rich(
                   TextSpan(children: [
@@ -189,7 +188,7 @@ class _TSignupFormState extends State<TSignupForm> {
               ),
             ],
           ),
-
+*/
           const SizedBox(height: TSizes.spaceBtwSections),
           SizedBox(
             width: double.infinity,

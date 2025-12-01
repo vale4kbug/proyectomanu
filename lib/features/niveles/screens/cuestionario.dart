@@ -72,13 +72,13 @@ class _NivelCuestionarioScreenState extends State<NivelCuestionarioScreen> {
                 textAlign: TextAlign.center,
               ),
 
-              const SizedBox(height: TSizes.spaceBtwSections),
+              //     const SizedBox(height: TSizes.spaceBtwSections),
 
               /// Imagen
 
-              Image.asset(widget.imagenPath, height: 230),
+              Image.asset(widget.imagenPath, height: 200),
 
-              const SizedBox(height: TSizes.spaceBtwSections),
+              // const SizedBox(height: TSizes.spaceBtwSections),
 
               /// Opciones
 

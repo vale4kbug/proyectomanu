@@ -55,7 +55,6 @@ class _NivelRelacionScreenState extends State<NivelRelacionScreen> {
       canPop: false,
       onPopInvoked: (didPop) async {
         if (didPop) return;
-        // Reutilizamos la lógica que escribimos en la AppBar
         await EjercicioAppBar.mostrarAlertaSalida(context);
       },
       child: Scaffold(
@@ -69,7 +68,7 @@ class _NivelRelacionScreenState extends State<NivelRelacionScreen> {
                 style: Theme.of(context).textTheme.headlineSmall,
                 textAlign: TextAlign.center,
               ),
-              const SizedBox(height: TSizes.spaceBtwSections),
+              //  const SizedBox(height: TSizes.spaceBtwSections),
 
               /// columnas
               Expanded(

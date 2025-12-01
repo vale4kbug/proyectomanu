@@ -12,7 +12,7 @@ class ApiClient {
   static Dio _createDio() {
     final dio = Dio(
       BaseOptions(
-        baseUrl: "https://10.0.2.2:7285/api",
+        baseUrl: "https://192.168.1.76:7285/api",
         connectTimeout: const Duration(seconds: 10),
         receiveTimeout: const Duration(seconds: 10),
         // Ya no se necesita 'withCredentials' aquí.

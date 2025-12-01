@@ -15,7 +15,7 @@ import 'package:proyectomanu/utils/constants/colors.dart';
 // (Puedes mover esto a su propio archivo de servicio si prefieres)
 class PythonRecognitionService {
   // Asegúrate de que esta sea la URL de tu API de Python
-  static const String pythonApiUrl = "http://10.0.2.2:5000/predict";
+  static const String pythonApiUrl = "http://192.168.1.76:5000/predict";
 
   static Future<Map<String, dynamic>> predictGesture(String base64Image) async {
     try {

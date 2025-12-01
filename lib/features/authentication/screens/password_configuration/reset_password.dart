@@ -37,7 +37,7 @@ class _ResetPasswordState extends State<ResetPassword> {
 
     try {
       final response = await AuthService.resetPassword(
-        token: _codeController.text.trim(), // Enviamos el código como token
+        token: _codeController.text.trim(),
         newPassword: _passwordController.text.trim(),
       );
 
@@ -45,7 +45,6 @@ class _ResetPasswordState extends State<ResetPassword> {
           response['message'] ?? 'Contraseña actualizada correctamente.',
           backgroundColor: Colors.green, colorText: Colors.white);
 
-      // Limpiamos la pila de navegación y vamos al Login
       Get.offAll(() => const LoginScreen());
     } catch (e) {
       Get.snackbar(
@@ -85,12 +84,10 @@ class _ResetPasswordState extends State<ResetPassword> {
           child: Form(
             key: _formKey,
             child: Column(
-              crossAxisAlignment:
-                  CrossAxisAlignment.center, // Centramos el contenido
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                // Icono o Imagen
                 const Icon(Iconsax.password_check,
-                    size: 100, color: Colors.blueAccent),
+                    size: 80, color: Colors.blueAccent),
                 const SizedBox(height: TSizes.spaceBtwSections),
 
                 Text(
@@ -100,23 +97,19 @@ class _ResetPasswordState extends State<ResetPassword> {
                 ),
                 const SizedBox(height: TSizes.spaceBtwItems),
                 Text(
-                  'Hemos enviado un código de seguridad a ${widget.email}. Por favor, ingrésalo abajo para crear tu nueva contraseña.',
+                  'Hemos enviado un código de seguridad a ${widget.email}.\nPor favor, ingrésalo abajo para crear tu nueva contraseña.',
                   style: Theme.of(context).textTheme.labelMedium,
                   textAlign: TextAlign.center,
                 ),
                 const SizedBox(height: TSizes.spaceBtwSections),
 
-                // Campo para el Código (Token)
                 TextFormField(
                   controller: _codeController,
                   validator: (value) =>
                       TValidator.validateEmptyText('Código', value),
-                  keyboardType:
-                      TextInputType.number, // Teclado numérico para el código
-                  textAlign: TextAlign.center, // Texto centrado
-                  style: const TextStyle(
-                      fontSize: 24,
-                      letterSpacing: 5), // Estilo grande para el código
+                  keyboardType: TextInputType.number,
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(fontSize: 24, letterSpacing: 5),
                   decoration: const InputDecoration(
                     labelText: 'Código de Verificación',
                     alignLabelWithHint: true,
@@ -126,7 +119,7 @@ class _ResetPasswordState extends State<ResetPassword> {
                 ),
                 const SizedBox(height: TSizes.spaceBtwInputFields),
 
-                // Campo para la nueva contraseña
+                //  contraseña
                 TextFormField(
                   controller: _passwordController,
                   validator: TValidator.validatePassword,
@@ -144,7 +137,7 @@ class _ResetPasswordState extends State<ResetPassword> {
                 ),
                 const SizedBox(height: TSizes.spaceBtwInputFields),
 
-                // Campo para confirmar contraseña
+                // confirmar contraseña
                 TextFormField(
                   controller: _confirmPasswordController,
                   validator: (value) {
@@ -162,7 +155,7 @@ class _ResetPasswordState extends State<ResetPassword> {
                 ),
                 const SizedBox(height: TSizes.spaceBtwSections),
 
-                // Botón de enviar
+                //  enviar
                 SizedBox(
                   width: double.infinity,
                   child: ElevatedButton(

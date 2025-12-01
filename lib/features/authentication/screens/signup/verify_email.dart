@@ -25,17 +25,14 @@ class _VerifyEmailScreenState extends State<VerifyEmailScreen> {
   bool _isVerifying = false;
   bool _isResending = false;
 
-  // --- 1. Lógica para Verificar el Código ---
   Future<void> _verifyCode() async {
     if (!_formKey.currentState!.validate()) return;
 
     setState(() => _isVerifying = true);
 
     try {
-      // Llamamos al servicio con el código que escribió el usuario
       await AuthService.verifyEmail(_codeController.text.trim());
 
-      // Si todo sale bien, vamos a la pantalla de éxito
       Get.off(
         () => SuccessScreen(
           image: TImages.staticSuccesIllutration,
@@ -57,8 +54,7 @@ class _VerifyEmailScreenState extends State<VerifyEmailScreen> {
     }
   }
 
-  // --- 2. Lógica para Reenviar el Correo ---
-  Future<void> _resendEmail() async {
+  /* Future<void> _resendEmail() async {
     if (widget.email == null || widget.email!.isEmpty) return;
 
     setState(() => _isResending = true);
@@ -78,7 +74,7 @@ class _VerifyEmailScreenState extends State<VerifyEmailScreen> {
     } finally {
       if (mounted) setState(() => _isResending = false);
     }
-  }
+  }*/
 
   @override
   Widget build(BuildContext context) {
@@ -106,7 +102,6 @@ class _VerifyEmailScreenState extends State<VerifyEmailScreen> {
                 ),
                 const SizedBox(height: TSizes.spaceBtwSections),
 
-                // Título y Subtítulo
                 Text(
                   TTexts.confirmEmail,
                   style: Theme.of(context).textTheme.headlineMedium,
@@ -126,7 +121,6 @@ class _VerifyEmailScreenState extends State<VerifyEmailScreen> {
                 ),
                 const SizedBox(height: TSizes.spaceBtwSections),
 
-                // --- CAMPO DE CÓDIGO ---
                 TextFormField(
                   controller: _codeController,
                   keyboardType: TextInputType.number,
@@ -145,7 +139,7 @@ class _VerifyEmailScreenState extends State<VerifyEmailScreen> {
                 ),
                 const SizedBox(height: TSizes.spaceBtwSections),
 
-                // --- BOTÓN DE VERIFICAR ---
+                //  VERIFICAR ---
                 SizedBox(
                   width: double.infinity,
                   child: ElevatedButton(

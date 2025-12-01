@@ -45,7 +45,7 @@ class TTexts {
   static const signupTitle = "Vamos a crearte una cuenta \n@( o･ω･)@";
   static const forgetPasswordTitle = "Olvidé mi contraseña\n @(´･ｪ･`)@";
   static const forgetPasswordSubTitle =
-      "No te preocupes, aveces pasa. Ingresa tu correo para mandarte un link para reiniciar tu contraseña.";
+      "No te preocupes, a veces pasa.\nIngresa tu correo para mandarte un link para reiniciar tu contraseña.";
   static const changeYourPasswordTitle =
       "Correo para resetear tu contraseña enviado.";
   static const changeYourPasswordSubTitle =

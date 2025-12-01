@@ -167,4 +167,17 @@ class AuthService {
           e.response?.data['message'] ?? 'Error al borrar la cuenta.');
     }
   }
+
+  static Future<void> verifyEmail(String token) async {
+    try {
+      await _dio.get(
+        "/usuarios/verify-email",
+        queryParameters: {"token": token},
+      );
+    } on DioException catch (e) {
+      final msg =
+          e.response?.data.toString() ?? 'Error al verificar el correo.';
+      throw Exception(msg);
+    }
+  }
 }

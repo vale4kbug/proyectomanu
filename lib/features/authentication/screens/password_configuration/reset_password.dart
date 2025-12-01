@@ -17,7 +17,8 @@ class ResetPassword extends StatefulWidget {
 
 class _ResetPasswordState extends State<ResetPassword> {
   final _formKey = GlobalKey<FormState>();
-  final _tokenController = TextEditingController();
+  final _codeController =
+      TextEditingController(); // Renombrado de _tokenController
   final _passwordController = TextEditingController();
   final _confirmPasswordController = TextEditingController();
   bool _loading = false;
@@ -36,12 +37,14 @@ class _ResetPasswordState extends State<ResetPassword> {
 
     try {
       final response = await AuthService.resetPassword(
-        token: _tokenController.text.trim(),
+        token: _codeController.text.trim(), // Enviamos el código como token
         newPassword: _passwordController.text.trim(),
       );
 
       Get.snackbar('Éxito',
-          response['message'] ?? 'Contraseña actualizada correctamente.');
+          response['message'] ?? 'Contraseña actualizada correctamente.',
+          backgroundColor: Colors.green, colorText: Colors.white);
+
       // Limpiamos la pila de navegación y vamos al Login
       Get.offAll(() => const LoginScreen());
     } catch (e) {
@@ -61,7 +64,7 @@ class _ResetPasswordState extends State<ResetPassword> {
 
   @override
   void dispose() {
-    _tokenController.dispose();
+    _codeController.dispose();
     _passwordController.dispose();
     _confirmPasswordController.dispose();
     super.dispose();
@@ -71,7 +74,10 @@ class _ResetPasswordState extends State<ResetPassword> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Restablecer Contraseña'),
+        automaticallyImplyLeading: false,
+        actions: [
+          IconButton(onPressed: () => Get.back(), icon: const Icon(Icons.clear))
+        ],
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -79,27 +85,43 @@ class _ResetPasswordState extends State<ResetPassword> {
           child: Form(
             key: _formKey,
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+              crossAxisAlignment:
+                  CrossAxisAlignment.center, // Centramos el contenido
               children: [
+                // Icono o Imagen
+                const Icon(Iconsax.password_check,
+                    size: 100, color: Colors.blueAccent),
+                const SizedBox(height: TSizes.spaceBtwSections),
+
                 Text(
                   TTexts.changeYourPasswordTitle,
                   style: Theme.of(context).textTheme.headlineMedium,
+                  textAlign: TextAlign.center,
                 ),
                 const SizedBox(height: TSizes.spaceBtwItems),
                 Text(
-                  'Hemos enviado un token a ${widget.email}. Por favor, ingrésalo abajo junto con tu nueva contraseña.',
+                  'Hemos enviado un código de seguridad a ${widget.email}. Por favor, ingrésalo abajo para crear tu nueva contraseña.',
                   style: Theme.of(context).textTheme.labelMedium,
+                  textAlign: TextAlign.center,
                 ),
                 const SizedBox(height: TSizes.spaceBtwSections),
 
-                // Campo para el Token
+                // Campo para el Código (Token)
                 TextFormField(
-                  controller: _tokenController,
+                  controller: _codeController,
                   validator: (value) =>
-                      TValidator.validateEmptyText('Token', value),
+                      TValidator.validateEmptyText('Código', value),
+                  keyboardType:
+                      TextInputType.number, // Teclado numérico para el código
+                  textAlign: TextAlign.center, // Texto centrado
+                  style: const TextStyle(
+                      fontSize: 24,
+                      letterSpacing: 5), // Estilo grande para el código
                   decoration: const InputDecoration(
-                    labelText: 'Token',
-                    prefixIcon: Icon(Iconsax.code),
+                    labelText: 'Código de Verificación',
+                    alignLabelWithHint: true,
+                    prefixIcon: Icon(Iconsax.security_safe),
+                    hintText: "######",
                   ),
                 ),
                 const SizedBox(height: TSizes.spaceBtwInputFields),
@@ -125,7 +147,13 @@ class _ResetPasswordState extends State<ResetPassword> {
                 // Campo para confirmar contraseña
                 TextFormField(
                   controller: _confirmPasswordController,
-                  validator: TValidator.validatePassword,
+                  validator: (value) {
+                    if (value == null || value.isEmpty)
+                      return 'Confirma tu contraseña';
+                    if (value != _passwordController.text)
+                      return 'Las contraseñas no coinciden';
+                    return null;
+                  },
                   obscureText: !_passwordVisible,
                   decoration: const InputDecoration(
                     labelText: 'Confirmar Contraseña',
@@ -141,7 +169,7 @@ class _ResetPasswordState extends State<ResetPassword> {
                     onPressed: _loading ? null : _resetPassword,
                     child: _loading
                         ? const CircularProgressIndicator(color: Colors.white)
-                        : const Text(TTexts.submit),
+                        : const Text("Restablecer Contraseña"),
                   ),
                 ),
               ],
